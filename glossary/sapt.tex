@@ -1,0 +1,31 @@
+%%% The glossary entry the acronym links to   
+\newglossaryentry{saptg}{name={SAPT},
+    description={Symmetry-Adapted Perturbation Theory, a perturbative
+treatment of intermolecular interactions which is pretty cool}
+    }
+
+%%% define the acronym and use the see= option
+\newglossaryentry{sapt}{type=\acronymtype, name={SAPT},
+description={Symmetry-Adapted Perturbation Theory},
+text={SAPT},
+short={SAPT},
+long={Symmetry-Adapted Perturbation Theory},
+first={Symmetry-Adapted Perturbation Theory (SAPT)\glsadd{saptg}}, 
+see=[Glossary:]{saptg},
+    }
+
+
+\newglossaryentry{ccsdtf}{name={CCSD(T)-f12},
+    description={Explicitly-correlated CCSD(T). Given a sufficiently large
+(\avdz or \avtz) basis set, used throughout this work as a `gold-standard'
+estimate of the exact \acrlong{pes}.}
+    }
+
+\newglossaryentry{ccsdt}{name={CCSD(T)},
+    description={Coupled Cluster methods including singles, doubles, and
+perturbative triples excitations. CCSD(T). Given a sufficiently large
+(\avqz or better) basis set, can be used as a `gold-standard'
+estimate of the exact \acrlong{pes}.}
+    }
+
+
