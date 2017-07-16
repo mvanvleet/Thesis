@@ -1,67 +1,117 @@
 \begin{section}{Preface}
 The preceding sections have been devoted to a development of various methodologies for ab initio intermolecular force
-field development, all generally assuming that \acrfull{sapt} can be used as a benchmark electronic structure
-theory. Critically, and especially given the developments discussed in \chref{ch:anisotropy},
+field development, all generally assuming that \sapt can be used as a benchmark electronic structure
+theory. Critically, and especially given the developments discussed in
+\cref{ch:mastiff},
 we can now usually expect our model force field energies to be within
 \kjmol{\textasciitilde1} of the \sapt reference values! In spite of this
-success, we note that high precision between the model
-and \sapt can only lead to improved molecular simulation provided that the \sapt energies \emph{themselves} are
-accurate, either with respect to the exact underlying \acrfull{pes} or (for practical
-purposes) with respect to gold-standard \ccsdt calculations. Indeed, if \sapt
-and \ccsdt differ by several \kjmol{}, there is little point in developing
-\sapt-based force fields with \kjmol{<1} accuracy! This raises to two
-fundamentally important questions regarding our methodology for force field
-development. First, for what types of systems might we expect \sapt to be inaccurate? Secondly,
-for such systems where \sapt does not achieve a desired level of accuracy, how
+success, this high precision between the model
+and \sapt energies can only lead to experimentally-accurate molecular simulation provided that the \sapt energies themselves are
+accurate, either with respect to the exact underlying \pes or (in
+practice)
+with respect to gold-standard \ccsdt calculations. Indeed, for systems where \sapt
+and \ccsdt disagree by several \kjmol{}, there is little point in developing
+\sapt-based force fields with sub-\kjmol{} accuracy! This limitation raises to two
+fundamentally important questions. 
+First, for what types of systems might we expect \sapt to be inaccurate? Second,
+for the systems where \sapt and the exact \pes are in disagreement, how
 must we modify our typical methodology for ab-initio force field development?
 
-The above questions have been addressed, in part, by myself and other
-researchers. Errors in \sapt are often greatest for
-hydrogen-bonded\cite{Parker2014a} or extremely ionic systems,
+The purpose of this chapter is to partially address these questions, all
+within the specific context of 
+force field development for \glspl{mof}. Note that the results presented here were
+gathered from 2013--2015, so some important advances (namely those
+presented in \cref{ch:isaff,ch:mastiff}) haven't been incorporated into
+the force fields presented here. This is probably to the determinent of the accuracy and
+transferability that might be possible with the \lmoeda-based methodology, and
+(should this project be picked up in the future) it may be necessary to
+refit these force fields to the functional forms and monomer-based parameters
+discussed in \cref{ch:mastiff}.
 
-The overall purpose of this chapter is to address, in part, the above
-concerns. 
-
-Nevertheless (and as discussed in \chref{ch:anisotropy} and below),
-significant \sapt 
 
 \end{section}
 \begin{section}{Introduction}
+\glsreset{mof}
+
+\Glspl{mof} are an increasingly important class of compounds, 
+fundamentally defined as porous
+materials comprised of inorganic nodes connected by organic linkers. Within
+this general motif, more than 20,000 compounds have been reported and
+studied,\cite{Furukawa2013} and this vast diversity of \mof materials shows great promise
+for chemical customization and optimization. Within the past two decades, a
+huge body of research has been devoted to the design and study of \mofs, and
+current applications range from gas separation and storage to catalysis and
+biomedical imaging.\cite{Furukawa2013}
+
+Somewhat recently, it has been discovered that so-called \cus \mofs can be
+created by activation of solvent-coordinated inorganic nodes to yield exposed
+(or 'open') metal sites.\cite{Millward2005b,Dietzel2009,Dzubak2012} These \cus-\mofs have
+been shown to exhibit exhibit excellent uptakes and selectivities in a number
+of gas separation and storage problems,\cite{Czaja2009,Millward2005b,Dietzel2009}
+making this family of compounds an excellent target for future
+investigation and materials design. Owing to the vast scope of hypothetical
+\cus-\mof materials, however, and the number of chemically-distinct targets
+for gas separation/storage, it is unlikely that experiment alone can
+be used to screen for new and promising \cus-\mof materials.\cite{Krishna2011} 
+Rather, a combination of
+experiment and computational modeling will be required to find (or possibly
+even rationally design) optimal \cus-\mofs.\cite{Getman2012,Czaja2009,Krishna2011}
+
+Despite the utility of computational studies, it remains challenging to
+develop molecular models for \cus-\mofs.\cite{Dzubak2012} Because the strong
+binding between metal and adsorbate leads to chemical environments
+substantially different from typical coordinatively-saturated \mofs, many
+standard force fields (such as UFF and DREIDING) which yield good predictions
+for these \mofs frequently (and substantially!) underpredict adsorption in
+\cus-\mofs, especially at low
+pressures.\cite{Yazaydin2009,Krishna2011,Getman2012} While \cus-\mofs can
+sometimes be studied using quntum mechanical
+means,\cite{Getman2012,Valenzano2010} clearly
+new and improved force fields will be required to perform in-depth simulations
+and large-scale screenings of these materials.
+
+The goal of the present chapter is to present a general 
+methodology for developing accurate and transferable force fields for \cus-\mofs. 
+The current study is limited to a discussion of the MOF-74 series (a
+prototypical and well-studied \cus-\mof), however it
+is expected that the methods presented herein might also be applicable to
+other systems. After outlining this methodology
+(\cref{sec:lmoeda-background,sec:lmoeda-theory}), we next show how our force
+fields can be applied to accurately predict \co adsorption isotherms in
+\mgmof. At the present time, we do not have results for other compounds in the
+M-MOF-74 series (M = Co, Cr, Cu, Fe, Mn, Ni, Ti, V, and Zn), largely as a
+result of techical challenges in the force field parameterization itself.
+We discuss these technical challenges in some detail, and conclude with our
+perspective on the challenges and opportunities associated with developing
+transferable force fields for these and other \cus-\mof systems.
 
 
-What, however, should be done for systems where \acrshort{sapt} itself
-is in significant error?\cite{Parker2014a} 
 
-Back in 2013, at the start of this project, we encountered a series of systems
-for which \sapt did indeed seem to be breaking down.
+\end{section}
 
 
-    %%%%%%%%%%%% SAPT Breakdown %%%%%%%%%%%%%%%
-    \begin{figure}
-    \centering
-    \includegraphics[width=1.0\textwidth]{lmoeda/sapt_breakdown.pdf}
-    \caption{
-Model \pes for interactions between \co and \mgmof.  (Left) Interaction
-energies between \co and a cluster model of \mgmof (shown bottom right),
-computed at a \ccsdtf (black), \sapt (orange), and/or \pbeod (blue) level of
-theory. Discrepancies
-between \sapt and \ccsdtf in the minimum-energy region of the potential have
-been highlighted. (Top right)
-The structure of \co-bound \mgmof. (Bottom right) The structure of the cluster
-model used for \mgmof, where the circled atom pair indicates the relevant Mg-O
-radius from the x-axis in the leftmost figure.
-            }
-    \label{fig:rmse}
-    \end{figure}
-    %%%%%%%%%%%% SAPT Breakdown %%%%%%%%%%%%%%%
-
-\end{section}{Introduction}
-
-
-=======================
-
-\gls{sapt}
-\gls{saptg}
-\gls{abintff}
+%% =======================
+%% 
+%% \mgmof has good \co capacity: \cite{Krishna2011}
+%% Choice of cluster significantly impacts binding energies: \cite{Getman2012}
+%% \co-\mof force field for Cu, Co, Mn, Ni-MOF-74: \cite{Haldoupis2015}
+%%     Isotherms are okay (better than UFF, certainly, but still overpredicts
+%%     adsorption at high loadings), and would only be applicable to \co adsorption.
+%% Another \co-\mof force field for M = Co, Cr, Cu, Fe, Mg, Mn, Ni, Ti, V, and
+%% Zn: \cite{Becker2017} 
+%%     - Uses UFF (framework) and Trappe (CO2) as starting points, but also
+%%     includes polarization. Pretty good agreement between adsorption isotherms. 
+%%     - Fit Mg-MOF-74/\co potential to experiment, but then used the same
+%%     scaling parameters to compute other M-MOF-74 and CH4 adsorption. Some MOFs and
+%%     the CH4 isotherms are not reproduced well, but technically their model isn't
+%%     site-specific.
+%% "Approaching-paths" non-polarizable \co adsorption model: \cite{Lin2014}
+%%     Reproduces Mg and Zn energies, and can be parameterized for both \co and
+%%     h2o. Non-polarizable, so the parameters probably don't transfer well to new Mg
+%%     environments.
+%% 
+%% \gls{sapt}
+%% \gls{saptg}
+%% \gls{abintff}
 
 

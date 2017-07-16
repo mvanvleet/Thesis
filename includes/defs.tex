@@ -30,16 +30,42 @@
 \newcommand{\chref}[1]{Chapter~\ref{#1}}
 \newcommand{\appendixref}[1]{Appendix~\ref{#1}}
 
+% Citations
+\newcommand*{\citen}{}% generate error, if `\citen` is already in use
+\DeclareRobustCommand*{\citen}[1]{%
+  \begingroup
+    \romannumeral-`\x % remove space at the beginning of \setcitestyle
+    \setcitestyle{numbers}%
+    ref. \cite{#1}%
+  \endgroup
+}
+\newcommand*{\citens}{}% generate error, if `\citen` is already in use
+\DeclareRobustCommand*{\citens}[1]{%
+  \begingroup
+    \romannumeral-`\x % remove space at the beginning of \setcitestyle
+    \setcitestyle{numbers}%
+    refs. \cite{#1}%
+  \endgroup
+}
 
-% Acronyms
-\newcommand{\sapt}{\acrshort{sapt}\xspace}
-\newcommand{\pes}{\acrshort{pes}\xspace}
+
+% Electronic structure acronyms
+\newcommand{\sapt}{\gls{sapt}\xspace}
+\newcommand{\dftsapt}{\acrshort{dftsapt}\xspace}
+\newcommand{\dft}{\gls{dft}\xspace}
+\newcommand{\pes}{\gls{pes}\xspace}
 \newcommand{\ccsdtf}{\Gls{ccsdtf}\xspace}
 \newcommand{\ccsdt}{\Gls{ccsdt}\xspace}
+\newcommand{\lmoeda}{\Gls{lmoeda}\xspace}
 
 % Chemical compounds
 \newcommand{\co}{\BPChem{CO\_2}\xspace}
 \newcommand{\mgmof}{\BPChem{Mg-MOF-74}\xspace}
+
+% MOFs
+\newcommand{\mof}{\gls{mof}\xspace}
+\newcommand{\mofs}{\glspl{mof}\xspace}
+\newcommand{\cus}{\gls{cus}\xspace}
 
 % Units
 \newcommand{\kjmol}[1]{{#1}~kJ/mol}

@@ -70,15 +70,20 @@ New Functional Forms and Parameterization Methods for Ab Initio, Intermolecular 
 
 %% Now include the tex files for each chapter, like so (I put these in separate dirs): 
 \part{Introduction}
+\glsresetall % reset glossary so as to redefine acronyms in each chapter
 \include{intro/intro}
 \include{background/background}
 
 \part{Published Work}
+\glsresetall 
 \include{isotropic/main}
+\glsresetall 
 \include{anisotropic/main}
 
 \part{Unpublished Work}
+\glsresetall 
 \include{lmoeda/main}
+\glsresetall 
 \include{database/main}
 
 \part{Practical Matters}
@@ -101,7 +106,7 @@ New Functional Forms and Parameterization Methods for Ab Initio, Intermolecular 
 %% McBride is a very nice style (some version is included in this distribution)
 %\bibliographystyle{mcbride}
 \bibliographystyle{achemso}
-\bibliography{library}
+\bibliography{/Users/mvanvleet/Documents/library}
 
 \setglossarystyle{listhypergroup}
 \printglossary[type=\acronymtype]

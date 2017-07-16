@@ -1,5 +1,5 @@
 #!/bin/bash
 pdflatex dissertation.tex
-bib dissertation
+bibtex dissertation
 makeglossaries dissertation
 pdflatex dissertation.tex
