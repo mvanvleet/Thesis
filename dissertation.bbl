@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{16}
+\begin{mcitethebibliography}{21}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -144,9 +144,31 @@ McDaniel,~J.~G.; Li,~S.; Tylianakis,~E.; Snurr,~R.~Q.; Schmidt,~J.~R. \emph{J.
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
+\bibitem[Lao \latin{et~al.}(2015)Lao, Schaeffer, Jansen, and Herbert]{Lao2015a}
+Lao,~K.~U.; Schaeffer,~R.; Jansen,~G.; Herbert,~J.~M. \emph{J. Chem. Theory
+  Comput.} \textbf{2015}, 150417132228001\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Pastorczak and Corminboeuf(2017)Pastorczak, and
+  Corminboeuf]{Pastorczak2017}
+Pastorczak,~E.; Corminboeuf,~C. \emph{J. Chem. Phys.} \textbf{2017},
+  \emph{146}, 120901\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
 \bibitem[{\.{Z}}uchowski(2008)]{Zuchowski2008a}
 {\.{Z}}uchowski,~P. \emph{Chem. Phys. Lett.} \textbf{2008}, \emph{450},
   203--209\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Horn and Head-gordon(2016)Horn, and Head-gordon]{Horn2016b}
+Horn,~P.~R.; Head-gordon,~M. \emph{Phys. Chem. Chem. Phys.} \textbf{2016},
+  \emph{18}, 23067--23079\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -163,5 +185,18 @@ Chen,~Y.; Li,~H. \emph{J. Phys. Chem. A} \textbf{2010}, \emph{114},
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Su \latin{et~al.}(2014)Su, Jiang, Chen, and Wu]{Su2014}
+Su,~P.; Jiang,~Z.; Chen,~Z.; Wu,~W. \emph{J. Phys. Chem. A} \textbf{2014},
+  \emph{118}, 2531--42\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Fedorov and Kitaura(2006)Fedorov, and Kitaura]{Fedorov2006}
+Fedorov,~D.~G.; Kitaura,~K. \textbf{2006}, \relax
+\mciteBstWouldAddEndPunctfalse
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
 \end{mcitethebibliography}

@@ -45,7 +45,8 @@ screening.\cite{McDaniel2015}
     \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{lmoeda/sapt_breakdown.pdf}
-    \caption{
+    \caption[Model \pes for interactions between \co and \mgmof]
+{
 Model \pes for interactions between \co and \mgmof.  (Left) Interaction
 energies between \co and a cluster model of \mgmof (shown bottom right),
 computed at a \ccsdtf (black), \sapt (orange), and/or \pbeod (blue) level of
@@ -62,15 +63,16 @@ radius from the x-axis in the leftmost figure.
 
 
 In the generation of force fields for \cus-\mofs, we expect that many of the
-advantages of the above workflow (such as the component-by-component based
-parameterization and method for partial charge determination) will translate
-well to force field development for this subclass of \mof materials. 
+advantages of the above workflow for coordinatively-saturated \mofs (such as the component-by-component based
+parameterization and method for partial charge determination) will also translate
+well to \cus-\mof materials. 
 Nevertheless, there are two reasons why a \sapt-based methodology
 cannot be used to generate such force fields. First, and as shown in
 \cref{fig:lmoeda-sapt_breakdown} for a representative \mgmof cluster model,
-we have empirically found \sapt to be in error compared to benchmark
-\ccsdtf calculations. \sapt is well-known to struggle with highly-polarizable
-and/or ionic systems, and so this error is perhaps not surprising.
+we have empirically found \sapt to be in error for \cus-\mof-like systems compared to benchmark
+\ccsdtf calculations. \dftsapt has been known to struggle with highly
+ionic systems (relative to \ccsdt or \dft
+methods),\cite{Lao2015a,Pastorczak2017} and so this error is perhaps not surprising.
 (Possible sources of the discrepancy between \sapt and \ccsdtf will be
 discussed in \cref{sec:lmoeda-results}.) Nevertheless, and in the absence of
 fortuitous error cancellation,
@@ -91,29 +93,6 @@ Delaware) do not allow for computations of open-shell systems, and indeed
 rare.\cite{Zuchowski2008a} For these reasons, a new electronic structure
 benchmark is highly preferable.
 
-Based on the results for \mgmof, it is clear that, at least for \cus-\mofs, a
-new methodology is required which simultaneously keeps the important advantages of the
-old workflow (especially the component-by-component based parameterization,
-which is essential for generating transferable force fields) while overcoming
-the limitations of \sapt itself. Put differently, for \cus-\mofs we should
-seek a new electronic structure theory benchmark and associated energy
-decomposition analysis with the following qualities:
-%
-\begin{enumerate}
-\item High accuracy with respect to to \ccsdtf benchmark energies
-\item Physically-meaningful energy decomposition into (at least)
-electrostatics, exchange, induction, and dispersion
-\item For systems where \sapt and \ccsdtf agree, a quantitative correspondence
-between the energy decompositions of \sapt and the new method
-\end{enumerate}
-%
-Assuming these three qualites are met, we expect to be able to generate force
-fields for \cus-\mofs that are both highly accurate and maximally-compatible
-with previous force fields developed for coordinatively-saturated \mof
-systems. For reasons discussed below, and after a thorough comparison of
-available energy decomposition schemes, the \lmoeda\cite{Su2009,Chen2010} has been selected as our
-energy decomposition of choice, and we turn now to a full description of the
-method and our reasons for using it in this work.
 
 \end{section}
 
