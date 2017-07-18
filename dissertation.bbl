@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{21}
+\begin{mcitethebibliography}{26}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -198,5 +198,41 @@ Fedorov,~D.~G.; Kitaura,~K. \textbf{2006}, \relax
 \mciteBstWouldAddEndPunctfalse
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Yu \latin{et~al.}(2012)Yu, Kiesling, and Schmidt]{Yu2012c}
+Yu,~K.; Kiesling,~K.; Schmidt,~J.~R. \textbf{2012}, \relax
+\mciteBstWouldAddEndPunctfalse
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Verma \latin{et~al.}(2013)Verma, Xu, and Truhlar]{Verma2013}
+Verma,~P.; Xu,~X.; Truhlar,~D.~G. \textbf{2013}, \relax
+\mciteBstWouldAddEndPunctfalse
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Valenzano \latin{et~al.}(2011)Valenzano, Civalleri, Sillar, and
+  Sauer]{Valenzano2011}
+Valenzano,~L.; Civalleri,~B.; Sillar,~K.; Sauer,~J. \textbf{2011},
+  21777--21784\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Haldoupis \latin{et~al.}(2015)Haldoupis, Borycz, Shi, Vogiatzis, Bai,
+  Queen, Gagliardi, and Siepmann]{Haldoupis2015a}
+Haldoupis,~E.; Borycz,~J.; Shi,~H.; Vogiatzis,~K.~D.; Bai,~P.; Queen,~W.~L.;
+  Gagliardi,~L.; Siepmann,~J.~I. \emph{J. Phys. Chem. C} \textbf{2015},
+  \emph{74}, 150616135429005\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Yu \latin{et~al.}(2011)Yu, McDaniel, and Schmidt]{Yu2011}
+Yu,~K.; McDaniel,~J.~G.; Schmidt,~J.~R. \emph{J. Phys. Chem. B} \textbf{2011},
+  \emph{115}, 10054--10063\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
 \end{mcitethebibliography}
