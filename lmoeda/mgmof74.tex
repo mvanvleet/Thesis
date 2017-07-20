@@ -20,8 +20,17 @@ energies without significant systematic error.
     \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{lmoeda/small_energies.pdf}
-    \caption[Model clusters for \mgmof]
-{
+    \caption[Force field fitting quality for the \mgmof-small cluster]
+{Force field fitting quality for the \mgmof-small cluster. (Top left) Various
+electronic structure benchmarks for \mgmof-small along with the classical
+potential. Each \dftsapt (orange dot-dashed), \pbeod (blue dot-dashed), \ccsdtf (black
+solid), and the \lmoeda-based force field (green dashed) are shown as a
+function of the \ch{Mg-O} interatomic distance (non-bonding pair highlighted
+at top right). (Bottom right) Force field fit quality, as benchmarked against
+\lmoeda-\pbeod, for a semi-random set of dimer configurations of the
+\mgmof-small cluster model interacting with \co. The black line
+establishes the $y=x$ benchmark, and the red line represents the line of best
+fit.
             }
     \label{fig:lmoeda-small_fit}
     \end{figure}
@@ -64,7 +73,7 @@ then able to attribute to our choice of cluster model (vida infra).
     \end{tabular}
 
     \caption[Model clusters for \mgmof]
-{ Various cluster models for \mgmof interacting with \co. 
+{ Various structures and cluster models for \mgmof interacting with \co. 
 (A) Full periodic \mgmof structure with inset showing adsorbed \co positions. 
 (B) \mgmof-small cluster, containing 6 heavy atoms (not including \co). 
 (C) \citeauthor{Yu2012c} cluster model for \mgmof, denoted in text as \mgmof-Yu.
@@ -75,8 +84,8 @@ angles for adsorbed \co are given in the bottom table. Data for (A) was taken
 from \citeauthor{Valenzano2010} using a B3LYP-D level of theory,\cite{Valenzano2010}
 whereas data for (B-D) was computed in this work using \pbeod. Finally, note
 that the binding energy for (A) includes framework geometry relaxation effects,
-whereas (B-D) were computed using rigid cluster geometries and only optimizing
-the \co position.
+whereas (B-D) were computed using semi-rigid cluster geometries and only optimizing
+the \co position and exposed \ch{MgO5} pocket.
             }
     \label{fig:lmoeda-clusters}
     \end{figure}
@@ -160,8 +169,12 @@ form could excellently reproduce the \mgmof-Yu model \pes.
     \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{lmoeda/xlarge_ff_fit.pdf}
-    \caption[Model clusters for \mgmof]
-{
+    \caption[Force field fitting quality for \mgmof-Yu]
+{Force field fitting quality for the \mgmof-Yu cluster. A \pbeod benchmark
+(black solid) is displayed along with two force field fits: single-exponential
+(red dashed) and double-exponential for Mg (blue dash-dotted). In either case,
+a cut of the \pes is shown along the interatomic distance between the central
+Mg atom and the closest-contact oxygen atom in \co.
             }
     \label{fig:lmoeda-xlarge_fit}
     \end{figure}
@@ -185,8 +198,13 @@ strong \ch{Mg-CO2} binding as well as the weaker physisorption regime.
     \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{lmoeda/mgmof_isotherm.pdf}
-    \caption[Model clusters for \mgmof]
-{
+    \caption[Predicted \co Adsorption Isotherm for \mgmof]
+{Predicted \co adsorption isotherm for \mgmof. Two experimental isotherms are
+shown, one as directly measured by experiment (dashed line) and one scaled to
+account for pore block effects (solid line). Predictions from two force fields
+are also shown, where Mg parameters for each force field were fit either to
+the \mgmof-small cluster (gold triangles) or to the \mgmof-Yu cluster (purple
+circles). Cluster geometries are given in \cref{fig:lmoeda_clusters}.
             }
     \label{fig:lmoeda-isotherm}
     \end{figure}

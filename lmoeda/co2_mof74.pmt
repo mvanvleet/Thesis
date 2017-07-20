@@ -1,7 +1,7 @@
 \begin{verbatim}
 lennard_jones_type	1	"1 for buckingham, 2 for lennard jones"
 
-" parameters are listed as charge, A,B,C, polarizability for buckingham, or as charge, epsilon,sigma, junk, polarizability for lj"
+" parameters are listed as charge, A,B,C, polarizability 
 " units are A:kJ/mol,  B:A^-1,  C: KJ/mol*A^6   epsilon:KJ/mol,   sigma:A,  polarizability: A^3 "
 " polarizability is defined as q^2/k, spring constant is set to .1*1.8897^3 e^2/A^3"
 

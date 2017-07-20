@@ -1,18 +1,107 @@
 \begin{section}{Future Work}
 \label{sec:lmoeda-future_work}
 
-Practical issues
--- don't use GAMESS
--- need more memory
+Throughout this manuscript, we have attempted to highlight some of the key
+limitations of our force field development methodology for \cus-\mofs. 
+In summary, the following issues would need to be resolved in order to expand the
+scope of the present research:
+\begin{enumerate}
+%
+\item \textbf{Memory Limitations in GAMESS}: 
+%
+As evidenced in this work,
+relatively large (60+ atom) cluster models are required to correctly
+parameterize force fields for the M-MOF-74 system. While these cluster sizes
+do not present difficulties for standard \dft calculations with reasonable
+basis sets, the corresponding
+\lmoeda calculations were, as implemented in the GAMESS software package,
+infeasible due to memory requirements. Some time was spent attempting to
+address these memory issues, particularly for the memory-intensive
+Edmiston-Ruedenberg localization subroutine that is the source of the problem.
+However, due to our lack of familiarity with the GAMESS software and the
+\lmoeda source code, this pursuit was eventually dropped. 
+%
+\item \textbf{Fundamental Issues with \lmoeda}: 
+%
+As discussed in \cref{sec:lmoeda-theory}, the \lmoeda method has several
+theoretical limitations. In particular, and especially for functionals with no
+defined separation between exchange and correlation functionals, \lmoeda does
+not offer a clean separation between the exchange and dispersion energies.
+Furthermore, and unlike some recent \eda methods, \lmoeda cannot separate induction
+into charge transfer and polarization components. 
+%
+\item \textbf{Transferability of the Force Field Functional Form}: 
+%
+While our
+final force field for 
+studying \co interactions in \mgmof was highly accurate (both with respect to
+ab initio theory and with respect to experiment), it does not appear that this 
+accuracy extends to models for the adsorption of other small molecules, such as
+\ch{N2}. This transferability limitation is almost certainly due to the chosen
+double-exponential functional form and/or the parameterization process used to
+obtain Mg parameters, and improvements to this methodology will be essential
+to make our work on the \co-\mgmof system applicable to general force field
+development for \cus-\mofs. In particular, we will require a better force field for describing
+short-range interactions, as the functional forms and paramters used in this
+work struggled to model the \mgmof exchange energies.
+%
+\end{enumerate}
 
-Theoretical issues:
--- Functional form was bad
--- Hard to choose an appropriate cluster model
+While several of these issues (particularly practical limitations with the
+\lmoeda implementation) have yet to be addressed in a meaningful fashion,
+several recent theoretical advances may pave the way for continued work on this
+project. Thus for \cus-\mofs and other systems where \dftsapt might be in
+error, we offer the following recommendations:
+%
+\begin{enumerate}
+%
+\item \textbf{Improved \sapt energies}: 
+%
+Recently, it has been proposed that the commonly used single-exchange (``
+$S^2$'')
+approximation can lead to errors in the description of the induction
+energy,\cite{Jansen2012} particularly for ionic systems.\cite{Lao2015a} 
+While it is difficult to attribute errors in \sapt to a particular energy
+component, it may well be that \sapt poorly describes \mgmof due to the $S^2$
+treatment of the induction energy. In this case, eliminating the $S^2$
+approximation might improve the \dftsapt total interaction energies, thus
+enabling \sapt to be used for (at least) closed-shell \cus-\mofs.
+%
+\item \textbf{New \sapt Correction Schemes}: 
+%
+As discussed in \cref{ch:mastiff}, deviations between \sapt and \ccsdt can be
+rectified by adding a \dccsdt correction to the total \sapt energy.
+Thus far, we have had good success modeling this \dccsdt correction as part of
+the dispersion energy, though this is an empirically-justified choice, and may
+need modification for treating \mgmof. Regardless, the results in
+\cref{ch:mastiff}
+indicate that correcting (rather than entirely ignoring) the \dftsapt energies
+is a promising strategy for transferable force field development.
+%
+\item \textbf{New \eda schemes}: 
+%
+Since this work was completed, a second-generation ALMO-EDA scheme has been
+implemented in the Q-Chem software package.\cite{Horn2016b} Crucially, and unlike its
+predecessor, this ALMO-EDA scheme now breaks up the interaction energy into
+electrostatic, exchange, polarization, charge-transfer, and dispersion
+components. While there is no guarantee that such an \eda could serve as the
+basis for \cus-\mof force field development (see \cref{sec:lmoeda-theory}),
+these and other recently developed \edas may be worth investigation, and could
+eventually replace the (practically problematic) \lmoeda method.
+%
+\item \textbf{Improved Force Field Functional Forms}: 
+%
+Since 2014, we have made significant progress in developing more accurate and
+transferable intermolecular force fields (see \cref{ch:isaff,ch:mastiff}), and
+many of these advances particularly improve the description of the short-range
+potential itself. There is a good chance that either the \isaffold or \mastiff
+methodologies would yield high-quality force fields for \mgmof and other
+systems. In this case, continued work on this project might be an exciting
+avenue for showcasing the \mastiff methodology in the context of
+accurate inorganic/organometallic force field development.
+%
+\end{enumerate}
 
-Fixes:
--- try second-generation ALMO-EDA?
--- try \sapt correction scheme?
--- for this system, maybe s2 approximation for the induction energy is to
-blame
+
 
 \end{section}

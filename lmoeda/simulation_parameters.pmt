@@ -1,7 +1,8 @@
 \begin{verbatim}
 Simulation Methodology
 energy_decomposition		yes        ! yes for our force fields, no for UFF LJ, etc.
-solute_cross_parameter_set	yes	   ! this should be set to yes if using different solute parameters for solute-solute and solute-framework interactions as in our force fields, no otherwise
+solute_cross_parameter_set	yes	   ! this should be set to yes if using different solute parameters 
+            ! for solute-solute and solute-framework interactions as in our force fields, no otherwise
 C8_10_dispersion_terms		yes	   ! set to yes if using C8, C10 dispersion terms as in our force fields
 C12_dispersion			yes
 electrostatic_type		pme	   ! either "pme" for particle-mesh ewald, "cutoff", or "none"
@@ -9,7 +10,8 @@ lj_comb_rule			ZIFFF	   ! "opls" or "standard" for lj, "standard" or "ZIFFF" for
 
 Simulation Parameters
 temperature			296.0		! temperature in Kelvin
-too_close			1.8		! reject move if molecules are within this separation in Angstroms.  helpful to avoid unnecessary energy calculations and to prevent drude oscillator catastrophes
+too_close			1.8		! reject move if molecules are within this separation in Angstroms.  
+            ! helpful to avoid unnecessary energy calculations and to prevent drude oscillator catastrophes
 lj_bkghm			1		! 1 for bkghm force field, 2 for lj
 screen_type			1		! screening for coulomb potential: 0 = no screening, 1 = Tang-Toennies type screening for our force fields
 springconstant			0.1		! spring constant for drude oscillators (au). set to 0.1 for our CO2/N2 force fields

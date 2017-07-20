@@ -6,8 +6,8 @@ new methodology is required which simultaneously keeps the important advantages 
 old workflow (especially the component-by-component based parameterization,
 which is essential for generating transferable force fields) while overcoming
 the limitations of \sapt itself. Put differently, for \cus-\mofs we should
-seek a new electronic structure theory benchmark and associated energy
-decomposition analysis with the following qualities:
+seek a new electronic structure theory benchmark and associated \eda 
+with the following qualities:
 %
 \begin{enumerate}
 \item High accuracy with respect to to \ccsdtf benchmark energies
@@ -37,7 +37,7 @@ total energy closely matches \ccsdtf. Indeed, and
 as shown in
 \cref{fig:lmoeda-sapt_breakdown}, \pbeod
 shows excellent agreement with \ccsdtf for a \mgmof cluster model, 
-and any \dft-compatible \eda will meet our first criteria from above.
+and so any \dft-compatible \eda should meet our first criteria from above.
 
 Although all variational \edas yield the same
 total interaction energy for a given level of theory, many \edas can differ substantially in terms of how
@@ -79,8 +79,15 @@ fields.
     \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{lmoeda/co2_co2_pes.pdf}
-    \caption[\pes for \co ]
-{
+    \caption[\lmoeda vs. \sapt \pes for the \co dimer]
+{\pes and associated energy decomposition for the slipped parallel geometry of
+the \co dimer as a function of
+the \ch{C-C} interatomic distance. The \pes has been
+computed by both \dftsapt(PBE0) (solid lines) and \lmoeda-\pbeod (dashed
+lines), and each electrostatics (green), exchange (red), dispersion (blue),
+induction (purple), and total energy (black) components are displayed.
+Note that, for the \dftsapt energies, the \dhf contribution has been
+incorporated into the \induction energy.
             }
     \label{fig:lmoeda-co2_co2}
     \end{figure}
@@ -90,8 +97,13 @@ fields.
     \begin{figure}
     \centering
     \includegraphics[width=1.0\textwidth]{lmoeda/co2_mgmof_pes.pdf}
-    \caption[\pes for \co and \mgmof]
-{
+    \caption[\lmoeda vs. \sapt \pes for the \co/\mgmof dimer ]
+{\pes and associated energy decomposition for a \co + \ch{MgO5} cluster, 
+as a function of the highlighted \ch{Mg-O} interatomic distance. 
+The \pes has been
+computed by both \dftsapt(PBE0) (solid lines) and \lmoeda-\pbeod (dashed
+lines), and colors and labels for the energy decomposition are as in
+\cref{fig:lmoeda-co2_co2}. 
             }
     \label{fig:lmoeda-co2_mgmof}
     \end{figure}

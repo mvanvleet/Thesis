@@ -17,10 +17,12 @@ First, for what types of systems might we expect \sapt to be inaccurate? Second,
 for the systems where \sapt and the exact \pes are in disagreement, how
 must we modify our typical methodology for ab-initio force field development?
 
+%TODO: Fix this paragraph to focus more on the overall project's successes and
+%failures.
 The purpose of this chapter is to partially address these questions, all
 within the specific context of 
 force field development for \glspl{mof}. Note that the results presented here were
-gathered from 2013--2015, so some important advances (namely those
+gathered from 2012--2014, so some important advances (namely those
 presented in \cref{ch:isaff,ch:mastiff}) haven't been incorporated into
 the force fields presented here. This is probably to the determinent of the accuracy and
 transferability that might be possible with the \lmoeda-based methodology, and
@@ -33,9 +35,9 @@ discussed in \cref{ch:mastiff}.
 \begin{section}{Introduction}
 \glsreset{mof}
 
-\Glspl{mof} are an increasingly important class of compounds, 
-fundamentally defined as porous
-materials comprised of inorganic nodes connected by organic linkers. Within
+\Glspl{mof} are an increasingly important class of compounds that are
+defined as porous
+materials which contain inorganic nodes connected by organic linkers. Within
 this general motif, more than 20,000 compounds have been reported and
 studied,\cite{Furukawa2013} and this vast diversity of \mof materials shows great promise
 for chemical customization and optimization. Within the past two decades, a
@@ -57,6 +59,7 @@ Rather, a combination of
 experiment and computational modeling will be required to find (or possibly
 even rationally design) optimal \cus-\mofs.\cite{Getman2012,Czaja2009,Krishna2011}
 
+%Todo: Mention other force fields that succeed at describing cusmofs.
 Despite the utility of computational studies, it remains challenging to
 develop molecular models for \cus-\mofs.\cite{Dzubak2012} Because the strong
 binding between metal and adsorbate leads to chemical environments
@@ -65,7 +68,7 @@ standard force fields (such as UFF and DREIDING) which yield good predictions
 for these \mofs frequently (and substantially!) underpredict adsorption in
 \cus-\mofs, especially at low
 pressures.\cite{Yazaydin2009,Krishna2011,Getman2012} While \cus-\mofs can
-sometimes be studied using quntum mechanical
+sometimes be studied using quantum mechanical
 means,\cite{Getman2012,Valenzano2010} clearly
 new and improved force fields will be required to perform in-depth simulations
 and large-scale screenings of these materials.

@@ -1,13 +1,39 @@
 \begin{section}{Computational Methods}
 \label{sec:lmoeda-methods}
 
-Determining Partial Charges
+\begin{subsection}{Partial Charge Determination}
 
-Force Field Functional Forms
+Partial charges for \mgmof were determined in a manner analagous to
+\citen{McDaniel2015} using the $Q_{\text{SBU}}$ method. Two cluster models, one
+a hydrogen-capped DOBDC ligand environment, and one a capped \ch{MgO5} inorganic chain,
+were constructed and analysed using a \acrfull{dma}. The resulting \dma charges were
+then used to obtain charge paramters for the ligand and inorganic SBU,
+respectively. See \cref{sec:lmoeda-params} for final charge parameters.
 
-Force field fitting
-    -- single exponential form
-    -- double exponential form
+\end{subsection}
+\begin{subsection}{Force Field Fitting}
+
+Two types of force field functional forms were considered in this work. The
+first, a `single-exponential' functional form, exactly matches that used in
+\citen{McDaniel2013}, with the exception that \dhf parameters were not fit to
+the Mg atomtype. This fitting choice was due to the fact that \lmoeda only provides a
+total \induction term (rather than splitting into 2\textsuperscript{nd}- and
+higher-order \induction energies, as with \sapt). 
+
+For the `double-exponential' functional form used to fit the \mgmof-Yu cluster
+model, the same functional form was used as in the single-exponential case,
+with the exception that two sets of short-range interaction parameters
+(labeled Mg and Du in \cref{sec:lmoeda-params}) were assigned to the Mg atomic center. This
+effectively meant that Mg was described by two separate exponential decays,
+which enabled the much more accurate force field fits discussed in
+\cref{sec:lmoeda-mgmof}.
+
+In all cases, force fields were fit using the Fortran code described in the
+Appendix of \citen{McDaniel2014a}.
+
+
+\end{subsection}
+
 
 
 
