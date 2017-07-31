@@ -17,3 +17,4 @@
 *.toc
 *.swp
 .DS_Store
+*old*

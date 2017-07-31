@@ -36,7 +36,7 @@
   \begingroup
     \romannumeral-`\x % remove space at the beginning of \setcitestyle
     \setcitestyle{numbers}%
-    ref. \cite{#1}%
+    Ref. \cite{#1}%
   \endgroup
 }
 \newcommand*{\citens}{}% generate error, if `\citen` is already in use
@@ -44,9 +44,10 @@
   \begingroup
     \romannumeral-`\x % remove space at the beginning of \setcitestyle
     \setcitestyle{numbers}%
-    refs. \cite{#1}%
+    Refs. \cite{#1}%
   \endgroup
 }
+
 
 
 % SAPT terms 
@@ -54,6 +55,7 @@
 \newcommand{\dftsapt}{\acrshort{dftsapt}\xspace}
 \newcommand{\dhf}{\acrshort{dhf}\xspace}
 \newcommand{\induction}{\gls{ind}\xspace}
+\newcommand{\isa}{\gls{isa}\xspace}
 
 % Electronic structure acronyms
 \newcommand{\dft}{\gls{dft}\xspace}
@@ -64,11 +66,19 @@
 \newcommand{\eda}{\Gls{eda}\xspace}
 \newcommand{\edas}{\Glspl{eda}\xspace}
 \newcommand{\dma}{\Gls{dma}\xspace}
+\newcommand{\aim}{\gls{aim}\xspace}
 
-% Modeling
+% Modeling methods
 \newcommand{\dccsdt}{$\delta$\Gls{ccsdt}\xspace}
+\newcommand{\homo}{\gls{homo}\xspace}
+\newcommand{\hetero}{\gls{hetero}\xspace}
+
+
+% Specific Force Fields
 \newcommand{\mastiff}{MASTIFF\xspace}
+\newcommand{\isaff}{Aniso-Iso FF\xspace}
 \newcommand{\isaffold}{Slater-ISA FF\xspace}
+\newcommand{\saptff}{Born-Mayer-IP FF\xspace}
 
 % Chemical compounds
 \newcommand{\co}{\ch{CO2}\xspace}
@@ -87,6 +97,19 @@
 \newcommand{\avdz}{aVDZ\xspace}
 \newcommand{\avtz}{aVTZ\xspace}
 \newcommand{\avqz}{aVQZ\xspace}
+\newcommand{\avtzm}{aVTZ+m\xspace}
+\newcommand{\avqzm}{aVTZ+m\xspace}
+
+% software terms 
+\newcommand{\molpro}{Molpro\xspace}
+\newcommand{\camcasp}{CamCASP\xspace}
+% Force-field-specific software
+\newcommand{\pointer}{\gls{pointer}\xspace}
+\newcommand{\idma}{i\dma-pol\xspace}
+
+% General
+\newcommand{\si}{Supporting Information\xspace}
+\newcommand{\super}[1]{\textsuperscript{#1}}
 
 
 \makeatletter

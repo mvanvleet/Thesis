@@ -68,6 +68,36 @@
 \usepackage{listings}%
 }{}
 
+\usepackage{color}
+
+%% \definecolor{mygreen}{rgb}{0,0.6,0}
+%% \definecolor{mygray}{rgb}{0.5,0.5,0.5}
+%% \definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{ %
+  %backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\tiny,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at
+  frame = single, 
+  captionpos=t,                    % sets the caption-position to bottom
+  %commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  %keywordstyle=\color{blue},       % keyword style
+  %stringstyle=\color{mymauve},     % string literal style
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    %numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    %numbers=left,                    
+    %numbersep=5pt,                  
+    %showspaces=false,            
+}
+
 
 
 %% Get rid of ugly borders around PDF hyperlinks (e.g. for cross-references, bib entries, or URLs)
@@ -179,6 +209,21 @@
 
 % Chem-specific packages
 \usepackage{chemformula}
+
+%Multi-page pdfs
+\usepackage{pdfpages}
+
+% General
+\usepackage{subfig}
+\usepackage{multirow}
+
+% Bold math fonts
+\usepackage{bm}
+
+%Footnotestyle
+\usepackage{perpage}
+\MakePerPage{footnote}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 
 %%% set up page numbering for chapter pages to satisfy UW requirements
 %%% NB: You will want to delete until the ``SNIP'' mark if you are

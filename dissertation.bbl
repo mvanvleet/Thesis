@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{29}
+\begin{mcitethebibliography}{47}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -255,5 +255,137 @@ Jansen,~G.; Scha,~R. \textbf{2012}, \relax
 \mciteBstWouldAddEndPunctfalse
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Guibas(1992)]{Guibas1992}
+Guibas,~L. {Representing rotations with quaternions}. 1992;
+  \url{graphics.stanford.edu/courses/cs164-09-spring/Handouts/handout12.pdf}\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Shoemake(1992)]{Shoemake1992}
+Shoemake,~K. \emph{Graph. Gems 3}; 1992; Chapter 6, pp 124--132\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Jeziorski \latin{et~al.}(1994)Jeziorski, Moszynski, and
+  Szalewicz]{Jeziorski1994}
+Jeziorski,~B.; Moszynski,~R.; Szalewicz,~K. \emph{Chem. Rev.} \textbf{1994},
+  \emph{94}, 1887--1930\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Szalewicz(2012)]{Szalewicz2012}
+Szalewicz,~K. \emph{Wiley Interdiscip. Rev. Comput. Mol. Sci.} \textbf{2012},
+  \emph{2}, 254--272\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Knizia \latin{et~al.}(2009)Knizia, Adler, and Werner]{Knizia2009}
+Knizia,~G.; Adler,~T.~B.; Werner,~H.-J. \emph{J. Chem. Phys.} \textbf{2009},
+  \emph{130}, 054104\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Misquitta and Stone(2015)Misquitta, and Stone]{camcasp5.8}
+Misquitta,~A.~J.; Stone,~A.~J. {CamCASP: a program for studying intermolecular
+  interactions and for the calculation of molecular properties in distributed
+  form, version 5.8}. University of Cambridge, 2015\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Stone(2005)]{Stone2005}
+Stone,~A.~J. \emph{J. Chem. Theory Comput.} \textbf{2005}, \emph{1},
+  1128--1132\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Misquitta \latin{et~al.}(2014)Misquitta, Stone, and
+  Fazeli]{Misquitta2014}
+Misquitta,~A.~J.; Stone,~A.~J.; Fazeli,~F. \emph{J. Chem. Theory Comput.}
+  \textbf{2014}, \emph{10}, 5405--5418\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Misquitta and Stone(2006)Misquitta, and Stone]{Misquitta2006}
+Misquitta,~A.~J.; Stone,~A.~J. \emph{J. Chem. Phys.} \textbf{2006}, \emph{124},
+  024111\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{Van Vleet} \latin{et~al.}(2016){Van Vleet}, Misquitta, Stone, and
+  Schmidt]{VanVleet2016}
+{Van Vleet},~M.~J.; Misquitta,~A.~J.; Stone,~A.~J.; Schmidt,~J.~R. \emph{J.
+  Chem. Theory Comput.} \textbf{2016}, \emph{12}, 3851--3870\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Cardamone \latin{et~al.}(2014)Cardamone, Hughes, and
+  Popelier]{Cardamone2014}
+Cardamone,~S.; Hughes,~T.~J.; Popelier,~P. L.~a. \emph{Phys. Chem. Chem. Phys.}
+  \textbf{2014}, \emph{16}, 10367\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Kramer \latin{et~al.}(2014)Kramer, Spinn, and Liedl]{Kramer2014}
+Kramer,~C.; Spinn,~A.; Liedl,~K.~R. \emph{J. Chem. Theory Comput.}
+  \textbf{2014}, \emph{10}, 4488--4496\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Dixon and Kollman(1997)Dixon, and Kollman]{Dixon1997}
+Dixon,~R.~W.; Kollman,~P.~a. \emph{J. Comput. Chem.} \textbf{1997}, \emph{18},
+  1632--1646\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Chaudret \latin{et~al.}(2013)Chaudret, Gresh, Cisneros, Scemama, and
+  Piquemal]{Chaudret2013}
+Chaudret,~R.; Gresh,~N.; Cisneros,~G.~A.; Scemama,~A.; Piquemal,~J.-p.
+  \emph{Can. J. Chem.} \textbf{2013}, \emph{91}, 804--810\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Unke \latin{et~al.}(2017)Unke, Devereux, and Meuwly]{Unke2017}
+Unke,~O.~T.; Devereux,~M.; Meuwly,~M. \emph{J. Chem. Phys.} \textbf{2017},
+  \emph{147}, 161712\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Ferenczy \latin{et~al.}(1997)Ferenczy, Winn, and
+  Reynolds]{Ferenczy1997}
+Ferenczy,~G.~G.; Winn,~P.~J.; Reynolds,~C.~a. \emph{J. Phys. Chem. A}
+  \textbf{1997}, \emph{101}, 5446--5455\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Williams and Stone(2003)Williams, and Stone]{Williams2003}
+Williams,~G.~J.; Stone,~A.~J. \emph{J. Chem. Phys.} \textbf{2003}, \emph{119},
+  4620--4628\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Misquitta and Stone(2008)Misquitta, and Stone]{Misquitta2008}
+Misquitta,~A.~J.; Stone,~A.~J. \emph{Mol. Phys.} \textbf{2008}, \emph{106},
+  1631--1643\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
 \end{mcitethebibliography}
