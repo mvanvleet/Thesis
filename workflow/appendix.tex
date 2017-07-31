@@ -1,0 +1,36 @@
+\begin{subappendices}
+\begin{section}{Input Scripts}
+
+In total, the workflow for force field development requires four input files,
+as follows:
+
+\scriptsize
+\lstinputlisting[language=bash,
+                 caption=generate\_grid\_settings.inp,
+                 label=lst:workflow-generate_geometries]{workflow/generate_grid_settings.inp}
+\normalsize
+
+\scriptsize
+\lstinputlisting[language=bash,
+                 caption=dimer\_info.dat,
+                 label=lst:workflow-dimer_info]{workflow/dimer_info.dat}
+\normalsize
+
+\scriptsize
+\lstinputlisting[language=bash,
+                 caption=pyridine\_pyridine.inp,
+                 label=lst:workflow-dimer_geom]{workflow/pyridine_pyridine.inp}
+\normalsize
+
+\scriptsize
+\lstinputlisting[language=bash,
+                 caption=pyridine.atomtypes,
+                 label=lst:workflow-pyridine.atomtypes]{workflow/pyridine_pyridine.inp}
+\normalsize
+
+\end{section}
+\begin{section}{Extrapolation Algorithm for ISA Exponents}
+\label{sec:workflow-exponent_algorithm}
+\input{workflow/exponent_algorithm.tex}
+\end{section}
+\end{subappendices}
