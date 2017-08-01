@@ -44,7 +44,8 @@
 %% you don't have enumitem installed at all, hanglist will just be an
 %% alias for enumerate.
 \IfFileExists{enumitem.sty}{%
-\usepackage[loadonly]{enumitem}[2007/06/30]%
+%\usepackage[loadonly]{enumitem}[2007/06/30]%
+\usepackage{enumitem}
 \newlist{hanglist}{enumerate}{1}% 
 \setlist[hanglist]{label=\arabic*.}%
 \setlist[hanglist,1]{leftmargin=0pt}%
@@ -224,6 +225,12 @@
 \usepackage{perpage}
 \MakePerPage{footnote}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+% Multiple columns
+\usepackage{multicol}
+
+% Nice tables
+\usepackage{tabu}
 
 %%% set up page numbering for chapter pages to satisfy UW requirements
 %%% NB: You will want to delete until the ``SNIP'' mark if you are

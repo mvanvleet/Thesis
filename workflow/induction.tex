@@ -1,0 +1,69 @@
+\begin{subsubsection}{Theory}
+
+In addition to frequency-dependent polarizabilities, some of the same techniques
+described in \cref{sec:workflow-dispersion} can be applied to obtain the
+drude oscillator charges that get used in modeling the
+induction energy. Though in principle \isa-based polarizabilities could be
+used, this technique has not yet been developed. Instead, an \idma-type
+procedure can be used to extract the necessary polarization parameters. The
+algorithms used to perform this procedure are described in Appendix A of
+\citen{McDaniel2014a}. Due to the reduced number of coefficients that need to
+be fit, this optimization is generally more robust, and leads to more
+transferable dispersion parameters, than the algorithms described in
+\cref{sec:workflow-dispersion}.
+
+\end{subsubsection}
+\begin{subsubsection}{Practicals}
+
+The drude oscillator fitting code has the same dependencies and input files as
+\idma, with the exception that the \verb|dispersion_base_constraints.index|
+file is replaced with the following constraint file:
+\begin{enumerate}
+\item \verb|drude_base_constraints.index|: As with \idma,
+it is usually advisable to only fit a few atomtype static polarizabilities at a
+time, with the remaining atomtype polarizabilities read in as hard
+constraints. The \verb|drude_base_constraints.index| file lists these
+hard constraints in a block format, 
+
+\begin{minipage}{\linewidth}
+%[float,floatplacement=H]
+\begin{lstlisting}
+C
+1
+0.0
+
+N     
+1
+-11.7529643 
+
+H     
+1
+-1.254
+
+\end{lstlisting}
+\end{minipage}
+which lists each constrained atomtype along with the rank 1 static
+polarizabilities, separated by a blank line. Unlike with the generation of
+dispersion coefficients, an initial guess must be given for \emph{all}
+atomtypes in the \verb|<monomer>.atomtypes| input file.
+The format for the  \verb|drude_base_constraints.index| is such that
+positive polarizabilities correspond to these initial guesses, whereas zero or
+negative entries for the polarizabilities indicate that the atomtype should be
+treated as a hard constraint.
+Previously-fit atomtype polarizabilities from \citen{McDaniel2013} are already included in 
+\verb|drude_base_constraints.index| so as to minimize the number of hard
+constraints that the user will need to add manually, and these hard
+constraints should be used whenever possible.
+\end{enumerate}
+
+Assuming that the \idma calculations have already been run in \camcasp, the
+drude oscillator coefficients can be obtained simply by executing
+%
+\begin{lstlisting}
+./scripts/workup_drude_files.sh
+\end{lstlisting}
+%
+As with the dispersion coefficients, care should be taken to ensure that the
+resulting drude oscillator charges are physically-meaningful (i.e. negative).
+
+\end{subsubsection}

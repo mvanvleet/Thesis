@@ -63,10 +63,11 @@ model for the two-body interaction energies. For the \sapt-based force fields de
 these two overarching steps lead to the following workflow:
 %
 \begin{figure}
-\begin{enumerate}[I.]
+%\begin{enumerate}[I.]
+\begin{enumerate}[label=\Roman*)]
 \item Generate benchmark two-body energies
 \label{workflow:step1}
-    \begin{enumerate}[1.]
+    \begin{enumerate}[label=\arabic*)]
     \item Generate a series of well-chosen dimer configurations
         (see \cref{sec:workflow-geometries})
     \item Calculate \dftsapt benchmark energies for all dimer configurations from
@@ -79,17 +80,17 @@ order to correct the \dftsapt energies above
     \end{enumerate}
 \item Parameterize the two-body \pes
 \label{workflow:step2}
-    \begin{enumerate}[1.]
+    \begin{enumerate}[label=\arabic*)]
     \item For each unique monomer, obtain the following monomer-specific parameters:
         \begin{enumerate}
         \item Multipole moments, $Q$
             (see \cref{sec:workflow-multipoles})
         \item \acrshort{isa} Exponents, $B$ 
             (see \cref{sec:workflow-exponents})
-        \item Induced Dipole Polarizabilities, $\alpha$
-            (see \cref{sec:workflow-polarizabilities})
         \item Dispersion Coefficients, $C_n$
             (see \cref{sec:workflow-dispersion})
+        \item Induced Dipole Polarizabilities, $\alpha$
+            (see \cref{sec:workflow-polarizabilities})
         \end{enumerate}
     \item Obtain all remaining force field parameters by fitting a chosen
     force field functional form to the two-body benchmark energies from Step \ref{workflow:step1}
