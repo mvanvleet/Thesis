@@ -2,7 +2,7 @@
 
 Dispersion coefficients can also be determined from distributed molecular
 (that is, \aim)
-property calculations using either an \isa- or \dma-based approach. The method
+property calculations, using either an \isa- or \dma-based approach. The method
 for obtaining distributed dispersion coefficients has been described in detail elsewhere for an assortment of \dma-based
 approaches,
 \cite{Williams2003,Misquitta2008,McDaniel2012,McDaniel2013,stone2013theory,McDaniel2014a}
@@ -11,7 +11,9 @@ different equations and molecular properties that are needed to derive
 the types of dispersion models used in \cref{ch:isaff,ch:mastiff}.
 In brief, \aim dispersion energies can be obtained by integrating over
 distributed 
-frequency-dependent polarizabilities for each monomer.
+frequency-dependent polarizabilities for each monomer, and the interested
+reader is referred to Chapter 9 of \citen{stone2013theory} for complete
+details.
 %% \begin{align}
 %% E^{ab}_\text{disp} = - \frac{\hbar}{2\pi} T^{ab}_{tu} T^{ab}_{t'u'}
 %% \int\limits_{0}^{\infty} 
@@ -24,7 +26,7 @@ frequency-dependent polarizabilities for each monomer.
 %% the subscripts $t,t',u,u'$ represent the rank and order (e.g. t = 11c, to use
 %% Stone's notation\cite{stone2013theory}) of the associated spherical harmonic
 %% component. 
-Under the simplifying assumption that we can treat these polarizabilities as
+Under the simplifying assumption that we can treat these frequency-dependent polarizabilities as
 isotropic,
 the dispersion energy expression is given by
 \begin{align}
@@ -43,10 +45,10 @@ C^{ab}_8 &= \frac{15}{2\pi} \int\limits_{0}^{\infty}
 d\omega , 
 \label{eq:workflow-c8}
 \end{align}
-and the higher order terms are defined analagously. $C^{ab}_n$ are the
+and higher order terms are defined analagously. Here $C^{ab}_n$ are the
 atom-atom dispersion coefficients, and $\bar{\alpha}^a_l$ are the
 rank $l$, isotropic, \aim frequency-dependent polarizabilities. 
-The formalisms in \cref{eq:workflow-c6,eq:workflow-c8} can be somewhat
+The formalisms involved in evaluating \cref{eq:workflow-c6,eq:workflow-c8} can be somewhat
 involved,
 but for our purposes the important take-away is the understanding that the dispersion
 coefficients can be entirely determined by calculating the frequency-dependent
@@ -97,6 +99,7 @@ and this is discussed in \cref{sec:workflow-cn_postprocess}.
 \begin{subsubsection}{Iterative-\dma-pol}
 \label{sec:workflow-jesse}
 
+\begin{paragraph}{Theory}
 As described in \citen{McDaniel2014a}, the iterative-\dma-pol (\idma) method of
 \citeauthor{McDaniel2013} performs a constrained optimization of
 atomtype-specific frequency dependent polarizabilities by fitting all
@@ -116,9 +119,12 @@ where the $T$ are the spherical harmonic interaction functions described above a
 \citen{stone2013theory}. Aside from the isotropic polarizabilities
 $\bar{\alpha}^a_l$, all quantities in \cref{eq:workflow-apq} are directly
 calculated in \camcasp, enabling us to fit
-the isotropic polarizabilities based on a \camcasp properties calculation (see
+the isotropic polarizabilities on the basis of \camcasp property
+calculations (see
 Appendix A of \citen{McDaniel2014a} for details).
+\end{paragraph}
 
+\begin{paragraph}{Practicals}
 Using the \idma method in the Workflow has two software dependencies: 
 \begin{enumerate}
 \item The \idma fiting program itself, which can be downloaded at
@@ -173,7 +179,7 @@ quadrature. See the
 \href{http://www-stone.ch.cam.ac.uk/programs/camcasp.html}{\camcasp user
 manual} for details.) Each polarizability block should be separated by a blank
 line, and the atomtypes listed in the .index file \emph{must} match those in
-the .atomtypes file for any hard constraints to be applied. 
+the .atomtypes file for any hard constraints to be successfully applied. 
 Previously-fit atomtype polarizabilities from \citen{McDaniel2013} are already included in 
 \verb|dispersion_base_constraints.index| so as to minimize the number of hard
 constraints that the user will need to add manually, and these hard
@@ -219,7 +225,7 @@ dispersion coefficients are likely a sign of unphysical atomic
 polarizabilities (see next point).
 %
 \item Phsyically-speaking, the atomic polarizabilities at each rank should be positive
-definite, and monotomically-decreasing.\cite{Williams20013,stone2013theory} Unphysical behavior (especially at
+definite, and monotomically-decreasing.\cite{Williams2003,stone2013theory} Unphysical behavior (especially at
 rank 3) is sometimes unavoidable, but often indicates poor fit quality and can
 lead to inaccurate and/or non-transferable dispersion coefficients. Always
 check the output \verb|.casimir| files for the physicality
@@ -232,6 +238,7 @@ Finally, given a set of physical atomic polarizabilities and dispersion
 coefficients, dispersion coefficients from the \idma method can be worked-up
 using the post-processing scripts described in
 \cref{sec:workflow-cn_postprocess}.
+\end{paragraph}
 \end{subsubsection}
 
 
@@ -310,17 +317,18 @@ all without recourse to the iterative fitting process required in
 The \isa-pol method has been completely implemented as of \camcasp-6.0, though
 the input scripts are (as of this writing) still in beta. Consult 
 \href{http://www-stone.ch.cam.ac.uk/programs/camcasp.html}{the \camcasp user
-manual} for up-to-date details and required input files.
+manual} or contact Alston Misquitta for up-to-date details and required input files.
 
 \end{paragraph}
 
 \end{subsubsection}
-\begin{subsubsection}{Method Comparison}
+\begin{subsubsection}{Comparison between \idma and \isa-pol}
 \label{sec:workflow-dispersion_comparison}
 
 %TODO: Add in Alston vs. Jesse comparison?
 
-Preliminary results for the \isa-pol method, tested on the 91 dimer test set,
+Preliminary results for the \isa-pol method, tested on the 91 dimer test set
+from \cref{ch:isaff},
 appear to be of similar accuracy compared to the \idma method, though both
 methods appear to have their own strengths and weaknesses when it comes to
 obtaining dispersion coefficients for different atomtypes. A comparison
@@ -333,7 +341,7 @@ model.\footnotemark{ }
 
 \footnotetext{
 A main difference between the \idma and \isa-pol coefficients is that \idma
-fits more strongly to the p2p file, whereas \isa-pol coefficients are set to
+fits more strongly to the point-to-point (p2p) response function, whereas \isa-pol coefficients are set to
 the values calculated as in \cref{sec:workflow-alston}. Consequently, \idma is
 able to perform better as an `effectively anisotropic' model. In principle,
 changing the defaults in CamCASP to use weight type 4 (which uses
@@ -356,11 +364,11 @@ more similar to \idma, though this idea requires further testing.
 \tabuphantomline
 \hline
 \begin{itemize}[topsep=-1pt]
-\item For systems with 1-2 unparameterized atomtypes, little cost to
+\item For systems with a single (or possibly two) unparameterized atomtype(s), straightforward to
 parameterize new atomtypes
 \item For systems requiring dispersion coefficients for several
 unparameterized atomtypes, requires a library of systems containing these
-atomtypes, and an iterative procedure to fit the new atomtypes.
+atomtypes, and an iterative procedure to fit the new atomtypes
 \end{itemize}
 & 
 \begin{itemize}[topsep=0pt]
@@ -373,8 +381,8 @@ unparameterized atomtypes
 \hline
 \begin{itemize}[topsep=0pt]
 \item Polarizabilities tend to be positive-definite and monotonically-decaying
-at low rank, but not always at rank 3
-\item Physicality highly-dependent on quality of previously parameterized
+at low rank, but not always for rank 3
+\item Physicality is highly-dependent on the quality of previously parameterized
 atomtypes
 \end{itemize}
 & 
@@ -435,7 +443,7 @@ be carried out by executing the command
 \end{lstlisting}
 %
 where \verb|<scale_factor>| is chosen to reproduce the asymptotic \molpro
-\dftsapt energies (see \cref{ch:pointer}). This choice may require some
+\dftsapt energies (see \cref{ch:pointer} for details). This choice may require some
 testing, but 1.10 is usually a good default. The above script outputs files
 \verb|dispersion/<monomer>.disp|, which can be used as input to the \pointer
 program discussed in \cref{ch:pointer}.

@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{47}
+\begin{mcitethebibliography}{49}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -255,6 +255,19 @@ Jansen,~G.; Scha,~R. \textbf{2012}, \relax
 \mciteBstWouldAddEndPunctfalse
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[McDaniel and Schmidt(2014)McDaniel, and Schmidt]{McDaniel2014}
+McDaniel,~J.~G.; Schmidt,~J.~R. \emph{J. Phys. Chem. B} \textbf{2014},
+  \emph{118}, 8042--8053\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Frenkel and Smit(2002)Frenkel, and Smit]{Frenkel2002}
+Frenkel,~D.; Smit,~B. \emph{Acad. Press}; 2002; Vol. New York,; p 638\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
 \bibitem[Guibas(1992)]{Guibas1992}
 Guibas,~L. {Representing rotations with quaternions}. 1992;

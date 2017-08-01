@@ -3,24 +3,25 @@
 \label{sec:workflow-sapt}
 
 After geometry generation, the next step 
+in the Workflow
 is to run benchmark \dftsapt calculations on all dimer configurations.
 For a detailed analysis of \sapt, and \dftsapt in particular, the reader is
 referred to 
 \citens{Jeziorski1994,Szalewicz2012,McDaniel2014a}.
 \dftsapt calculations can be performed in a fairly black-box
-manner, though the points are worth mention:
+manner using the \molpro software, though the following points are worth note:
 \begin{enumerate}
-\item For best accuracy, and as described in \citen{Yu2011}, the monomer \dft
-calculations need to be asymptotically-corrected (AC) for best accuracy. This
+\item For best accuracy, and as described in \citen{Yu2011}, monomer \dft
+calculations need to be asymptotically-corrected (AC) in order to achieve best accuracy. This
 asymptotic correction is computed as the difference between the HOMO and the
-vertical ionization potential for each monomer, and is calculated
+vertical ionization potential for each monomer, and can be calculated
 automatically by running the command 
 \begin{lstlisting}
 ./scripts/submit_ip_calcs.py
 \end{lstlisting}
 (The calculation takes only a few minutes for small molecules, but may take
 longer for larger systems.) Importantly, the HOMO calculation should be computed
-in the same basis as the \dftsapt calculations themselves.
+using the same basis set as the \dftsapt calculations themselves.
 \item Accurate \sapt dispersion energies generally require use of midbond
 functions, as described in \citen{Yu2011}. Locations for the midbond functions
 can be specified in the \verb|dimer_info.dat| file. For most small molecules
@@ -29,7 +30,7 @@ often sufficient to place a single midbond at the midpoint between each
 monomer's center of mass. For larger molecules, additional midbonds
 (especially ones near close-contact interaction sites) may be required.
 \item The included workflow assumes an \avtzm basis set (where the +m represents
-the midbond functions). This is generally sufficiently accurate for most
+the midbond functions). This is generally of sufficient accuracy for most
 systems, though an \avqzm basis set should be used when possible to ensure
 convergence of the \dftsapt dispersion energies.
 \end{enumerate}

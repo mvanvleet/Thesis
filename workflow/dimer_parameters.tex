@@ -3,19 +3,21 @@
 
 After obtaining monomer parameters for a given system of interest, the final
 remaining task is to fit the remaining force field parameters to reproduce the
-\dftsapt calculations performed earlier in this section. Dimer-based
+\dftsapt calculations performed earlier in the Workflow. Dimer-based
 parameterization is carried out by the \pointer program, which will be the
-subject of the next chapter. Still, the Workflow is useful for preparing input
-files for this dimer-based parameterization:
+subject of the next chapter. The Workflow is useful for preparing input
+files for this dimer-based parameterization, as follows:
 %
 \begin{lstlisting}
 ./scripts/workup_sapt_energies.py
 ./scripts/gather_pointer_input_files.py
 \end{lstlisting}
 %
-The output of these scripts will generate an output .sapt file (with atomtype
-descriptions taken from each \verb|input/<monomer>.atomtypes| file and a new
-directory, \verb|ff_fitting|, which sets up all of the input files and monomer
-parameters needed to easily run the \pointer fitting code.
+The output of these scripts will generate a .sapt file (containing results
+from the \dftsapt calculations, with atomtype
+labels taken from each \verb|input/<monomer>.atomtypes| file) and a new
+directory, \verb|ff_fitting|, which automatically sets up all of the input files and monomer
+parameters needed to easily run the \pointer fitting code. The theory and
+practice of the \pointer fitting code is the subject of the next chapter.
 
 \end{section}

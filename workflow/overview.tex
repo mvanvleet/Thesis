@@ -14,55 +14,72 @@ understanding of the force field development process, after which they should
 work on
 developng their own force field using
 the semi-automated workflow (\cref{ch:workflow}) and the \pointer software
-(\cref{ch:pointer}). Developing a water force field
+(\cref{ch:pointer}). Developing a force field for water
 makes for an excellent teaching example, however any interesting (and preferably
 small!) molecule will suffice.
 
 \begin{section}{Overview}
 
 As discussed in \cref{ch:background}, our \sapt-based force field 
-methodology principally requires us to parameterize the two-body interactions
+methodology principally relies on modeling two-body interactions
 for a given system of interest. These two-body (i.e. dimer)
 interactions are completely defined by the 
 positions and relative orientation of the two constituent monomers, and in
-practice we parameterize the two-body interactions based on benchmark \sapt
+practice we parameterize the two-body model based on benchmark \sapt
 energies for a series of gas-phase dimer 
+configurations.\footnotemark{} 
 %
-configurations.\footnote{This philosophy of force field development was one of the most counter-intuitive ideas I
-had to learn as a grad student. Still, and regardless of whether we are ultimately
+\footnotetext{
+At first, it may seem counter-intuitive to focus so heavily on modeling
+the energetics of gas-phase dimers. After all, aren't we interested in
+simulating a wider variety of chemically-relevant systems, including
+homogeneous and heterogeneous liquids, solids, and super-critical phases?
+This apparent discrepancy can be resolved by looking at the \mbe described in
+\cref{ch:background}. From this expansion, we see that \emph{any} system can
+be modeled as a sum of two- and many-body interactions, with the two-body
+interactions plus $N$-body polarization (an energy term which we obtain
+automatically in \cref{sec:workflow-polarizabilities}) accounting for upwards of
+$90-95\%$ of the
+total $N$-body energy.\cite{McDaniel2014}
+Consequently, and regardless of whether we are ultimately
 interested in studying a homogeneous liquid or a heterogeneous supercritical
-phase, the best starting point for ab initio force field development is always
-to model all relevant gas-phase dimer interactions.}
+phase, for ab initio force field development it's critical that we develop
+and parameterize accurate models for all two-body interactions. Thus in
+practice, our focus is often on developing new and improved force fields for
+gas-phase dimer interactions, always with the goal of using the \mbe to
+run simulations on any $N$-body system of interest.
+}
 %
 We are usually interested in obtaining
 transferable parameters for a new molecule or atomtype, in which case it is
 often easiest to model the interactions between two identical monomers (a
-so-called \homo dimer interaction). Still, there are reasons why it can
-be advantageous to instead study \hetero dimer 
-%
-interactions,\footnote{In general, force field development based on \homo
-interactions involves the fewest atomtypes, and thus the fewest number of free
-parameters. Alternately, \hetero-based force field development can yield the
-best accuracy for studying systems where either transferability is difficult
-(see \cref{ch:lmoeda} for an example) or computational expense is an issue.
-(For instance, running \sapt calculations on a napthalene dimer may be
-infeasible, whereas studying napthalene-Ar interactions is easily possible.)}
-%
-and the workflow
+so-called \homo dimer interaction).\footnotemark Still, there are reasons why it can
+be advantageous to instead study \hetero dimer interactions, and the workflow
 described herein applies equally to studying both \homo and \hetero
-%
-interactions.
+dimer interactions.
 
-Regardless of the chosen dimer of study, developing force fields for the
+\footnotetext{In general, force field development based on \homo
+interactions involves the fewest atomtypes (and thus the fewest number of free
+parameters!), and is to be preferred. On the other hand, \hetero-based
+force field development can yield the best accuracy for studying specific systems where
+either transferability is difficult (see \cref{ch:lmoeda} for an example) or
+where computational expense is an issue.  (Running
+large-basis-set \sapt calculations
+on the napthalene dimer, as an example, is currently infeasible, whereas
+benchmark calculations on napthalene-Ar
+interactions are affordable.)}
+
+
+Regardless of the chosen dimer of study, modeling a 
 two-body \pes involves two major steps.  First, we must
 obtain benchmark two-body energies for a series of well-chosen dimer
 configurations. Second, we must
-calculate and/or fit all force field parameters so as to completely describe a
-model for the two-body interaction energies. For the \sapt-based force fields described in
+calculate and/or fit all force field parameters so as to completely develop a
+force field for the two-body interaction energies. For the \sapt-based force fields described in
 \cref{ch:isaff,ch:mastiff}, 
 these two overarching steps lead to the following workflow:
 %
-\begin{figure}
+\begin{minipage}{\linewidth}
 %\begin{enumerate}[I.]
 \begin{enumerate}[label=\Roman*)]
 \item Generate benchmark two-body energies
@@ -98,11 +115,13 @@ order to correct the \dftsapt energies above
         %\label{step:workflow-dimers}
     \end{enumerate}
 \end{enumerate}
-\caption{The workflow for \sapt-based force field development.}
-\end{figure}
-
-Aside from the last step of this workflow, which will be the subject of
-\cref{ch:pointer}, the entire force field development
+\phantom{abc}
+%\caption{The workflow for \sapt-based force field development.}
+\end{minipage}
+%
+%% Aside from the last step of this workflow, which will be the subject of
+%% \cref{ch:pointer}, 
+The entire force field development
 process has been made reasonably `black-box', and can be carried out via a
 handful of input files and easy-to-use run scripts. This semi-automated workflow
 for \sapt-based force field development is available for download 
@@ -111,10 +130,8 @@ at
 sufficient for most routine force field development. Installation and
 usage instructions are included on the website, and are also reprinted in
 \cref{fig:workflow-overview} for conveninece. 
-
-
-% Completion of the steps shown in
-% \cref{fig:workflow-overview} will provide all the necessary electronic structure
-% benchmarks and monomer parameters required for developing \sapt-based
+The remainder of this Chapter is designed to give new users a sense of the
+theory and practice involved in using the workflow, and we now turn to an
+in-depth discussion of each step.
 
 \end{section}

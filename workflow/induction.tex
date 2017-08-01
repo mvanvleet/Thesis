@@ -1,19 +1,19 @@
-\begin{subsubsection}{Theory}
+\begin{paragraph}{Theory}
 
 In addition to frequency-dependent polarizabilities, some of the same techniques
 described in \cref{sec:workflow-dispersion} can be applied to obtain the
-drude oscillator charges that get used in modeling the
-induction energy. Though in principle \isa-based polarizabilities could be
+static polarizabilities that get used in modeling the
+\sapt induction energy. Though in principle \isa-based polarizabilities could be
 used, this technique has not yet been developed. Instead, an \idma-type
 procedure can be used to extract the necessary polarization parameters. The
 algorithms used to perform this procedure are described in Appendix A of
 \citen{McDaniel2014a}. Due to the reduced number of coefficients that need to
 be fit, this optimization is generally more robust, and leads to more
-transferable dispersion parameters, than the algorithms described in
+transferable dispersion parameters, than do the algorithms described in
 \cref{sec:workflow-dispersion}.
 
-\end{subsubsection}
-\begin{subsubsection}{Practicals}
+\end{paragraph}
+\begin{paragraph}{Practicals}
 
 The drude oscillator fitting code has the same dependencies and input files as
 \idma, with the exception that the \verb|dispersion_base_constraints.index|
@@ -43,7 +43,7 @@ H
 \end{lstlisting}
 \end{minipage}
 which lists each constrained atomtype along with the rank 1 static
-polarizabilities, separated by a blank line. Unlike with the generation of
+polarizabilities. Each block should be separated by a blank line. Unlike with the generation of
 dispersion coefficients, an initial guess must be given for \emph{all}
 atomtypes in the \verb|<monomer>.atomtypes| input file.
 The format for the  \verb|drude_base_constraints.index| is such that
@@ -66,4 +66,4 @@ drude oscillator coefficients can be obtained simply by executing
 As with the dispersion coefficients, care should be taken to ensure that the
 resulting drude oscillator charges are physically-meaningful (i.e. negative).
 
-\end{subsubsection}
+\end{paragraph}
