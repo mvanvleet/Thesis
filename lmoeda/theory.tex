@@ -1,9 +1,9 @@
-\begin{section}{New Methods for \cus-\mof force fields}
+\begin{section}{Parameterizing \cus-\mof force fields with \lmoeda}
 \label{sec:lmoeda-theory}
 
 Based on the results for \mgmof, it is clear that, at least for \cus-\mofs, a
 new methodology is required which simultaneously keeps the important advantages of the
-old workflow (especially the component-by-component based parameterization,
+old development strategy (especially the component-by-component based parameterization,
 which is essential for generating transferable force fields) while overcoming
 the limitations of \sapt itself. Put differently, for \cus-\mofs we should
 seek a new electronic structure theory benchmark and associated \eda 
@@ -13,8 +13,9 @@ with the following qualities:
 \item High accuracy with respect to to \ccsdtf benchmark energies
 \item Physically-meaningful energy decomposition into (at least)
 electrostatics, exchange, induction, and dispersion
-\item For systems where \sapt and \ccsdtf agree, a quantitative correspondence
-between the energy decompositions of \sapt and the new method
+\item Quantitative correspondence
+between the energy decompositions of \sapt and the new method for systems
+where total energies from \sapt, \ccsdtf, and the new method agree
 \end{enumerate}
 %
 Assuming these three qualites are met, we expect to be able to generate force
@@ -46,8 +47,8 @@ time this research was completed, only a handful of variational \edas distinguis
 electrostatics, exchange, induction, and dispersion. (Notably, the recent
 second-generation ALMO-EDA\cite{Horn2016b} now
 separates their `frozen' energy term into electrostatic, exchange, and
-dispersion components, and might thus might be worth re-investigation.) Of the
-popular \eda methods available as of 2014, we found that
+dispersion components, and thus might be worth future investigation.) Of the
+popular \eda methods available in 2014, we found that
 \lmoeda,\cite{Su2009,Chen2010}
 GKS-EDA,\cite{Su2014} and PIEDA\cite{Fedorov2006} decompose the total
 interaction in a manner philosophically similar to \sapt, and include each
@@ -110,21 +111,21 @@ lines), and colors and labels for the energy decomposition are as in
     %%%%%%%%%%%% CO2 Mg-MOF-74 PES %%%%%%%%%%%%
 
 In addition to describing the advantages of the \lmoeda method, it is worthwhile to overview
-some of its relevant shortcomings, and limitations. 
+some of its relevant shortcomings and limitations. 
 As with most variational \eda methods,\cite{Pastorczak2017} and especially for
 \dft-based methods, it becomes difficult to precisely assign and separate out the true
 `dispersion' energy for a system. This limitation is also true of \lmoeda,
 where the dispersion energy is defined as the difference in correlation energy
-between the monomer and dimer wavefunctions. For density functionals employing
+between the monomer and dimer wavefunctions. (For density functionals employing
 Grimme's --D dispersion correction, this correction is also added to the
-\lmoeda dispersion energy. For functionals that have a well-defined and
+\lmoeda dispersion energy.) For functionals that have a well-defined and
 theoretically-grounded distinction between the exchange and correlation
 functionals, the \lmoeda energies tend to agree well with \sapt, and we have
 found good agreement (for instance) between \sapt and \lmoeda-\pbeod. With other
 functionals, such as with our tests using the M06 functional, there is no
 separation between the exchange and correlation functionals, and \lmoeda gives
 unphysical values for both the exchange and dispersion energies in this case.
-(GKS-EDA attempts to rectify this issue by changing the \lmoeda formalism for
+(Notably, GKS-EDA attempts to rectify this issue by changing the \lmoeda formalism for
 dispersion. While this leads to qualitative agreement between \sapt and
 GKS-EDA for a wider variety of functionals, the quantitative agreement for the
 \pbeod functional is somewhat worsened for the systems studied herein, and we

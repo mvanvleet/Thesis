@@ -6,28 +6,29 @@ theory. Critically, and especially given the developments discussed in
 we can now usually expect our model force field energies to be within
 \kjmol{\textasciitilde1} of the \sapt reference values! In spite of this
 success, this high precision between the model
-and \sapt energies can only lead to experimentally-accurate molecular simulation provided that the \sapt energies themselves are
-accurate, either with respect to the exact underlying \pes or (in
+and \sapt energies can only lead to experimentally-accurate molecular
+simulation in the event that the \sapt energies themselves are
+accurate with respect to the exact underlying \pes. 
 practice)
-with respect to gold-standard \ccsdt calculations. Indeed, for systems where \sapt
-and \ccsdt disagree by several \kjmol{}, there is little point in developing
-\sapt-based force fields with sub-\kjmol{} accuracy! This limitation raises to two
+Indeed, for systems where \sapt
+and \ccsdt (a gold-standard electronic structure theory that closely matches
+the exact \pes) disagree by several
+\kjmol{}, there is little advantage in developing
+\sapt-based force fields with sub-\kjmol{} precision. This limitation raises to two
 fundamentally important questions. 
 First, for what types of systems might we expect \sapt to be inaccurate? Second,
 for the systems where \sapt and the exact \pes are in disagreement, how
-must we modify our typical methodology for ab-initio force field development?
+might we best modify our typical methodology for ab-initio force field development?
 
-%TODO: Fix this paragraph to focus more on the overall project's successes and
-%failures.
-The purpose of this chapter is to partially address these questions, all
-within the specific context of 
-force field development for \glspl{mof}. Note that the results presented here were
-gathered from 2012--2014, so some important advances (namely those
-presented in \cref{ch:isaff,ch:mastiff}) haven't been incorporated into
-the force fields presented here. This is probably to the determinent of the accuracy and
-transferability that might be possible with the \lmoeda-based methodology, and
-(should this project be picked up in the future) it may be necessary to
-refit these force fields to the functional forms and monomer-based parameters
+The purpose of this chapter is to partially address these two questions, all
+within the specific context of force field development for \cus \mofs.
+Importantly, the results presented here were gathered from 2012--2014, so some
+important advances (namely those presented in \cref{ch:isaff,ch:mastiff}) have
+yet to be incorporated into the force fields presented here, probably to the
+determinent of the accuracy and transferability that might be possible with
+the \lmoeda-based methodology.  Should this project be picked up in the
+future, it will likely prove advantageous to refit the \lmoeda-based force
+fields described herein to the functional forms and monomer-based parameters
 discussed in \cref{ch:mastiff}.
 
 
@@ -35,9 +36,9 @@ discussed in \cref{ch:mastiff}.
 \begin{section}{Introduction}
 \glsreset{mof}
 
-\Glspl{mof} are an increasingly important class of compounds that are
+\Glspl{mof} are an increasingly important class of compounds, and are
 defined as porous
-materials which contain inorganic nodes connected by organic linkers. Within
+materials containing inorganic nodes connected by organic linkers. Within
 this general motif, more than 20,000 compounds have been reported and
 studied,\cite{Furukawa2013} and this vast diversity of \mof materials shows great promise
 for chemical customization and optimization. Within the past two decades, a
@@ -56,22 +57,26 @@ investigation and materials design. Owing to the vast scope of hypothetical
 for gas separation/storage, it is unlikely that experiment alone can
 be used to screen for new and promising \cus-\mof materials.\cite{Krishna2011} 
 Rather, a combination of
-experiment and computational modeling will be required to find (or possibly
+experiment and computational modeling will be required to identify (or possibly
 even rationally design) optimal \cus-\mofs.\cite{Getman2012,Czaja2009,Krishna2011}
 
 %Todo: Mention other force fields that succeed at describing cusmofs.
 Despite the utility of computational studies, it remains challenging to
-develop molecular models for \cus-\mofs.\cite{Dzubak2012} Because the strong
-binding between metal and adsorbate leads to chemical environments
-substantially different from typical coordinatively-saturated \mofs, many
-standard force fields (such as UFF and DREIDING) which yield good predictions
-for these \mofs frequently (and substantially!) underpredict adsorption in
-\cus-\mofs, especially at low
-pressures.\cite{Yazaydin2009,Krishna2011,Getman2012} While \cus-\mofs can
+develop molecular models for
+\cus-\mofs.\cite{Dzubak2012,Krishna2011,Getman2012} Because the strong binding
+between metal and adsorbate leads to chemical environments substantially
+different from typical coordinatively-saturated \mofs, many standard force
+fields (such as UFF and DREIDING) that yield good predictions for these
+CS-\mofs can frequently (and substantially!) underpredict adsorption in
+\cus-\mofs.\cite{Yazaydin2009,Krishna2011,Getman2012} Importantly, these
+underpredictions are especially prominent at low pressures, where
+metal-adsorbate interactions
+dominate.\cite{Yazaydin2009,Krishna2011,Getman2012} While \cus-\mofs can
 sometimes be studied using quantum mechanical
-means,\cite{Getman2012,Valenzano2010} clearly
-new and improved force fields will be required to perform in-depth simulations
-and large-scale screenings of these materials.
+means,\cite{Getman2012,Valenzano2010,Poloni2014} clearly new and improved
+force fields will be required to perform in-depth simulations and large-scale
+screenings of these materials, and such studies are already being
+undertaken.\cite{Lin2014,Haldoupis2015,Mercado2016,Becker2017}
 
 The goal of the present chapter is to present a general 
 methodology for developing accurate and transferable force fields for \cus-\mofs. 
@@ -86,7 +91,7 @@ M-MOF-74 series (M = Co, Cr, Cu, Fe, Mn, Ni, Ti, V, and Zn), largely as a
 result of techical challenges in the force field parameterization itself.
 We discuss these technical challenges in some detail, and conclude with our
 perspective on the challenges and opportunities associated with developing
-transferable force fields for these and other \cus-\mof systems.
+transferable force fields for the M-MOF-74 series and other similar \cus-\mof systems.
 
 
 

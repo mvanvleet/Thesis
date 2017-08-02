@@ -1,10 +1,10 @@
 \begin{section}{Future Work}
 \label{sec:lmoeda-future_work}
 
-Throughout this manuscript, we have attempted to highlight some of the key
+Throughout this Chapter, we have attempted to highlight some of the key
 limitations of our force field development methodology for \cus-\mofs. 
 In summary, the following issues would need to be resolved in order to expand the
-scope of the present research:
+scope and utility of the present research:
 \begin{enumerate}
 %
 \item \textbf{Memory Limitations in GAMESS}: 
@@ -27,23 +27,24 @@ As discussed in \cref{sec:lmoeda-theory}, the \lmoeda method has several
 theoretical limitations. In particular, and especially for functionals with no
 defined separation between exchange and correlation functionals, \lmoeda does
 not offer a clean separation between the exchange and dispersion energies.
-Furthermore, and unlike some recent \eda methods, \lmoeda cannot separate induction
+Furthermore, and unlike some recent \eda
+methods,\cite{Misquitta2013,Horn2016b} \lmoeda cannot separate induction
 into charge transfer and polarization components. 
 %
 \item \textbf{Transferability of the Force Field Functional Form}: 
 %
 While our
 final force field for 
-studying \co interactions in \mgmof was highly accurate (both with respect to
+studying \co interactions in \mgmof is highly accurate (both with respect to
 ab initio theory and with respect to experiment), it does not appear that this 
 accuracy extends to models for the adsorption of other small molecules, such as
 \ch{N2}. This transferability limitation is almost certainly due to the chosen
 double-exponential functional form and/or the parameterization process used to
 obtain Mg parameters, and improvements to this methodology will be essential
-to make our work on the \co-\mgmof system applicable to general force field
-development for \cus-\mofs. In particular, we will require a better force field for describing
+to make our work on the \co--\mgmof system applicable to general force field
+development for \cus-\mofs. In particular, future work will require a better force field for describing
 short-range interactions, as the functional forms and paramters used in this
-work struggled to model the \mgmof exchange energies.
+work struggled to both accurately and transferably model the \mgmof exchange energies.
 %
 \end{enumerate}
 
@@ -57,10 +58,9 @@ error, we offer the following recommendations:
 %
 \item \textbf{Improved \sapt energies}: 
 %
-Recently, it has been proposed that the commonly used single-exchange (``
-$S^2$'')
+Recently, it has been proposed that the commonly used single-exchange (`$S^2$')
 approximation can lead to errors in the description of the induction
-energy,\cite{Jansen2012} particularly for ionic systems.\cite{Lao2015a} 
+energy, particularly for ionic systems.\cite{Jansen2012,Lao2015a} 
 While it is difficult to attribute errors in \sapt to a particular energy
 component, it may well be that \sapt poorly describes \mgmof due to the $S^2$
 treatment of the induction energy. In this case, eliminating the $S^2$
@@ -71,11 +71,11 @@ enabling \sapt to be used for (at least) closed-shell \cus-\mofs.
 %
 As discussed in \cref{ch:mastiff}, deviations between \sapt and \ccsdt can be
 rectified by adding a \dccsdt correction to the total \sapt energy.
-Thus far, we have had good success modeling this \dccsdt correction as part of
-the dispersion energy, though this is an empirically-justified choice, and may
-need modification for treating \mgmof. Regardless, the results in
+As discussed in \cref{ch:mastiff}, we have empirically had good success modeling this \dccsdt correction as part of
+the dispersion energy. Though this partitioning choice may require adjustment
+for treating \mgmof, the results in
 \cref{ch:mastiff}
-indicate that correcting (rather than entirely ignoring) the \dftsapt energies
+indicate that simply correcting (rather than entirely ignoring) the \dftsapt energies
 is a promising strategy for transferable force field development.
 %
 \item \textbf{New \eda schemes}: 

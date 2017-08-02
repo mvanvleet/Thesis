@@ -10,7 +10,7 @@ representative of the Mg environment in \mgmof. Using the functional forms
 discussed in \cref{sec:lmoeda-methods}, force field parameters were fit to
 reproduce \lmoeda-\pbeod energies for a variety of \co/\mgmof-small
 interactions, with results shown in \cref{fig:lmoeda-small_fit}.
-Though some interaction energies disagree by several \kjmol{} between
+Though select interaction energies disagree by several \kjmol{} between
 \lmoeda-\pbeod and the force field energies, overall the agreement is
 reasonable, and the force field correctly reproduces trends in the interaction
 energies without significant systematic error. 
@@ -99,8 +99,8 @@ calculated the \co binding energies and geometries of both our original
 \mgmof-small cluster as well as for two larger clusters developed in
 \citens{Yu2012c,Dzubak2012}. These latter two clusters, respectively denoted
 \mgmof-Yu and \mgmof-Dzubak, are the same size (each with 60 atoms), but have
-made different choices as to the number of included magnesium atoms (three vs.
-four) and number/location of capping atoms. To test the influence of model
+distinct stoichiometries and geometries.
+To test the influence of model
 cluster on the \co binding energy/geometry, we performed two sets of
 optimizations of the \mgmof-Yu and \mgmof-Dzubak clusters: one in which only
 the \co position was optimized, and one in which the exposed \ch{MgO5} pocket
@@ -119,13 +119,16 @@ features. By contrast, the \mgmof-Dzubak model predicts a substantially shorter 
 distance and increased tilt angle, both in contrast to results from the
 periodic system. In part, these deficiencies can be attributed to spurious
 \co interactions with the exposed carbonyl capping groups in the \mgmof-Dzubak
-model which are not present in the periodic system or the other two cluster
-models. Additionally, a Mulliken charge analysis of the 
+model, as these exposed carbonyls are not present in the periodic system or the other two cluster
+models. As a second distinction, a Mulliken charge analysis of the 
 \mgmof-Dzubak cluster yields larger partial charges for the surrounding Mg
 atoms as compared to the \mgmof-Yu model, which may help explain the increased
 binding and shortened \ch{Mg-O} contact in the \mgmof-Dzubak model. 
-As for binding energies, there are substantial differences in binding energies
-between the various cluster models, with \mgmof-small severely underbinding
+
+There are also substantial differences in binding energies
+between the various cluster models. Importantly, \mgmof-small severely
+underbinds
+\co compared to all other tested systems.
 These results for the \mgmof-small cluster indicate the inadequacy of such a small 
 model, and likely explain the underprediction of the \co adsorption isotherm
 from above. 
@@ -143,25 +146,25 @@ we opt to use the \mgmof-Yu cluster model for the remainder of this work.
 \end{subsection}
 \begin{subsection}{Final Mg-MOF-74 {\co} Adsorption Isotherm}
 
-Using our new \mgmof-Yu cluster model, we next attempted to fit new
+Using our new \mgmof-Yu cluster model, we next attempted to refit
 force field paramters for Mg. As discussed earlier, and
 because of the size of this new cluster (60 atoms), \lmoeda-\pbeod
-calculations became cost prohibitive in all but the smallest VDZ basis set and
-for a limited set of points. Starting from the minimum energy configuration
+calculations became cost prohibitive in all but the smallest VDZ basis set, and
+thus could only be carried out for a limited set of points. Starting from the minimum energy configuration
 shown in \cref{fig:lmoeda-clusters}, we fit Mg parameters to a 12-point scan along the
 Mg-O bond vector, with fit results shown in  
 \cref{fig:lmoeda-xlarge_fit}. Interestingly, though the functional form used
 in this fit was sufficient to accurately paramterize the interaction energies
 in the \mgmof-small cluster, the same force field methodology proved
-unsuccessful in paramterizing \mgmof-Yu interactions. We knew at the time that
+unsuccessful in paramterizing \mgmof-Yu--\co interactions. We knew at the time that
 this inaccuracy was probably a consequence of uncertainties in correctly
 parameterizing the Mg short-range exponent. (See \cref{ch:isaff} for a full
 discussion of new methods for parameterizing the short-range potential.) Nevertheless, because the Slater-ISA methodology
 for short-range interactions had not yet been developed, we opted instead to
 fit the Mg interactions to a double exponential functional form, with each
 exponent corresponding to the ionization potential for either \ch{Mg+} or
-\ch{Mg^{2+}}, the two chemical environments that we thought might correctly
-represent the Mg cation. As shown in \cref{fig:lmoeda-xlarge_fit}, this
+\ch{Mg^{2+}} (the two atomic environments most likely to correctly
+represent the Mg cation). As shown in \cref{fig:lmoeda-xlarge_fit}, this
 form could excellently reproduce the \mgmof-Yu model \pes.
 
 
@@ -182,7 +185,7 @@ Mg atom and the closest-contact oxygen atom in \co.
 
 
 Using the double exponential functional form from above, we recomputed the
-\mgmof \co adsorption isotherm. Before comparing to experiment, and as
+ adsorption isotherm of \co in \mgmof. Before comparing to experiment, and as
 recommended by others,\cite{Haldoupis2015a} we scaled the experimental
 isotherm in order to account for the pore blocking effects that are common in
 the M-MOF-74 series. Using this scaled isotherm, we then obtain excellent
@@ -219,7 +222,7 @@ developed by \citeauthor{Yu2011}\cite{Yu2011} to predict the \ch{N2}
 adsorption isotherm. These predictions were generally poor, and results are
 not shown. Nevertheless, the poor \ch{N2} results suggest a lack of
 transferability of our Mg parameters, possibly (and as discussed in the
-section on \nameref{sec:lmoeda-future_work}) due to unphysical double-exponential
+section on \nameref{sec:lmoeda-future_work}) due to the unphysical double-exponential
 functional form used to parameterize Mg.
 
 \end{subsection}

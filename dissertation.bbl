@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{49}
+\begin{mcitethebibliography}{54}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -118,6 +118,45 @@ Yazaydin,~a.~O.; Snurr,~R.~Q.; Park,~T.-H.; Koh,~K.; Liu,~J.; Levan,~M.~D.;
 Valenzano,~L.; Civalleri,~B.; Chavan,~S.; Palomino,~G.~T.; Areán,~C.~O.;
   Bordiga,~S. \emph{J. Phys. Chem. C} \textbf{2010}, \emph{114},
   11185--11191\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Poloni \latin{et~al.}(2014)Poloni, Lee, Berger, and Smit]{Poloni2014}
+Poloni,~R.; Lee,~K.; Berger,~R.~F.; Smit,~B. \textbf{2014}, \relax
+\mciteBstWouldAddEndPunctfalse
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Lin \latin{et~al.}(2014)Lin, Lee, Gagliardi, and Smit]{Lin2014}
+Lin,~L.-c.; Lee,~K.; Gagliardi,~L.; Smit,~B. \emph{J. Chem. Theory Comput.}
+  \textbf{2014}, \emph{10}, 1477--1488\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Haldoupis \latin{et~al.}(2015)Haldoupis, Borycz, Shi, Vogiatzis, Bai,
+  Queen, Gagliardi, and Siepmann]{Haldoupis2015}
+Haldoupis,~E.; Borycz,~J.; Shi,~H.; Vogiatzis,~K.~D.; Bai,~P.; Queen,~W.~L.;
+  Gagliardi,~L.; Siepmann,~J.~I. \emph{J. Phys. Chem. C} \textbf{2015},
+  \emph{119}, 16058--16071\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Mercado \latin{et~al.}(2016)Mercado, Vlaisavljevich, Lin, Lee, Lee,
+  Mason, Xiao, Gonzalez, Kapelewski, Neaton, and Smit]{Mercado2016}
+Mercado,~R.; Vlaisavljevich,~B.; Lin,~L.-C.; Lee,~K.; Lee,~Y.; Mason,~J.~A.;
+  Xiao,~D.~J.; Gonzalez,~M.~I.; Kapelewski,~M.~T.; Neaton,~J.~B.; Smit,~B.
+  \emph{J. Phys. Chem. C} \textbf{2016}, acs.jpcc.6b03393\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Becker \latin{et~al.}(2017)Becker, Heinen, Dubbeldam, Lin, and
+  Vlugt]{Becker2017}
+Becker,~T.~M.; Heinen,~J.; Dubbeldam,~D.; Lin,~L.-C.; Vlugt,~T. J.~H. \emph{J.
+  Phys. Chem. C} \textbf{2017}, acs.jpcc.6b12052\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

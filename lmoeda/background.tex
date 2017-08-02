@@ -7,7 +7,8 @@ systems by fitting force field parameters on a component-by-component basis to
 reproduce an ab initio \sapt energy
 decomposition.\cite{McDaniel2012,McDaniel2012a} 
 While full details for this force field development methodology can be found
-in \citens{McDaniel2012a,McDaniel2015}, a short workflow is as follows:
+in \citens{McDaniel2012a,McDaniel2015}, a short workflow is given here for
+\mgmof:
 %
 \begin{enumerate}
 \item 
@@ -36,7 +37,7 @@ For each component of the \dftsapt interaction energy,
 parameterize the relevant functional forms (as detailed in \citen{McDaniel2012a} and
 \cref{sec:lmoeda-theory}) to reproduce the \dftsapt component energy.
 \end{enumerate}
-
+%
 Once parameterized, these \sapt-based \mof force fields can be used
 for calculating individual adsorption isotherms or even for high-throughput
 screening.\cite{McDaniel2015} 
@@ -63,14 +64,15 @@ radius from the x-axis in the leftmost figure.
 
 
 In the generation of force fields for \cus-\mofs, we expect that many of the
-advantages of the above workflow for coordinatively-saturated \mofs (such as the component-by-component based
-parameterization and method for partial charge determination) will also translate
+advantages of the development methodology for coordinatively-saturated \mofs (such as the component-by-component based
+parameterization and protocol for partial charge determination) should also translate
 well to \cus-\mof materials. 
 Nevertheless, there are two reasons why a \sapt-based methodology
-cannot be used to generate such force fields. First, and as shown in
+is non-ideal for generating \cus-\mof force fields. First, and as shown in
 \cref{fig:lmoeda-sapt_breakdown} for a representative \mgmof cluster model,
-we have empirically found \sapt to be in error for \cus-\mof-like systems compared to benchmark
-\ccsdtf calculations. \dftsapt has been known to struggle with highly
+by comparing to benchmark \ccsdtf calculations we have discovered \sapt to be
+in error for \cus-\mof-like systems.
+\dftsapt is known to struggle with highly
 ionic systems (relative to \ccsdt or \dft
 methods),\cite{Lao2015a,Pastorczak2017} and so this error is perhaps not surprising.
 (Possible sources of the discrepancy between \sapt and \ccsdtf will be
@@ -82,7 +84,7 @@ level of theory that they are parameterized against. Consequently, because
 \sapt underbinds \co 
 by a full \kjmol{6} compared to \ccsdtf, we would not expect to see
 good predictions for the \co adsorption isotherm with a \sapt-based
-methodology, and a new strategy will be required.
+methodology. For \cus-\mofs and other similar systems, a new strategy for force field development is required.
 
 As a second barrier to using a \sapt-based methodology, many of the compounds in the M-\mof-74 series are
 open-shell. Though this poses no fundamental issue, 
