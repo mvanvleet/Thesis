@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{54}
+\begin{mcitethebibliography}{55}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -285,6 +285,13 @@ Haldoupis,~E.; Borycz,~J.; Shi,~H.; Vogiatzis,~K.~D.; Bai,~P.; Queen,~W.~L.;
 \bibitem[Yu \latin{et~al.}(2011)Yu, McDaniel, and Schmidt]{Yu2011}
 Yu,~K.; McDaniel,~J.~G.; Schmidt,~J.~R. \emph{J. Phys. Chem. B} \textbf{2011},
   \emph{115}, 10054--10063\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Misquitta(2013)]{Misquitta2013}
+Misquitta,~A.~J. \emph{J. Chem. Theory Comput.} \textbf{2013}, \emph{9},
+  5313--5326\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

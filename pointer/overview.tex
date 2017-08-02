@@ -1,18 +1,72 @@
+\begin{subsection}{What is \pointer?}
+
+overview
+
+\end{subsection}
+\begin{subsection}{What parameters do we get from \pointer?}
+
+
+
+\newcommand{\bij}{\textcolor{black}{B_{ij}}}
+\newcommand{\bijr}{\bij r}
+\newcommand{\vmultipolecolor}{\ensuremath{\sum\limits_{tu}\textcolor{mon}{Q_t^i}T_{tu}\textcolor{mon}{Q_u^j}}\xspace}
+%% \begin{align}
+%% \label{eq:pointer-ff_form}
+%% \vdisp_{ij}
+%% \intertext{where}
+%% \begin{split}
+%% \label{eq:ff_details}
+%% \A &= \color{fit} A_iA_j \\
+%% \B &= \sqrt{\textcolor{cfit}{B_iB_j}} \\
+%% \C &= \sqrt{\textcolor{mon}{C_{i,2n}C_{j,2n}}} \\
+%% P(\bij,r_{ij}) &= \frac13 (\bij r_{ij})^2 + \bij r_{ij} + 1 \\
+%% f_{2n}(x) &= 1 - e^{-x} \sum \limits_{k=0}^{2n} \frac{(x)^k}{k!} \\
+%% x &= \bijr_{ij} - \frac{2 \bij^2 r_{ij} + 3 \bij }
+%% { \bij^2 r_{ij}^2 + 3 \bij r_{ij} + 3} r_{ij}
+%% %\thinmuskip
+%% \vrep_{ij} &= \textcolor{fit}{\Aex{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) \\
+%% \velst_{ij} &= -\textcolor{fit}{\Ael{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) +
+%% \vmultipolecolor
+%% \\
+%% \vind_{ij} &= -\textcolor{fit}{\Aind{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) + \textcolor{mon}{\vdrudeind} \\
+%% \vdhf_{ij} &= -\textcolor{fit}{\Adhf{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) +
+%% \textcolor{mon}{\vdrudescf} \\
+%% \vdisp_{ij} &= -\textcolor{disp}{\Adisp{ij}} \sum\limits_{n=3}^{6} f_{2n}(x)
+%% \frac{\textcolor{mon}{C_{ij,2n}}}{r_{ij}^{2n}} \\
+%% %\thinmuskip
+%% \vtot &= \sum\limits_{ij} \vrep_{ij} + \velst_{ij} + \vind_{ij} + \vdhf_{ij} +
+%% \end{split}
+%% \end{align}
+%
+
+\end{subsection}
+
+========================================
+
+
+
 What is \pointer
 
 input and output parameters (as a workflow chart?)
+    or as highlighted equation workflow
 
 any important algorithmic details of the code
 
 required input
+    sapt file
     anisotropy file
     settings file
     (for advanced users) defaults file
 
 tricky (i.e. not-yet-standardized) aspects of parameterization
     ccsdt correction
-    off-site point charges
-    polarization damping
+    electrostatics
+        electrostatic damping (discuss how to change sapt file!)
+        off-site point charges
+    polarization damping - how to choose?
+    exponents - when to fit vs. hold fixed?
+    dispersion - when and how to fit (ccsdt correction vs sapt, how to choose
+        asymptotic correction factor, caution in fitting)
 
 documentation of various options and settings
 
