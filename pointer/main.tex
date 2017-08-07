@@ -1,19 +1,71 @@
+
 \begin{chapter}{POInter: A Program for Intermolecular Force Field Optimization}
 \label{ch:pointer}
+
+\newcommand{\vmultipolecolor}{\ensuremath{\sum\limits_{\textcolor{mon}{tu}}\textcolor{mon}{Q_t^i}T_{tu}\textcolor{mon}{Q_u^j}}\xspace}
 
 \begin{section}{Overview}
 \input{pointer/overview}
 \end{section}
 
-\begin{section}{Documentation}
+%% \begin{section}{A Philosophy for `Good' Two-Body Force Field Development}
+%% \input{pointer/philosophy}
+%% \end{section}
+
+
+\begin{section}{Parameterization Overview}
+\input{pointer/parameters}
 \end{section}
 
-\begin{section}{Examples}
+\begin{section}{The \pointer Code}
+\input{pointer/pointer}
 \end{section}
+
+\begin{section}{Force Field Development: Principles and Practice}
+\input{pointer/general}
+\begin{subsection}{Exchange}
+\label{sec:pointer-exchange}
+\input{pointer/exchange}
+\end{subsection}
+\begin{subsection}{Electrostatics}
+\label{sec:pointer-electrostatics}
+\input{pointer/electrostatics}
+\end{subsection}
+\begin{subsection}{Induction}
+\label{sec:pointer-induction}
+\input{pointer/induction}
+\end{subsection}
+\begin{subsection}{Dispersion}
+\label{sec:pointer-dispersion}
+\input{pointer/dispersion}
+\end{subsection}
+\begin{subsection}{Many-Body Effects}
+\input{pointer/many_body_effects}
+\end{subsection}
+\end{section}
+
+\begin{section}{Validation: Assessing Fit Quality}
+\label{sec:pointer-validate}
+\input{pointer/validate}
+\end{section}
+
+\begin{section}{Summary and Outlook}
+\label{sec:pointer-conclusions}
+\input{pointer/conclusions}
+\end{section}
+
+
+
 
 \begin{subappendices}
-\begin{section}{Input Files}
+\begin{section}{\pointer Input Files}
 \input{pointer/input_files.tex}
+\end{section}
+\begin{section}{\pointer Output Files}
+\input{pointer/output_files.tex}
+\end{section}
+\begin{section}{Additional Fitting Options}
+\input{pointer/advanced_options}
 \end{section}
 \end{subappendices}
 

@@ -1,0 +1,37 @@
+From \cref{ch:isaff}, and as in \cref{eq:pointer-ff_form},
+our exponentially-decaying model for the exchange-repulsion energy 
+requires two sets of parameters per atomtype, \Aex{i} and $B_i$: 
+%
+\newcommand{\bij}{\textcolor{cfit}{B_{ij}}}
+\newcommand{\bijr}{\bij r}
+\begin{align}
+\vrep_{ij} &= \textcolor{fit}{\Aex{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij})
+\end{align}
+%
+Because the exchange-repulsion energy has no long-range contributions (unlike
+with electrostatics, induction, and dispersion), when analyzing the final
+force field it is often easiest to use the exchange energy (by itself) to
+compare between models with differing numbers of atomtypes or treatments of
+anisotropy. Additionally, when fitting the $B_i$ parameters against a harmonic
+penalty function, \pointer takes advantage of the relative simplicity of the
+exchange-repulsion model and fits this $B_i$ parameter based solely on the
+exchange component.
+
+\begin{paragraph}{Exponent Fitting}
+
+To use \pointer to relax the $B_i$ parameters from their initial \isa-based values, the
+following flag in \verb|settings.py| can be set to True:
+
+\begin{lstlisting}[language=python]
+...
+# Exchange Settings: fit_bii selects whether or not to treat the ISA
+# short-range exponents are soft- (fit_bii=True) or hard-constraints
+# (fit_bii=False)
+fit_bii                    =    True
+...
+\end{lstlisting}
+In general, deviations from the input $B_i$ parameters should be no larger
+than 10--15\%. Larger deviations may indicate problems with the \bsisa
+exponents or with the fitting process itself.
+
+\end{paragraph}

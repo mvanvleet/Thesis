@@ -1,5 +1,5 @@
-
 \begin{section}{Dimer-Based Parameterization}
+\label{sec:workflow-dimer_parameters}
 
 After obtaining monomer parameters for a given system of interest, the final
 remaining task is to fit the remaining force field parameters to reproduce the
@@ -13,11 +13,30 @@ files for this dimer-based parameterization, as follows:
 ./scripts/gather_pointer_input_files.py
 \end{lstlisting}
 %
+For modeling off-site point charges, the following additional steps are
+required (assuming the offites .xyz file has already been added to the input
+directory):
+\begin{lstlisting}
+cd geometries
+mkdir xyz
+mv * xyz
+cd ../
+./scripts/get_sapt_file_wi_offsites.py
+\end{lstlisting}
+%
 The output of these scripts will generate a .sapt file (containing results
 from the \dftsapt calculations, with atomtype
 labels taken from each \verb|input/<monomer>.atomtypes| file) and a new
 directory, \verb|ff_fitting|, which automatically sets up all of the input files and monomer
 parameters needed to easily run the \pointer fitting code. The theory and
-practice of the \pointer fitting code is the subject of the next chapter.
+practice of the \pointer fitting code is the subject of the next chapter,
+however in practice the software can be run very simply by modifying the
+required input files (see \cref{sec:pointer-pointer} for details) and running
+\begin{lstlisting}
+cd ff_fitting
+(modify input scripts)
+./run_pointer.py
+\end{lstlisting}
 
 \end{section}
+

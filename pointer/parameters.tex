@@ -1,0 +1,209 @@
+\begin{subsection}{Theory}
+
+For \sapt-based force fields with functional forms similar to those in
+\cref{ch:isaff,ch:mastiff} -- \mastiff being a prime example -- 
+we have discussed in \cref{ch:workflow} a number of practical approaches for
+intermolecular force field development.
+(Here and throughout this Chapter, much of our
+our discussion is restricted to examples with the \mastiff force field. Nevertheless, most
+of the principles and ideas presented below should pertain generally to other
+force fields (\saptff, \isaffold, etc.) that are fit on a term-by-term basis
+to reproduce a benchmark \eda, and this Chapter is also intended to provide a
+helpful guide for fitting and analyzing these types of force fields.)
+In particular, we have already discussed strategies for optimally obtaining benchmark
+electronic structure theory data and for calculating some of the parameters
+that will be used in the final force fields themselves. Nevertheless, up
+until now we have not focused on the actual process of force field fitting, nor on
+strategies for assessing the quality of the resulting force fields. It is
+to these two crucial topics that we now turn.
+
+%%%%%%%%%%%% Fitting Equations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bij}{\textcolor{black}{B_{ij}}}
+\newcommand{\bijr}{\bij r}
+%\newcommand{\vmultipolecolor}{\ensuremath{\sum\limits_{\textcolor{mon}{tu}}\textcolor{mon}{Q_t^i}T_{tu}\textcolor{mon}{Q_u^j}}\xspace}
+
+\begin{figure}
+\begin{align}
+%\label{eq:pointer-ff_form}
+%\intertext{where}
+\begin{split}
+\label{eq:pointer-ff_form}
+\A &= \color{fit} A_iA_j \\
+\B &= \sqrt{\textcolor{cfit}{B_iB_j}} \\
+\C &= \sqrt{\textcolor{mon}{C_{i,2n}C_{j,2n}}} \\
+P(\bij,r_{ij}) &= \frac13 (\bij r_{ij})^2 + \bij r_{ij} + 1 \\
+f_{2n}(x) &= 1 - e^{-x} \sum \limits_{k=0}^{2n} \frac{(x)^k}{k!} \\
+x &= \bijr_{ij} - \frac{2 \bij^2 r_{ij} + 3 \bij }
+{ \bij^2 r_{ij}^2 + 3 \bij r_{ij} + 3} r_{ij} \\[20pt]
+%
+\vrep_{ij} &= \textcolor{fit}{\Aex{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) \\
+\velst_{ij} &= -\textcolor{fit}{\Ael{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) +
+\vmultipolecolor
+\\
+\vind_{ij} &= -\textcolor{fit}{\Aind{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) + \textcolor{mon}{\vdrudeind} \\
+\vdhf_{ij} &= -\textcolor{fit}{\Adhf{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) +
+\textcolor{mon}{\vdrudescf} \\
+\vdisp_{ij} &= -\textcolor{disp}{\Adisp{ij}} \sum\limits_{n=3}^{6} f_{2n}(x)
+\frac{\textcolor{mon}{C_{ij,2n}}}{r_{ij}^{2n}} \\
+\end{split}
+\\[20pt]
+\vtot &= \sum\limits_{ij} \vrep_{ij} + \velst_{ij} + \vind_{ij} + \vdhf_{ij} +
+\vdisp_{ij}
+\end{align}
+\captionsetup{singlelinecheck=off}
+\caption[Required parameters for \mastiff]
+    {An overview of required force field parameters for the \mastiff and/or
+\isaffold force fields. All relevant equations are
+displayed in black, and the first instance of each parameter is shown in color according to the
+following scheme:
+\begin{itemize}
+\item \textcolor{fit}{Unconstrained} parameters, which must be directly fit by \pointer
+%
+\item \textcolor{cfit}{Soft-constrained} parameters 
+which, depending on user-specified settings, are treated as either soft- or
+hard-constraints
+%
+\item \textcolor{mon}{Hard-Constrained} parameters read in by \pointer which are
+always treated as hard constraints
+\end{itemize}
+See main text for details.
+}
+\label{fig:pointer-ff}
+\end{figure}
+%%%%%%%%%%%% Fitting Equations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+In regards to the force field fitting process, we begin by asking the obvious
+question: "What parameters actually need to be fit in order to obtain a final
+force field?" To this end, we have highlighted in \cref{fig:pointer-ff} all
+of the parameters required to completely specify the \mastiff force field, and
+have grouped these parameters according to how we choose to calculate/optimize
+them in practice. In particular, all our force field parameters can be thought
+of in terms of the following three categories:
+%
+\begin{itemize}
+\item \textcolor{fit}{Unconstrained} parameters: These parameters have not
+been specified on the basis of any monomer properties calculation, and so must
+be directly fit to the two-body energy itself. 
+%
+\item \textcolor{cfit}{Soft-Constrained} parameters: These parameters
+\emph{can} be fit entirely on the basis of monomer properties, however it is
+sometimes advantageous to further refine this category of parameters with respect to the
+benchmark two-body energies. In this case, soft
+constraints\cite{Misquitta2016} are often applied to
+the fitting process to ensure that the parameters do not deviate strongly from
+their original values as calculated from monomer properties.
+%
+\item \textcolor{mon}{Hard-Constrained} parameters: These parameters are calculated
+entirely from monomer properties, and are not futher involved in the force
+field fitting process except as hard constraints.
+\end{itemize}
+
+To use \mastiff (see \cref{ch:mastiff}) as an example, an overview of the required parameters and
+strategies for parameter fitting is as follows:
+\begin{itemize}
+\item \textcolor{fit}{\Aex{i}, \Ael{i}, \Aind{i}, \Adhf{i}}: 
+The force field energy depends linearly on a number of short-range prefactors, and
+in practice it is fairly straightforward to directly fit each of these
+prefactors to the corresponding benchmark \sapt component energy. Note that, for anisotropic atomtypes,
+each $A$ coefficient may in fact involve several parameters, all of which must
+be directly fit:
+\begin{align}
+\label{eq:pointer-anisotropy}
+\Aex{i}(\theta_i,\phi_i) &=
+\textcolor{fit}{\Aex{i,\text{iso}}}\left(1 + 
+\sum\limits_{l>0,k} \textcolor{fit}{\aex}  \mathcal{C}_{lk}(\theta_i,\phi_i)
+\right)
+\end{align}
+(Though not entirely standard notation,\cite{stone2013theory}
+for clarity in this Chapter we use
+$\mathcal{C}$ to denote the set of renormalized spherical harmonics so as to
+make a clear distinction between $\mathcal{C}$, the spherical harmonics, and
+$C$, the dispersion coefficients from \cref{sec:workflow-dispersion}).
+%
+\item \textcolor{cfit}{$B_i$}:
+The force field energy depends non-linearly on the short-range exponents \B,
+making this parameter relatively difficult to optimize without constraints.
+Fortunately, the \B parameters can
+instead be calculated on the basis of monomer properties (see
+\cref{sec:workflow-exponents}), and for obtaining force fields with
+\rmse of \kjmol{\textasciitilde 1} it is often sufficient to use the \isa-obtained \B
+parameters without further fitting. For obtaining more accurate force fields,
+however, and in order to account for small uncertainties in our method of
+obtaining \isa-derived \B parameters (see
+\cref{sec:workflow-exponent_algorithm}), we have had good success in allowing the
+\B parameter to vary slightly from its \isa-derived value. In practice, this entails
+optimizing the \B parameters with respect to the benchmark \sapt exchange energy and subject
+to a harmonic penalty function.\cite{Misquitta2016}
+%
+\item \textcolor{cfit}{\Adisp{i}}:
+As with the other $A$ pre-factors, a pre-factor can be fit to the benchmark dispersion
+energy so as to enhance the force field accuracy with respect to a given
+benchmark electronic structure theory. (Vida infra, this benchmark energy can
+either by \dftsapt or \ccsdt). Unlike with other pre-factors, however, and because we generally
+have good accuracy in obtaining dispersion coefficients $C$ (see
+\cref{sec:workflow-dispersion}),
+nominally $\Adisp{i} \approx 1$ for most systems. Still, parameters must
+sometimes be fit to the dispersion energy due to one or both of the following reasons: 
+    \begin{enumerate}
+    \item For anisotropic atoms, we must model the orientational dependence of
+    the dispersion energy, and this model requires parameters outside of 
+    the isotropic dispersion coefficients calculated in
+    \cref{sec:workflow-dispersion}).
+    \item Uncertainties in the \idma and/or \isa-pol dispersion coefficients can
+    sometimes lead to inaccuracies in even the isotropic portion of the
+    dispersion model, and these inaccuracies must sometimes be corrected by rescaling
+    the isotropic dispersion coefficients themselves
+    \end{enumerate}
+In practice, when calculating \Adisp{ij} we often treat the \emph{anisotropic}
+dispersion coefficients \adisp as free parameters, and sometimes additionally
+optimize an \emph{isotropic} scale factor subject to
+soft constraints.\footnotemark{ }
+In total, this leads to the following set of parameters and equations for the
+dispersion energy pre-factor:
+%
+\begin{align}
+\Adisp{i}(\theta_i,\phi_i) &=
+\textcolor{cfit}{\Adisp{i,\text{iso}}}
+\left(1 + 
+\sum\limits_{l>0,k} \textcolor{fit}{\adisp}  \mathcal{C}_{lk}(\theta_i,\phi_i)
+\right)
+\end{align}
+where the colors serve to indicate that both free and soft-constrained
+parameters may be contained within the pre-factor.
+%
+\item \textcolor{mon}{$Q^i_t$}:
+Multipole moments $Q^i_t$ can be directly calculated from monomer properties
+using the techniques discussed in \cref{sec:workflow-multipoles}. These
+\isa-based multipoles are generally quite accurate, however (vida infra) when
+using cheaper point charge models some care must be taken to ensure that the
+effective model does not lead to a deterioration in force field accuracy 
+%TODO: Reference where we discuss electrostatic models
+\item \textcolor{mon}{\vdrude}:
+As with multipole moments, polarization parameters
+(\cref{sec:workflow-polarizabilities}) are treated as hard
+constraints during the force field fitting process. Currently, there is not a
+consensus on what functional forms and/or damping parameters should be used to 
+model the short-range polarization energy, and this topic and its associated
+practical issues will be the subject of \cref{sec:pointer-polarization}.
+\item \textcolor{mon}{$C_{i,2n}$}:
+Dispersion coefficients are calculated via the approaches discussed in
+\cref{sec:workflow-dispersion}, and are generally treated as hard constraints in the
+force field fitting process. In some cases (vida supra), these dispersion
+coefficients are scaled to reproduce the \sapt energies, however we discuss in
+\cref{sec:pointer-dispersion} some practical issues involved with such
+scaling.
+\end{itemize}
+
+
+\footnotetext{
+Currently, two constraints schemes are possible for 
+$\Adisp{i,\text{iso}}$. First, we can treat this parameter as a hard
+constraint, which sets $\Adisp{i,\text{iso}} = 1$. Second, we can apply
+boundary conditions to treat $\Adisp{i,\text{iso}}$ as a free parameter
+within the range $ 0.7 \le \Adisp{i,\text{iso}} \le 1.3 $. In future versions
+of the \pointer code, we may also include the option of fitting
+$\Adisp{i,\text{iso}}$ subject to a harmonic penalty function.
+}
+
+\end{subsection}

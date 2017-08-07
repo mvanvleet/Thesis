@@ -1,75 +1,59 @@
-\begin{subsection}{What is \pointer?}
+\begin{quote}
+The challenge for current and future work on force-field development is to
+improve the form of the potential energy function, to improve the methodology
+used in determining the potential energy parameters, and to use these
+advances to generate improved potential energy functions.
+\dots That these force fields differ substantially in form and in manner of
+derivation serves to emphasize that force field development is still as much a
+matter of art as of science. Someday, consensus on the form and manner of
+parameterization of molecular force fields may exist, but for now much remains
+to be learned.
+--- \citeauthor{Halgren1995}
+\end{quote}
 
-overview
-
-\end{subsection}
-\begin{subsection}{What parameters do we get from \pointer?}
 
 
-
-\newcommand{\bij}{\textcolor{black}{B_{ij}}}
-\newcommand{\bijr}{\bij r}
-\newcommand{\vmultipolecolor}{\ensuremath{\sum\limits_{tu}\textcolor{mon}{Q_t^i}T_{tu}\textcolor{mon}{Q_u^j}}\xspace}
-%% \begin{align}
-%% \label{eq:pointer-ff_form}
-%% \vdisp_{ij}
-%% \intertext{where}
-%% \begin{split}
-%% \label{eq:ff_details}
-%% \A &= \color{fit} A_iA_j \\
-%% \B &= \sqrt{\textcolor{cfit}{B_iB_j}} \\
-%% \C &= \sqrt{\textcolor{mon}{C_{i,2n}C_{j,2n}}} \\
-%% P(\bij,r_{ij}) &= \frac13 (\bij r_{ij})^2 + \bij r_{ij} + 1 \\
-%% f_{2n}(x) &= 1 - e^{-x} \sum \limits_{k=0}^{2n} \frac{(x)^k}{k!} \\
-%% x &= \bijr_{ij} - \frac{2 \bij^2 r_{ij} + 3 \bij }
-%% { \bij^2 r_{ij}^2 + 3 \bij r_{ij} + 3} r_{ij}
-%% %\thinmuskip
-%% \vrep_{ij} &= \textcolor{fit}{\Aex{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) \\
-%% \velst_{ij} &= -\textcolor{fit}{\Ael{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) +
-%% \vmultipolecolor
-%% \\
-%% \vind_{ij} &= -\textcolor{fit}{\Aind{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) + \textcolor{mon}{\vdrudeind} \\
-%% \vdhf_{ij} &= -\textcolor{fit}{\Adhf{ij}} P(\bij, r_{ij}) \exp(-\bijr_{ij}) +
-%% \textcolor{mon}{\vdrudescf} \\
-%% \vdisp_{ij} &= -\textcolor{disp}{\Adisp{ij}} \sum\limits_{n=3}^{6} f_{2n}(x)
-%% \frac{\textcolor{mon}{C_{ij,2n}}}{r_{ij}^{2n}} \\
-%% %\thinmuskip
-%% \vtot &= \sum\limits_{ij} \vrep_{ij} + \velst_{ij} + \vind_{ij} + \vdhf_{ij} +
-%% \end{split}
-%% \end{align}
+Thus far, our focus has primarily been on addressing 
+the following fundamental (and occasionally practical) issues related to ab-initio intermolecular force field development:
+\begin{enumerate}
+\item What functional forms should we use to optimally describe two-body
+intermolecular interactions? 
+(\cref{ch:isaff,ch:mastiff})
+\item How can we obtain accurate parameters for the two-body force field?
+(\cref{ch:isaff,ch:mastiff,ch:workflow})
+\item What benchmark \pes should we use in the fitting process, and how should
+it be sampled?
+(\cref{ch:lmoeda,ch:workflow})
+\end{enumerate}
+Building on these theoretical advances, we turn now our discussion to bear on
+a much
+more practical set of questions: using currently available techniques and softwares,
+how can we optimally develop intermolecular force fields for simulating
+arbitrary $N$ body systems?
 %
+This Chapter is designed to address several practical issues related to 
+ab initio intermolecular force field development, with a special emphasis on
+explaining and documenting the main software (\acrshort{pointer}) that has been
+developed expressly for the purposes of optimizing parameters for the various
+force field functional forms described in
+\cref{ch:isaff,ch:mastiff}. In particular, we attempt in this Chapter to
+address the following questions:
+\begin{enumerate}
+\item What algorithms and procedures are involved in fitting \sapt-based force
+fields?
+\item What functional forms should be used to describe the two-body force
+field for a particular system or application?
+\item How can we properly include a treatment of many-body effects 
+so as to yield a final model for describing arbitrary $N$-body
+systems?
+\item Once we've settled on a functional form and set of parameters for the
+$N$-body force field, how can we evaluate the
+quality of this force field and its utility for molecular simulation? 
+\end{enumerate}
 
-\end{subsection}
-
-========================================
 
 
+=========================================
 
-What is \pointer
 
-input and output parameters (as a workflow chart?)
-    or as highlighted equation workflow
 
-any important algorithmic details of the code
-
-required input
-    sapt file
-    anisotropy file
-    settings file
-    (for advanced users) defaults file
-
-tricky (i.e. not-yet-standardized) aspects of parameterization
-    ccsdt correction
-    electrostatics
-        electrostatic damping (discuss how to change sapt file!)
-        off-site point charges
-    polarization damping - how to choose?
-    exponents - when to fit vs. hold fixed?
-    dispersion - when and how to fit (ccsdt correction vs sapt, how to choose
-        asymptotic correction factor, caution in fitting)
-
-documentation of various options and settings
-
-wiki
-
-Release version number

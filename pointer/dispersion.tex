@@ -1,0 +1,54 @@
+Dispersion is the last energy component that we must model in order to
+completely describe the two-body energy. Asymptotically, the dispersion energy follows a
+well-defined expansion in powers of $1/r^{2n}$, and at shorter distances the
+energy expression is typically damped by a Tang-Toennies
+function\cite{Tang1984,Tang1992} as follows:
+%
+\begin{align}
+\vdisp_{ij} &= -{\Adisp{i}\Adisp{j}} \sum\limits_{n=3}^{6} f_{2n}(x)
+\frac{\textcolor{mon}{C_{ij,2n}}}{r_{ij}^{2n}} \\
+\Adisp{i}(\theta_i,\phi_i) &=
+\textcolor{cfit}{\Adisp{i,\text{iso}}}
+\left(1 +
+\sum\limits_{l>0,k} \textcolor{fit}{\adisp}  \mathcal{C}_{lk}(\theta_i,\phi_i)
+\right)
+\end{align}
+%
+where $f(x)$ is the Tang-Toennies damping function from
+\cref{eq:pointer-ff_form}, and the various colors highlight (as in
+\cref{fig:pointer-ff}) the different ways in which the dispersion parameters
+are calculated/fit.
+Dispersion coefficients must always be read into
+\pointer as input, and methods for obtaining these coefficients are as
+described in  \cref{sec:workflow-dispersion}. 
+
+In obtaining a final model for dispersion, it is important to ensure that any
+model is quantitatively correct in the asymptotic regime, as the
+least-squares optimization procedure \pointer uses does not ensure this
+physically-correct behavior. Unless directly fitting atomtype-specific scale
+factors to the dispersion energy (vida infra), a good strategy is to (using
+the methods in \cref{sec:workflow-dispersion}) manually fit a universal scale factor to
+the dispersion coefficients in order to achieve correct asymptotic behavior.
+Once these scaled dispersion coefficients are read into \pointer, additional
+anisotropic parameters can then be fit (or set to zero) by appropriate
+modification of the \verb|settings.py| file:
+\begin{lstlisting}[language=python]
+# Dispersion Settings: Choose which parameters to fit to the dispersion
+energies. Fit options
+# include 'none' (to fit no parameters), 'anisotropic' (to just fit
+# anisotropic dispersion parameters, but to leave isotropic dispersion
+# coefficients unscaled), and 'all' (to fit both anisotropic and isotropic
+# dispersion coefficients)
+fit_dispersion             =    'anisotropic'
+\end{lstlisting}
+
+In select cases, such as when a \dccsdt correction is added to the
+dispersion energy, it can be worthwhile to scale the isotropic
+dispersion coefficients in an atomtype-specific manner. (This strategy was
+used in \cref{ch:mastiff} to obtain dispersion parameters for \co, \nh, \ho,
+and \cl.) This behavior is also allowed in \pointer using the above flags,
+however care must be taken to ensure that this optimization does not degrade
+accuracy in the asymptotic regime. In general, it is usually best to
+\emph{not} fit isotropic scale factors to the dispersion energy in the absence
+of significant improvements to the overall force field fit quality.
+

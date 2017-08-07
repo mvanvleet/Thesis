@@ -1,0 +1,55 @@
+In total, \pointer requires modification of three input files,
+as follows:
+
+\clearpage
+\lstinputlisting[language=python,
+                 caption=settings.py,
+                 label=lst:pointer-settings]{pointer/settings.py}
+
+\clearpage
+\lstinputlisting[language=python,
+                 caption=defaults.py,
+                 label=lst:pointer-defaults]{pointer/defaults.py}
+
+\clearpage
+\lstinputlisting[language=python,
+                 caption={[pyridine.axes]
+\textbf{pyridine.axes}.
+For each anisotropic atomtype, the approximate symmetry and all terms included
+in the spherical harmonic expansion are listed to the right of the atomtype.
+Additionally, the local axis reference frame for each anisotropic atomtype is
+defined in the Axes subsection using the z-then-x convention employed by
+AMOEBA and other potentials (see \cref{ch:mastiff} for details). The first column of the axes subsection denotes
+the index of the anisotropic atom (atom ordering as in the .sapt file), and the
+second column denotes whether the z or x axis is being defined. For certain
+local symmetries, the choice of x-axis is unimportant, and so not every
+anisotropic atomtype has a defined x-axis. The remaining columns define the
+direction vector for the axis in terms of atomic indices. The first index
+(often the anisotropic atom itself) lists the start of the vector, and the
+endpoint of the vector is defined as the midpoint of all subsequently listed
+atoms.},
+                 label=lst:pointer-axes]{pointer/pyridine.axes}
+
+\clearpage
+\lstinputlisting[language=python,
+                 caption=pyridine.constraints,
+                 label=lst:pointer-axes]{pointer/pyridine.constraints}
+
+%% \scriptsize
+%% \lstinputlisting[language=bash,
+%%                  caption=dimer\_info.dat,
+%%                  label=lst:workflow-dimer_info]{workflow/dimer_info.dat}
+%% \normalsize
+%% 
+%% \scriptsize
+%% \lstinputlisting[language=bash,
+%%                  caption=pyridine\_pyridine.inp,
+%%                  label=lst:workflow-dimer_geom]{workflow/pyridine_pyridine.inp}
+%% \normalsize
+%% 
+%% \scriptsize
+%% \lstinputlisting[language=bash,
+%%                  caption=pyridine.atomtypes,
+%%                  label=lst:workflow-pyridine.atomtypes]{workflow/pyridine_pyridine.inp}
+%% \normalsize
+

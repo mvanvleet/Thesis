@@ -1,0 +1,114 @@
+Having identified the required parameters that completely specify \mastiff
+and other similar force fields, we now turn to a discussion of the actual
+fitting process itself. We begin in this section with an overview of the
+software used to optimize each unconstrained/soft-constrained parameter, and
+next (in \cref{sec:pointer-fitting}) discussion principles and practices
+related to fitting each component of the benchmark \sapt energy.
+
+As the name suggests, the \acrfull{pointer} is a Python package developed to aid in the fitting of
+(two-body + $N$-body polarization) intermolecular force fields. \pointer is
+open-source and is available for download from
+\url{https://git.chem.wisc.edu/schmidt/force_fields}.
+%TODO: Update this url and the one below for the pointer code once it's been
+%uploaded to github
+Documentation and examples for using \pointer are available through the wiki at
+\url{https://git.chem.wisc.edu/schmidt/force_fields/wikis/home}, but for
+convenience we include here a brief overview of the program input, usage, and
+main capabilities:
+
+
+\begin{subsection}{Input}
+Owing to the large number of parameters that serve as hard constraints in
+fitting the final \mastiff force field
+(see \cref{fig:pointer-ff}), a number of input parameters files are required
+in \pointer.
+Fortunately, provided the user has already executed the scripts and steps
+from
+\cref{ch:workflow}, all required input scripts should have all been created
+automatically and copied over to the force field fitting subdirectory
+(\verb|ff_fitting|) from which the \pointer code is intended to be run.
+Thus in practice, \pointer is designed to be run in combination with the
+Workflow so as to minimize the amount of required manual input.
+
+In total, the following input files are required by the \pointer program,
+where the tag <monomer> indicates that a separate file is required for each
+unique monomer being fit. Files highlighted in
+\textcolor{codegreen}{teal} or \textcolor{codepurple}{red} indicates that the input file
+sometimes or always require
+manual modification before running \pointer, whereas files in black are
+created automatically from the various scripts used in the Workflow:
+
+\begin{itemize}
+\item \textbf{<monomer1>\_<monomer2>.sapt}:
+Summarizes the output \sapt energies for each dimer configuration from
+\cref{sec:workflow-geometries}, and specifies the atomtype for each atom in
+each monomer 
+\item \textbf{<monomer>.disp}:
+Contains dispersion parameters for each monomer
+\item \textbf{<monomer>.drude}:
+Contains drude oscillator charges for each monomer
+\item \textbf{<monomer>.exp}:
+Contains short-range exponents for each monomer
+\item \textbf{<monomer>\_<multipole\_suffix>.mom}:
+Contains multipole moments for each monomer
+\item \textbf{\_\_init\_\_.py}:
+Empty file required to keep Python's module structure happy
+\item \textcolor{codegreen}{\textbf{<monomer>.constraints}:}
+Constraints file, used to include hard-constraints for any \A parameters
+for any previously-fit atomtypes. See \cref{sec:pointer-prior_fitting} for
+details and \cref{lst:pointer-constraints} for an example input file.
+\item \textcolor{codegreen}{\textbf{<monomer>.axes}:}
+Axes file, used to specify the local axes and included spherical harmonics for
+any anisotropic atomtypes. See \cref{sec:pointer-anisotropy} for details and
+\cref{lst:pointer-axes} for an example input file.
+\item \textcolor{codegreen}{\textbf{defaults.py}:}
+List of default settings for the \pointer program; these defaults rarely need
+to be changed for routine force field development. 
+See \cref{lst:pointer-defaults} for an example input file.
+\item \textcolor{codepurple}{\textbf{settings.py}:}
+List of modular settings for the \pointer program; many of these settings can
+get changed in the course of routine force field development.  See
+\cref{sec:pointer-fitting} for details and \cref{lst:pointer-settings} for
+an example input file.
+\end{itemize}
+
+\end{subsection}
+
+\begin{subsection}{Usage and Output}
+
+Once the required input files have been created/modified, running the \pointer
+program is straightforward:
+\begin{lstlisting}
+./run_pointer.py
+\end{lstlisting}
+
+After a few minutes of runtime, \pointer will generate the following important output
+files (file prefixes and suffixes may differ slightly depending on the choice
+of input variables \verb|file_prefix| and \verb|file_suffix| from \verb|settings.py|):
+\begin{itemize}
+\item \textbf{coeffs.out}:
+Output file containing fit parameters and error metrics
+\item \textbf{exchange.dat}:
+\sapt and force field exchange energies given in a two-column format with
+ordering identical to the input .sapt file
+\item \textbf{electrostatics.dat}:
+\sapt and force field electrostatic energies
+\item \textbf{multipoles.dat}:
+\sapt electrostatic and force field multipolar energies
+\item \textbf{induction.dat}:
+\sapt and force field second-order induction energies
+\item \textbf{dhf.dat}:
+\sapt and force field \dhf energies
+\item \textbf{edrudes.dat}:
+polarization energies, \vdrudeind and \vdrudescf, given in two-column format
+\item \textbf{dispersion.dat}:
+\sapt and force field dispersion energies
+\item \textbf{total\_energy.dat}:
+\sapt and force field total energies
+\end{itemize}
+
+We now discuss specific details related to the fitting of each energy
+component.
+
+\end{subsection}
+

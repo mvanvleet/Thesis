@@ -1,0 +1,118 @@
+% General shortcuts
+% \newcommand{\super}[1]{\textsuperscript{#1}}
+% \newcommand{\sub}[1]{\textsubscript{#1}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+\newcommand{\ra}[1]{\renewcommand{\arraystretch{#1}}}
+\newcommand{\citeboth}[1]{\citeauthor{#1}\cite{#1}\xspace}
+%% \newcommand*{\citen}{}% generate error, if `\citen` is already in use
+%% \DeclareRobustCommand*{\citen}[1]{%
+%%   \begingroup
+%%     \romannumeral-`\x % remove space at the beginning of \setcitestyle
+%%     \setcitestyle{numbers}%
+%%     ref. \cite{#1}%
+%%   \endgroup
+%% }
+%% \newcommand*{\citens}{}% generate error, if `\citen` is already in use
+%% \DeclareRobustCommand*{\citens}[1]{%
+%%   \begingroup
+%%     \romannumeral-`\x % remove space at the beginning of \setcitestyle
+%%     \setcitestyle{numbers}%
+%%     refs. \cite{#1}%
+%%   \endgroup
+%% }
+
+%eqref
+%% \usepackage{letltxmacro}
+%% \LetLtxMacro{\originaleqref}{\eqref}
+%% \renewcommand{\eqref}{eq.~\originaleqref}
+%% \newcommand{\Eqref}{Eq.~\originaleqref}
+%% 
+%% %figref
+%% \newcommand{\figref}[1]{Figure~\ref{#1}}
+%% \newcommand{\tabref}[1]{Table~\ref{#1}}
+%% \newcommand{\secref}[1]{Section~\ref{#1}}
+%% \newcommand{\appendixref}[1]{Appendix~\ref{#1}}
+
+
+%% \newcommand{\si}{Supporting Information\xspace}
+
+% ANISO-FF Paper lingo
+\newcommand{\bsisa}{BS-ISA\xspace}
+\newcommand{\isoff}{Iso-Iso FF\xspace}
+%\newcommand{\isaff}{Aniso-Iso FF\xspace}
+%\newcommand{\isaffold}{Slater-ISA FF\xspace}
+%\newcommand{\saptff}{Born-Mayer-IP FF\xspace}
+%\newcommand{\bmsisaff}{Born-Mayer-sISA FF\xspace}
+%\newcommand{\mastiff}{MASTIFF\xspace}
+\newcommand{\anisoff}{Aniso-Aniso FF\xspace}
+
+\newcommand{\ljff}{LJ FF\xspace}
+\newcommand{\saptpbeo}{DFT-SAPT (PBE0/AC)\xspace}
+% \newcommand{\avtz}{aug-cc-pVTZ\xspace}
+% \newcommand{\avtzm}{aug-cc-pVTZ+m\xspace}
+\newcommand{\A}{\ensuremath{A_{ij}}\xspace}
+\newcommand{\B}{\ensuremath{B_{ij}}\xspace}
+\newcommand{\C}{\ensuremath{C_{ij,2n}}\xspace}
+\newcommand{\R}{\ensuremath{r_{ij}}\xspace}
+
+\newcommand{\fij}{\ensuremath{f(r_{ij})}\xspace}
+\newcommand{\gij}{\ensuremath{g(\theta_i,\phi_i,\theta_j,\phi_j)}\xspace}
+\newcommand{\sfunc}{\ensuremath{\bar{S}\text{-functions}}\xspace}
+
+\newcommand{\mdhf}{\ensuremath{\delta^{\text{HF}}}\xspace}
+
+\newcommand{\Asr}[1]{\ensuremath{A^{\text{sr}}_{#1}}\xspace}
+\newcommand{\Aex}[1]{\ensuremath{A^{\text{exch}}_{#1}}\xspace}
+\newcommand{\Ael}[1]{\ensuremath{A^{\text{elst}}_{#1}}\xspace}
+\newcommand{\Apen}[1]{\ensuremath{A^{\text{pen}}_{#1}}\xspace}
+\newcommand{\Aind}[1]{\ensuremath{A^{\text{ind}}_{#1}}\xspace} % AJM Not ind,sr !!!
+\newcommand{\Adhf}[1]{\ensuremath{A^{\mdhf}_{#1}}\xspace} % AJM Not ind,sr !!!
+\newcommand{\Adisp}[1]{\ensuremath{A^{\text{disp}}_{#1}}\xspace} % AJM Not ind,sr !!!
+
+\newcommand{\aex}{\ensuremath{a_{lk}^{\text{exch}}}\xspace}
+\newcommand{\apen}{\ensuremath{a_{lk}^{\text{pen}}}\xspace}
+\newcommand{\adisp}{\ensuremath{a_{lk}^{\text{disp}}}\xspace}
+
+\newcommand{\Bisa}[1]{\ensuremath{B^{\text{ISA}}_{#1}}\xspace}
+\newcommand{\Bip}[1]{\ensuremath{B^{\text{IP}}_{#1}}\xspace}
+
+\newcommand{\esys}{\ensuremath{E_{\text{sys}}}\xspace}
+
+\newcommand{\etot}{\ensuremath{E_{\text{int}}}\xspace}
+\newcommand{\erep}{\ensuremath{E^{\text{exch}}}\xspace}
+\newcommand{\eelst}{\ensuremath{E^{\text{elst}}}\xspace}
+\newcommand{\eind}{\ensuremath{E^{\text{ind}}}\xspace}
+\newcommand{\edhf}{\ensuremath{E^{\mdhf}}\xspace}
+\newcommand{\edisp}{\ensuremath{E^{\text{disp}}}\xspace}
+
+\newcommand{\vtot}{\ensuremath{V_{\text{FF}}}\xspace}
+\newcommand{\vrep}{\ensuremath{V^{\text{exch}}}\xspace}
+\newcommand{\vcp}{\ensuremath{V^{\text{pen}}}\xspace}
+\newcommand{\vsrind}{\ensuremath{V^{\text{ind,sr}}}\xspace}
+\newcommand{\vsrdisp}{\ensuremath{V^{\text{disp,sr}}}\xspace}
+\newcommand{\velst}{\ensuremath{V^{\text{elst}}}\xspace}
+\newcommand{\vind}{\ensuremath{V^{\text{ind}}}\xspace}
+\newcommand{\vdhf}{\ensuremath{V^{\mdhf}}\xspace}
+\newcommand{\vdisp}{\ensuremath{V^{\text{disp}}}\xspace}
+\newcommand{\vlr}{\ensuremath{V_{lr}}\xspace}
+\newcommand{\vmultipole}{\ensuremath{\sum\limits_{tu}Q_t^iT_{tu}Q_u^j}\xspace}
+\newcommand{\vdrude}{\ensuremath{V_{\text{pol}}}\xspace}
+\newcommand{\vdrudeind}{\ensuremath{V_{\text{pol}}^{(2)}}\xspace}
+\newcommand{\vdrudescf}{\ensuremath{V_{\text{pol}}^{(3-\infty)}}\xspace}
+
+\newcommand{\rmse}{RMSE\xspace}
+\newcommand{\mse}{\ensuremath{\lVert\text{MSE}\rVert}\xspace}
+
+%% \newcommand{\co}{\BPChem{CO\_2}\xspace}
+%% \newcommand{\ho}{\BPChem{H\_2O}\xspace}
+%% \newcommand{\nh}{\BPChem{NH\_3}\xspace}
+%% \newcommand{\cl}{\BPChem{CH\_3Cl}\xspace}
+\newcommand{\deltahsub}{\ensuremath{\Delta H_{\text{sub}}}\xspace}
+\newcommand{\deltahvap}{\ensuremath{\Delta H_{\text{vap}}}\xspace}
+\newcommand{\deltah}{\ensuremath{\Delta H}\xspace}
+% \newcommand{\kjmol}{\xspace\ensuremath{\text{kJ mol}^{-1}}\xspace}
+
+\newcommand{\aniso}[1]{\ensuremath{\xi^{\text{#1}}(\theta_i,\phi_i)}\xspace}
+

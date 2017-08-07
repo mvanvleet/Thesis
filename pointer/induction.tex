@@ -1,0 +1,129 @@
+We turn now to a discussion of the \sapt induction energy, arguably the most
+complicated energy component to understand and correctly model. A good
+induction model needs to account for all of the following physical phenomenon:
+\begin{itemize}
+\item Long-range polarization
+\item Polarization damping at short-range
+\item Charge penetration effects arising from polarization
+\item Charge transfer
+\end{itemize}
+Aside from long-range polarization, for which asymptotically-exact formulas
+exist and can be modeled in simulation,\cite{Rick2002,Holt2008,Misquitta2007a,Misquitta2008b} 
+there is currently little literature consensus as how best to separate out and
+model the various physically-meaningful induction effects. Complicating matters further,
+even though the \sapt induction energy is purely a 2-body effect, the
+polarization model we develop based on the induction energy also defines
+the model for \emph{many}-body polarization, which accounts for a sizeable
+fraction of the total many-body energy discussed in \cref{sec:pointer-many_body}.
+Consequently, it is easily possible to obtain an induction model which shows good
+accuracy for dimer computations, but which leads to substantial inaccuracies
+in modeling larger clusters or bulk liquids.
+
+Improved induction models will certainly need to be the subject of future work,
+and are discussed further in \cref{ch:future}. In the meantime, below we present a summary of
+common induction models that can be used to fit \sapt-based force fields.
+
+\begin{paragraph}{Polarization}
+For reasonably isotropic systems, long-range polarization effects can be described
+either by a Drude oscillator model or via induced
+dipoles.\cite{Rick2002,Lopes2009} In practice, these models tend to be
+numerically similar, and we use them interchangeably in parameterization and
+simulation.\footnotemark{} \pointer uses a Drude oscillator model for the
+purposes of computing the polarization energy, and the Drude charges and
+associated spring constants are read in as input in the \verb|<monomer>.drude|
+file(s). These charges can be obtained using the methods described in
+\cref{sec:workflow-polarizabilities}, however note that these charges are
+sensitive to the choice of polarization damping model described below, and may
+need to be refit if either the functional form or parameters for the damping
+model are changed.
+
+For more anisotropic systems (such as water), higher-order polarizabilities
+have been shown to be important, and need to be included for best
+accuracy.\cite{Cisneros2016,Misquitta2008b,Misquitta2016,Welch2008}
+At present, however, higher-order polarizabilities have not been implemented
+in most common software packages, and we are currently exploring the use of
+off-site polarizabilities to describe highly anisotropic systems.
+\end{paragraph}
+
+\footnotetext{In specific, Drude oscillator models have been used
+historically in our group for their simplicity and ease of implementation.
+More recently, we have begun running our simulations with the induced dipole
+model in order to maintain compatibility with \openmm.}
+
+
+\begin{paragraph}{Polarization Damping}
+At short range, the induced dipole polarizabilities must be damped in order to
+avoid the so-called `polarization catastrophe', an effect in which nearby
+polarization sites mutually polarize each other to 
+infinite values. While there is widespread consensus as to the importance and
+necessity of including polarization damping, functional forms and parameters
+for the polarization damping vary widely.\cite{Cieplak2009,Lopes2009,Thole1981,Slipchenko2009,Wang2011}
+Thole-type damping functions\footnotemark are some of the more commonly used, and some
+effort has been put forth to compare between several similar damping functions
+and parameterization schemes.\cite{Wang2011,Wang2012,Liu2017}
+
+Historically,\cite{McDaniel2013} several members of our group have used an
+exponentially-decaying Thole function with an associated damping parameter of
+2.0.\cite{Yu2011} More recently, and due to software limitations in \openmm,
+we have taken to using the `Thole-tinker' model with a universal Thole damping
+parameter $a=0.33$, which is reasonably similar to the parameter used by the
+AMOEBA force field.\cite{VanVleet2017} These models can be changed in \pointer
+in the \verb|settings.py| file:
+\begin{lstlisting}[language=python]
+# Induction Settings: Choose the type and parameters for the polarization
+# damping functions. Options for thole_damping_type are 'thole_tinker' and
+# 'thole_exponential', and good defaults for thole_param are the 0.33 and 2.0 with
+# respect to the two different damping types
+# respectively
+thole_damping_type         =   'thole_tinker'
+thole_param                =    0.33
+\end{lstlisting}
+%
+Note that the choice of Thole damping parameter can be very important, as this
+modifies the relative balance between energies ascribed to polarization vs.
+charge transfer, in turn modifying the magnitude of the many-body
+polarization. In order to achieve a model that achieves the correct balance
+between polarization and other inductive effects, future work may need to
+involve some of the following advances:
+\begin{enumerate}
+\item Atomtype-specific Thole damping parameters
+\item New functional forms for polarization damping
+\item Explicit separation between the \sapt charge-transfer and polarization
+energies. Several schemes have already been proposed to achieve this decomposition,
+\cite{Bistoni2016,Misquitta2013,Horn2016b,Lao2016}
+and the various available schemes should be tested for their utility in force field
+development.
+\end{enumerate}
+\end{paragraph}
+
+\footnotetext{Be advised, most papers in the literature will simply state that a
+`Thole damping function' was used, but will not make explicit which of several
+different Thole-type damping functions was meant.}
+
+\begin{paragraph}{Charge transfer and inductive charge penetration}
+
+In addition to polarization damping, charge transfer and inductive charge
+penetration can become important at shorter intermolecular separations.
+Physically-motivated functional forms for these effects are generally lacking,
+though \citeauthor{Misquitta2013} has suggested a double exponential decay,
+and work in our own group has empirically found a single exponential decay
+(with \isa-derived exponents $B_i$) to be reasonably satisfactory.
+
+\end{paragraph}
+
+
+In summary, our current approach to modeling inductive effects include a sum
+over two contributions:
+%
+\begin{align}
+\vind_{ij} &= -\textcolor{fit}{\Aind{ij}} P(\B, r_{ij}) \exp(-\B r_{ij}) + \textcolor{mon}{\vdrudeind} \\
+\vdhf_{ij} &= -\textcolor{fit}{\Adhf{ij}} P(\B, r_{ij}) \exp(-\B r_{ij}) + \textcolor{mon}{\vdrudescf}
+\end{align}
+%
+The \sapt benchmark separates the induction energy into 2\super{nd}- and higher-order
+(i.e. \dhf) induction, and we fit the terms separately (Note that this expansion is in orders of perturbation theory,
+not in orders of the \acrlong{mbe}.)
+All parameters for the polarization model \vdrude are currently read in as hard
+constraints, and the \Aind{i}\/\Adhf{i} prefactors (which effectively accounts for both
+charge transfer and charge penetration) are explicitly fit by \pointer.
+

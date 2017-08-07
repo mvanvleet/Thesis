@@ -1,0 +1,59 @@
+Unlike with the exchange energy, the model for electrostatics must account for
+both the effects of multipolar interactions (at long-range) and charge
+penetration (at short-range):
+%
+\begin{align}
+\velst_{ij} &= -\textcolor{fit}{\Ael{ij}} P(\B, r_{ij}) \exp(-\B r_{ij}) + \vmultipolecolor
+\end{align}
+%
+\Ael{i} parameters are fit in a similar manner to the exchange energy, though
+it is not recommended to attempt to re-fit the $B_i$ parameters to the
+electrostatic energy. As for the multipole energy, in the simplest case (i.e.
+without off-sites) these
+parameters can simply be read in using the \verb|settings.py| file:
+%
+\begin{lstlisting}[language=python]
+# Electrostatic Settings: choose which multipole files the program should use
+multipoles_suffix          =   '_ISA-GRID_L2.mom'
+\end{lstlisting}
+%
+where the \verb|multipoles_suffix| should point to some file
+\verb|<monomer><multipoles_suffix>| in the \verb|input/| subdirectory.
+In general, an $L2$ model is a good accuracy benchmark, and it's often useful
+to compare the energies obtained from point-charge
+models to those achievable with the $L2$ model.
+
+\begin{paragraph}{Off-site models}
+When dealing with systems containing lone-pairs or other off-site multipoles,
+the following modifications are required:
+\begin{enumerate}
+\item Add the off-site positions to the .sapt file. Scripts for doing this are
+discussed in \cref{sec:workflow-dimer_parameters}.
+\item Modify the various monomer parameter files (located in the \verb|input/|
+subdirectory to reflect the newly-added off-site positions:
+    \begin{enumerate}
+    \item Add dispersion coefficients (usually all zero) to each
+            \verb|<monomer>.disp| file and for each atomtype
+    \item Add extra blocks to each \verb|<monomer>.exp| corresponding to the
+off-site positions. The .exp file(s) list exponents for each atom in the same
+order as the .sapt file, and the .exp and .sapt file orderings must match.
+Additionally, the off-site $B_i$ parameters must be set to a non-zero value to
+avoid numerical errors.
+    \item Add extra drude parameters to each off-site in the
+\verb|<monomer>.drude| file. Atom ordering is as in the .sapt file, and
+(assuming you do not want the off-sites to be polarizable) the drude charge
+parameters should be set to zero.
+    \item Assuming you do not wish short-range parameters to be fit to your
+off-site atoms, add the names of all off-site atomtypes to \verb|defaults.py|:
+\begin{lstlisting}[language=python]
+lone_pair_flags                     =  ['Du' , 'lp']
+\end{lstlisting}
+    \end{enumerate}
+\end{enumerate}
+%
+Energies between the off-site model and the (simpler) $L2$/$L0$ models should
+always be compared as a sanity check: if the errors in the offsite model are
+larger than the errors from the $L0$ model, this is usually a sign that
+something has gone wrong. 
+\end{paragraph}
+
