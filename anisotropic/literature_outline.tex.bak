@@ -1,0 +1,167 @@
+%auto-ignore
+Classical molecular simulations have become a standard tool in
+interpreting and predicting the chemistry of a wide host of systems ranging
+from simple liquids to complex materials and biomolecules. Such simulations
+always require, as input, a mathematical description of the
+system's $3N$-dimensional potential energy surface (PES). In principle, the
+PES for most chemical systems can accurately be determined 
+from one of several high-level electronic structure methods;
+\cite{CCSDT, some reviews on EST and AIMD}
+nevertheless, these types of calculations are computationally-intractable for
+studying both large systems and/or long timescales. Consequently, most
+molecular simulation today is performed with the aid of force fields,
+broadly defined as computationally-inexpensive, parameterized mathematical expressions that
+approximate the exact PES.
+
+Given the prevalence of force fields in molecular simulation, it becomes
+necessary to inquire: how successful are these force fields in enabling accurate and/or predictive
+molecular simulation? Unsurprisingly, the answer often depends on a variety of
+factors, particularly the choice of functional form (that is, mathematical
+expression), the parameterization method, and the nature(s) of the chemical
+interactions of study. 
+% TODO: Look up reviews that study force fields as a function of chemical
+% interaction
+(As a particularly poignant example of how functional form and parameter
+choice effects the quality of the resultant force field, one need look no
+further than the myriad water potentials, results of which have been
+summarized in \cite{Cisneros2016a}.)
+
+
+
+% Look up refs 7-- 10 from \cite{Kramer2014}
+% Look up refs 26-28 from \cite{Bartocci2015}
+% Look up refs (and check for follow-up work) 61-62 in \cite{Elking2010}
+
+============================================
+Previous work on anisotropic electrostatics:
+============================================
+Off-site point charges (representing lone pairs or otherwise):
+    How to place them, applications to acetone, methanol, methylamine, etc: \cite{Harder2006}
+    Using ELF to determine off-site locations: \cite{Chaudret2013}
+    Systematic investigation of improvements w/ off-site charges: \cite{Dixon1997}
+        Conclusion: adding off-sites improves results
+    Off-sites for halogens: \cite{Rendine2011}
+Multipoles, Gaussian or point-charge: 
+    AMOEBA, organochlorines: \cite{Mu2014}
+    AMOEBA, general: \cite{Ren2003,Shi2013}
+    GEM, theory: \cite{Cisneros2006}
+    GEM, theory pt. 2: \cite{Elking2010}
+    DMA, review: \cite{Stone2007}, \cite{Demerdash2014}
+    SIBFA: \cite{Chaudret2014a}
+    Example in water (SCME): \cite{Wikfeldt2013}
+    mDC DFTB2 model (QM/MM work): \cite{Giese2013}
+Importance of charge anisotropy for different functional groups
+    Systematic overview of different functional groups: \cite{Kramer2014}
+    In halogens (CX4, X=Cl, F) : \cite{Bartocci2015}
+    Sigma-hole bonding: \cite{Politzer2008}
+
+============================================
+Previous work on anisotropic polarizabilities:
+============================================
+Anisotropic drude oscillators \cite{Harder2006}
+Discussion of base stacking: \cite{Sponer2013}
+    Suggests that isotropic atom model might overestimate strength of base
+    stacking, leading to overstabilization of stacked arrangements in MD
+    simulations
+Off-site polarizabilities in SIBFA: \cite{Piquemal2007}
+
+============================================
+Previous work on anisotropic overlap effects:
+============================================
+Direct computation of (anisotropic) overlap integrals
+    GEM model for water: \cite{Duke2014a}
+    GEM, theory: \cite{Cisneros2006}
+    GEM, theory pt. 2: \cite{Elking2010}
+    SIBFA + GEM, application paper: \cite{Chaudret2014a}
+    SCDS, theory: \cite{Gavezzotti2003}
+        (model uses numerical integration, gets (with few parameters) results
+         very close to SAPT for a number of organic systems)
+Anisotropic Stone functional form:
+    Shape functions, review: \cite{Stone2007}
+Importance:
+    In halogens (CX4, X=Cl, F) : \cite{Bartocci2015}
+
+
+============================================
+Previous work on anisotropic VdW radii:
+============================================
+Discussion of 'anisotropy of vdW radii': \cite{Hagler2015} and refs therein
+Anisotropic VdW Radii, discussion from CSD
+    Interactions between halogens and O,N; also IMPT calculations: \cite{Lommerse1996}
+    Original Bondi Paper, assigned vdw radii and noticed that not all radii
+        are isotropic: \cite{Bondi1964}
+    Extension of Bondi's work, also notices anisotropy: \cite{Nyburg1985}
+    More anisotropy: \cite{Batsanov2001}
+    Anisotropic vdW radii in halogen bonding: \cite{Auffinger2004}
+    'Flattening Factors' for VdW Anisotropy: \cite{Eramian2013}
+Anisotropy, well-depth, experimental: \cite{Pack1978}
+Anisotropic VdW Radii, discussion from electronic structure theory
+    Natural steric analysis: \cite{Badenhoop1997a}
+    CCSD(T), SAPT on homonuclear diatomics interacting with themselves, ions, water, and benzene: \cite{Kim2014b}
+Gay-Berne potential (anisotropic LJ): \cite{Gay1981}
+
+
+============================================
+Previous work on anisotropic dispersion:
+============================================
+Generation of anisotropic dispersion coefficients, review: \cite{Stone2007}
+Importance of dispersion anisotropy:
+    in MM force fields: \cite{Zgarbova2010}
+    in describing base stacking: \cite{Sponer2013}
+QM description of pi systems: \cite{Krishtal2011}
+
+
+============================================
+Previous work on halogens:
+============================================
+AMOEBA, multipoles for organochlorine compounds: \cite{Mu2014}
+
+
+============================================
+Previous work on pi-stacking:
+============================================
+Difficulty in developing benzene models for standard force fields:
+\cite{Sherrill2009}
+    (Note: no discussion of anisotropy. Main complaint here is lack of charge
+        penetration)
+
+
+============================================
+History of work in Sally's group, Anthony's group, etc.
+============================================
+First anisotropic potential for the repulsive wall (cyanuric chloride): \cite{Mitchell2001}
+Review of anisotropic functional forms: \cite{Price2000}
+Modeling crystals wtih multipoles and polarizability: \cite{Price2010a}
+    No repulsion anisotropy here
+Anisotropic Atom-Atom Potentials: \cite{Stone1988}
+    "We shall argue that there is
+    theoretical and experimental evidence to show that the molecular
+    anisotropy cannot be represented adequately in terms of this sort
+    of superposition of spherical atoms, and we shall show how to
+    introduce anisotropy directly into the site-site interaction itself,
+    using the same orientation-dependent functions that are required
+    to describe the long-range forces."
+Modeling PAHs with anisotropic repulsion: \cite{Totton2010}
+ASP-W potential: \cite{Torheyden2006}
+    Gaussian overlaps for electrostatic charge penetration
+    Stone-form exchange
+    Higher-order polarizabilities
+    Multipole expansion dispersion
+
+
+
+
+Goal: add anisotropy (higher-order moments) to improve description of both the
+long-range and overlap regions.
+
+Split into two categories: long-range (1/R)^n distance dependence, and
+short-range (where overlap effects matter, and which decay exponentially)
+
+What does our work add that previous work hasn't accomplished?
+-- Add anisotropy to an 'ideal' (well, at least better than previous work)
+isotropic potential
+-- Address the general applicability of anisotropy for a diverse test set
+-- Concretely address the transferability question
+-- Provide an overall workflow for significantly improved anisotropic
+potentials
+

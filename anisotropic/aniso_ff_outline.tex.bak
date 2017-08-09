@@ -1,0 +1,195 @@
+%auto-ignore
+\documentclass[12pt,letterpaper]{article}
+\usepackage[margin=1in,bottom=1in]{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+
+\usepackage[journal=jacs]{chemstyle} %Other chemical formatting
+%\usepackage{chemscheme} % Chemical graphics
+%\usepackage{chemcompounds}
+\usepackage{caption}
+\usepackage{bpchem} % Chemical compounds
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{xspace}
+\usepackage{booktabs}
+\usepackage{pdflscape}
+\usepackage{tablefootnote}
+\usepackage[sort&compress,numbers,super]{natbib}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{nameref}
+\usepackage{xfrac}
+\usepackage{multirow}
+%\usepackage[inline]{showlabels}
+%\usepackage{achemso}
+% or letter or a5paper or ... etc
+%\geometry{landscape} % rotated page geometry
+
+% See the ``Article customise'' template for come common customizations
+\newcommand{\super}[1]{\textsuperscript{#1}}
+\newcommand{\sub}[1]{\textsubscript{#1}}
+\newcommand{\degC}{\ensuremath{{}^{\circ} \text C} \xspace}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch{#1}}}
+
+% Paper lingo
+\newcommand{\isa}{BS-ISA\xspace}
+\newcommand{\isaff}{Slater-ISA FF\xspace}
+\newcommand{\saptff}{Born-Mayer-IP FF\xspace}
+\newcommand{\sapt}{DFT-SAPT (PBE0/AC)\xspace}
+
+\newcommand{\mse}{\ensuremath{\lVert\text{MSE}\rVert}\xspace}
+
+
+%\renewcommand{\baselinestretch}{1.5}
+%
+%
+% \title{New angles on standard force fields: a completely general approach for describing lone pair effects and $\pi$-stacking}
+\title{New angles on standard force fields: a general approach for describing atomic-level anisotropy}
+\author{Mary Van Vleet, Alston Misquitta, JR Schmidt}
+%\date{April 23, 2015} % delete this line to display the current date
+
+\begin{document}
+\maketitle
+
+
+%\begin{abstract}
+%
+%\end{abstract}
+
+%%%%%%% Introduction %%%%%%%%%%%%%%%
+\onehalfspacing
+\begin{section}{To-Do List}
+\begin{enumerate}
+
+\item Run CO2 bulk simulations: density and enthalpy of vaporization
+\item Run Chloromethane bulk simulations: density and enthalpy of vaporization
+\item Water 2nd virials
+\item Ammonia 2nd virials
+\end{enumerate}
+\end{section}
+
+
+\begin{section}{To Discuss}
+\begin{enumerate}
+
+\item Which systems/simulations to include
+\item Names for each of the force fields
+\end{enumerate}
+\end{section}
+
+\newpage
+
+\begin{section}{Paper Outline}
+
+\begin{enumerate}
+\item Introduction
+    \begin{enumerate}
+    \item Importance of molecular simulation and force fields
+    \item General goals of force field development: accuracy, transferability, black-box development
+    \item Difficulties involved in treating systems with lone pairs
+        \begin{enumerate}
+        \item Standard water force fields as an example
+        \item Our potentials as an example: long-range anisotropy included, but short-range anisotropy of charge penetration neglected
+        \end{enumerate}
+    \item Difficulties involved in standard treatments of anisotropy
+        \begin{enumerate}
+        \item Off-sites: added cost, uncertainty (and difficulty in development) for where to place lone-pair sites
+        \item Potentials: Accurate, but expensive and non-transferable
+        \item Other literature examples of using anisotropy? (Mary: check Stone method, Alston's work, etc.)
+        \end{enumerate}
+    \item Goal: a generalizable treatment of a variety of effects arising from anisotropic electron densities
+    \end{enumerate}
+\item Motivation
+    \begin{enumerate}
+    \item Brief summary of previous JCTC 2016 work
+    \item What was missing from previous functional form? Bad assumption that the electron density is only a function of distance
+    \item Present new functional form (which includes s.r. anisotropy) as an ansatz
+        \begin{enumerate}
+        \item Motivate from approximate integrals of Slater functions (mentioned here, but fully discussed in an Appendix)
+        \item Motivate from Stone's S-functions
+        \end{enumerate}
+    \end{enumerate}
+\item Methodology
+    \begin{enumerate}
+    \item Brief summary of previous JCTC 2016 work
+    \item Determination of local axes
+    \item Simulation Protocols
+        \begin{enumerate}
+        \item 2nd virials
+        \item Simulations
+        \item Sublimation calculations
+        \end{enumerate}
+    \end{enumerate}
+\item Results
+    \begin{enumerate}
+    \item Overview
+          \begin{figure}
+          \includegraphics[width=0.9\textwidth]{figures/transferability_rmse_errors.pdf}  
+          \caption{Characteristic RMSE for the 91 dimer test set.}
+          \end{figure}
+          \begin{figure}
+          \includegraphics[width=0.9\textwidth]{figures/transferability_mae_errors.pdf}  
+          \caption{Characteristic \mse for the 91 dimer test set.}
+          \end{figure}
+          \clearpage
+    \item CO2 
+        \begin{enumerate}
+        \item CCSD(T) vs DFT-SAPT Force Fields
+          \begin{figure}
+          \includegraphics[width=0.9\textwidth]{figures/co2_ccsdt_ff_comparison.pdf}  
+          \caption{Comparison of isotropic vs. anisotropic force fields for
+CO2. Data fit to CCSD(T)-f12/avtz calculations.}
+          \end{figure}
+        \item Cuts of the PES
+        \item Dimer and Trimer minima
+        \item 2nd virials
+          \begin{figure}
+          \includegraphics[width=0.9\textwidth]{figures/co2_2nd_virial.pdf}  
+          \caption{2nd Virial for CO2 }
+          \end{figure}
+        \item Density
+        \item Enthalpy of Vaporization
+        \item Enthalpy of Sublimation
+        \end{enumerate}
+    \newpage
+    \item Chloromethane
+        \begin{enumerate}
+        \item Cut of the PES
+        \item Dimer and Trimer minima
+        \item 2nd virials
+        \item Density
+        \item Enthalpy of Vaporization
+        \end{enumerate}
+    \item Water
+        \begin{enumerate}
+        \item Cut of the PES
+        \item Dimer minima
+        \item 2nd virials
+        \end{enumerate}
+    \item NH3
+        \begin{enumerate}
+        \item Cut of the PES
+        \item Dimer minima
+        \item 2nd virials
+        \end{enumerate}
+    \end{enumerate}
+    
+\item Conclusions and Future Work
+\end{enumerate}
+
+
+\end{section}
+
+
+\singlespacing
+
+\renewcommand{\baselinestretch}{1}
+
+\bibliographystyle{achemso}
+\bibliography{/Users/Mary/Documents/library}
+%\bibliography{rp_extras}
+
+
+\end{document}

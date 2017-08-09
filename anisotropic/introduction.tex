@@ -1,0 +1,162 @@
+%auto-ignore
+Classical molecular simulation is a standard tool for
+interpreting and predicting the chemistry of an incredible host of systems ranging
+from simple liquids to complex materials and biomolecules. Such simulations
+always require, as input, a mathematical description of the
+system's potential energy surface (PES). In principle, the
+PES for most chemical systems can accurately be determined 
+from one of several high-level electronic structure methods;
+\cite{Rezac2016,Chalasinski2000,Jan2016}
+nevertheless, these calculations are currently too expensive to use
+in simulations of large systems and/or long timescales. 
+\cite{Hassanali2014}
+Consequently, most routine
+molecular simulation today is performed with the aid of force fields:
+computationally-inexpensive, parameterized mathematical expressions that
+approximate the exact PES. Because the accuracy and predictive capabilities of
+molecular simulation are directly tied to the underlying force
+field, one of the central challenges of molecular
+simulation is the development of highly accurate force fields. For ab initio
+force field development, this accuracy is 
+principally defined by a force field's fidelity to the underlying exact PES. 
+
+As of now, several common
+shortcomings\cite{Zgarbova2010} inhibit the accuracy and predictive capabilities of
+standard ab initio force fields, and these limitations must be systematically addressed
+in order to generate improved, `next-generation' force fields. One important
+shortcoming, which will be the focus of this Chapter, is the so-called
+`sum-of-spheres' approximation,\cite{Stone1988} in which it is assumed that the
+non-bonding interactions between molecules can be treated as a superposition
+of interactions between pairs of spherically-symmetric atoms.
+Put differently, the sum-of-spheres, or `isotropic atom-atom', approximation assumes that the 
+exact PES, \etot (which depends
+both on the center of mass distance $R$ and relative orientation $\Omega$ between molecules),
+can be modeled as
+\begin{align}
+\label{eq:sos_approx}
+\etot(R,\Omega) \approx \sum\limits_{ij} f(r_{ij}) \equiv \vtot,
+\end{align}
+where the above sum runs over all
+non-bonded pairs of atoms $i$ and $j$ with interatomic separation $r_{ij}$,
+and $f(r_{ij})$ is an arbitrary, distance-dependent function that defines the pairwise
+interaction.
+Here and throughout, we use $E$ to denote the true PES, and $V$ to denote the
+corresponding model/force field prediction. 
+With some exceptions (vida infra), nearly all standard intermolecular force
+fields ---
+ranging from the popular ``Lennard-Jones plus point charges'' model to more complex
+functional forms\cite{Schmidt2015}
+---
+explicitly make use of the isotropic atom-atom model.
+
+Notwithstanding the popularity of the model, there is good experimental and
+theoretical evidence to suggest that the sum-of-spheres approximation does not
+hold in practice.\cite{stone2013theory,Stone1988,Price2000} 
+Importantly, and as we argue in
+\cref{sec:results}, models which include anisotropic (multipolar) electrostatics, but
+otherwise employ the sum-of-spheres approximation, are an improved but
+\emph{still incomplete} model for
+describing the atomic-level anisotropy of intermolecular interactions.
+Experimentally, it has long been known that 
+atom-in-molecule charge densities, as determined from x-ray diffraction, can exhibit significant
+non-spherical features, such as with lone pair or $\pi$ electron
+densities.\cite{Coppens1979} Furthermore, statistical analyses of the
+Cambridge Structural Database 
+% cite this? is it the cambridge structural database or crystal structure
+% database?
+have shown that the the van der Waals radii of atoms-in-molecules (as measured
+from interatomic closest contact distances)
+are not isotropically
+distributed, but rather show strong orientation dependencies, particularly for
+halogens and other heteroatoms.
+\cite{Bondi1964,Nyburg1985,Batsanov2001,Auffinger2004,Lommerse1996,Eramian2013} 
+These experimental studies are corroborated by a significant body of
+theoretical research on both the anisotropy of the atomic van der Waals radii
+as well as the non-spherical features of the atomic charge densities themselves.
+\cite{Wheatley2012,Kramer2014,Lommerse1996, Badenhoop1997a,Kim2014b,Bankiewicz2012}
+These studies suggest
+that the sum-of-spheres approximation is an insufficiently
+flexible model for the subset of intermolecular interactions that arise from
+atomically non-spherical charge
+densities, and may help explain known difficulties in generating accurate
+isotropic atom-atom force fields for such important chemical interactions as 
+$\pi$-interactions,\cite{Chessari2002,Sponer2013,Sherrill2009}
+$\sigma$-bonding,\cite{Bartocci2015,Rendine2011,Politzer2008}
+and hydrogen bonding,\cite{Cisneros2016a}
+(see \citen{Cardamone2014} and references therein).
+
+Motivated by these observations,
+a small but important  body of work has been
+devoted to directly addressing the limitations of the isotropic atom-atom
+model in the context of `next-generation' force field development. As will be discussed in
+detail below (see \cref{sec:prior_work}), the general conclusion from these
+studies is that many components of intermolecular interactions
+(specifically electrostatics, exchange-repulsion, induction, and
+dispersion)
+can be more accurately modeled by functional forms that go beyond the
+sum-of-spheres approximation.
+\cite{Price2000,Hagler2015,Ren2003}
+While few intermolecular potentials (and virtually no standard force fields
+amenable to routine molecular simulation) explicitly account for atomic-level anisotropy
+for each component of intermolecular interactions, several recent standard force fields
+have incorporated atomic-level anisotropy into their description of 
+long-range electrostatics.\cite{Cardamone2014} Some of these potentials
+(notably AMOEBA\cite{Ponder2010,Ren2003,Shi2013} and some water
+potentials\cite{Cisneros2016a,Cardamone2014}) 
+are already employed in large-scale molecular simulation, often with very
+encouraging success.\cite{Cardamone2014}
+Furthermore, others have shown that anisotropic potentials (some of which additionally
+model the anisotropy of exchange-repulsion
+and/or dispersion) lead to significant improvements in predicting 
+molecular crystal structures.
+\cite{Cardamone2014,Price2010a,Day1999,Day2003,Price2008,Misquitta2016,Misquitta2008a}
+%TODO: Cite SIBFA and NEMO here?
+These and other results strongly 
+%% indicate that formulating a complete
+%% model for atomic-level anisotropy is 
+%% a promising strategy for the development of improved `next-generation' intermolecular force
+%% fields, and 
+suggest that a complete incorporation of atomic anistropy into next-generation
+force fields
+will lead to increasingly accurate and
+predictive molecular simulations in a wider variety of chemical interactions.
+\cite{Hagler2015}
+
+Given the
+importance of atomic-level anisotropy in defining intermolecular
+interactions,
+and the critical role that computationally-affordable standard force
+fields play in enabling molecular simulation, our present goal is to
+develop a general methodology for standard
+force field development that can both universally account for atomic-level anisotropy in all
+components of intermolecular interactions \emph{and} that can be routinely
+employed in large-scale molecular simulation. 
+Furthermore, and in line with our usual goals for force field
+development,\cite{Schmidt2015}
+our aim is to develop a first-principles-based model that is as accurate and transferable as possible, all while
+maintaining a simple, computationally-tractable functional form that allows
+for robust parameterization and avoids over-/under-fitting.
+Thus, building on prior work (both our own
+\cite{VanVleet2016,Schmidt2015,Misquitta2014,Stone2007} 
+and from other groups
+\cite{Price2000}),
+we present here a general ansatz for anisotropic force field development
+that, at minimal computational overhead, incorporates atomic-level anisotropy
+into all aspects of intermolecular interactions (electrostatics,
+exchange, induction, and dispersion) and that accounts for this anisotropy,
+not only in the asymptotic limit of large intermolecular separations, 
+but also in the region of non-negligible electron density
+overlap.
+After motivating and establishing the
+functional forms used in our anisotropic force fields, we next demonstrate,
+using a large library of dimer interactions between organic
+molecules, the excellent accuracy and transferability of these new force
+fields with respect to the reproduction of high-quality ab initio potential
+energy surfaces. Lastly, we showcase how these new force fields can be used
+in molecular simulation, and benchmark the
+accuracy of our models with regards to a variety of experimental properties. 
+The theory and results presented in this Chapter should be
+of general utility in improving the accuracy of (particularly ab initio
+generated) force fields, such that the complex, inherently anisotropic details of
+intermolecular interactions may eventually be routinely incorporated into
+increasingly rigorous and predictive molecular simulation.

@@ -1,0 +1,47 @@
+%auto-ignore
+We have presented a new methodology for describing short-range intermolecular
+interactions based upon a simple model of atom-in-molecule electron density
+overlap. The resulting \isaffold is a simple extension of the conventional
+Born-Mayer functional form, supplemented with atomic exponents determined from
+an ISA analysis of the molecular electron density. 
+In contrast to simple Born-Mayer or Lennard-Jones models, the \isaffold is capable of
+reproducing ab initio interaction energies over a wide range of inter-atomic
+distances, and displays
+extremely low sensitivity to the details of parameterization. Furthermore, the
+\isaffold exhibits excellent parameter transferability. We thus recommend
+\isaffold for use in the development of future ab initio (and possibly
+empirically-parameterized) potentials, particularly where accuracy across wide
+regions of the potential surface is paramount. 
+
+More generally, we find that analysis of the ISA densities provides an
+excellent first-principles procedure for the determination of atomic-density
+decay exponents.  This analysis improves upon existing approaches (which rely
+upon exponents derived from atomic radii or ionization
+potentials)\cite{Rappe1992, Mayo1990, Lim2009, VanDuin2001} and explicitly
+incorporates the influence of the molecular environment.  These exponents can
+be used within \isaffold without further parameterization.  Alternatively, in
+conjunction with an appropriate scale factor, the exponents can be used to
+enhance the accuracy of standard Born-Mayer potentials and/or Tang-Toennies
+damping functions. The resulting \bmsisaff retains many of the advantages of
+\isaffold, but also maintains compatibility with existing force fields and
+simulations packages that do not support the Slater functional form.  
+Given that the \bsisa exponents appear to be essentially
+optimal with respect to additional empirical optimization, we strongly
+recommend use of these first-principles exponents in order to simplify 
+(both ab initio and empirical) future force field development involving Born-Mayer
+or related functional forms.\cite{Gordon2006}
+
+Overall, \isaffold enables a significantly increase in force field accuracy,
+particularly in describing short intermolecular contacts. Nevertheless, the
+neglect of atomic anisotropy remains, in some cases, a severe approximation.
+\cite{Eramian2013, Badenhoop1997, Kim2014b}
+Indeed, it has been shown by many
+authors\cite{stone2013theory,Day2003,Totton2010a,Wheatley1990} that
+quantitatively accurate \A parameters (and to a lesser extent, \B parameters)
+require incorporation of angular dependence for the generation of
+highly-accurate force fields. This anisotropy becomes crucial when describing
+systems containing lone pairs, hydrogen bonds, and/or $\pi$-interactions.
+Promisingly, \bsisa densities naturally describe such anisotropy, 
+\cite{Wheatley2012,Misquitta2015a,Misquitta2015b}
+and a straightforward method for its inclusion (where essential) in
+ab initio force fields is the subject of \cref{ch:mastiff}.

@@ -1,0 +1,117 @@
+%% %\documentclass[12pt,letterpaper]{article}
+%% \documentclass[journal=jctcce,manuscript=article]{achemso}
+%% %\usepackage[margin=1in,bottom=1in]{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+%% 
+%% % Package imports
+%% %\usepackage[journal=jacs]{chemstyle} %Other chemical formatting
+%% %\usepackage{chemscheme} % Chemical graphics
+%% %\usepackage{chemcompounds}
+%% \usepackage{caption}
+%% \usepackage{bpchem} % Chemical compounds
+%% \usepackage{setspace}
+%% \usepackage{fullpage}
+%% \usepackage{graphicx}
+%% \usepackage{epstopdf}
+%% \usepackage{xspace}
+%% \usepackage{booktabs}
+%% \usepackage{pdflscape}
+%% \usepackage{tablefootnote}
+%% \usepackage[sort&compress,numbers,super]{natbib}
+%% \usepackage{amsmath}
+%% \usepackage{subcaption}
+%% \usepackage{nameref}
+%% \usepackage{xfrac}
+%% \usepackage{multirow}
+%% %\usepackage{authblk}
+%% 
+%% 
+%% % General shortcuts
+%% \newcommand{\super}[1]{\textsuperscript{#1}}
+%% \newcommand{\sub}[1]{\textsubscript{#1}}
+%% %\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+%% \usepackage[symbol,perpage]{footmisc}
+
+
+%% \newcommand{\ra}[1]{\renewcommand{\arraystretch{#1}}}
+%% \newcommand{\citeboth}[1]{\citeauthor{#1}\cite{#1}\xspace}
+%% \newcommand*{\citen}{}% generate error, if `\citen` is already in use
+%% \DeclareRobustCommand*{\citen}[1]{%
+%%   \begingroup
+%%     \romannumeral-`\x % remove space at the beginning of \setcitestyle
+%%     \setcitestyle{numbers}%
+%%     ref. \cite{#1}%
+%%   \endgroup
+%% }
+%% \newcommand*{\citens}{}% generate error, if `\citen` is already in use
+%% \DeclareRobustCommand*{\citens}[1]{%
+%%   \begingroup
+%%     \romannumeral-`\x % remove space at the beginning of \setcitestyle
+%%     \setcitestyle{numbers}%
+%%     refs. \cite{#1}%
+%%   \endgroup
+%% }
+%% 
+%% %eqref
+%% \usepackage{letltxmacro}
+%% \LetLtxMacro{\originaleqref}{\eqref}
+%% \renewcommand{\eqref}{eq.~\originaleqref}
+%% \newcommand{\Eqref}{Eq.~\originaleqref}
+
+%figref
+%% \newcommand{\figref}[1]{Figure~\ref{#1}}
+%% \newcommand{\tabref}[1]{Table~\ref{#1}}
+%% \newcommand{\secref}[1]{Section~\ref{#1}}
+
+
+% ISA-FF Paper lingo
+%\newcommand{\bsisa}{BS-ISA\xspace}
+%% \newcommand{\isaff}{Slater-ISA FF\xspace}
+%% \newcommand{\saptff}{Born-Mayer-IP FF\xspace}
+\newcommand{\bmsisaff}{Born-Mayer-sISA FF\xspace}
+%% \newcommand{\ljff}{LJ FF\xspace}
+%% \newcommand{\sapt}{DFT-SAPT (PBE0/AC)\xspace}
+%% \newcommand{\avtz}{aug-cc-pVTZ\xspace}
+%% \newcommand{\A}{\ensuremath{A_{ij}}\xspace}
+%% \newcommand{\B}{\ensuremath{B_{ij}}\xspace}
+%% \newcommand{\C}{\ensuremath{C_{ij,n}}\xspace}
+%% \newcommand{\R}{\ensuremath{r_{ij}}\xspace}
+%% 
+%% \newcommand{\dhf}{\ensuremath{\delta^{\text{HF}}}\xspace}
+%% 
+%% \newcommand{\Asr}[1]{\ensuremath{A^{\text{sr}}_{#1}}\xspace}
+%% \newcommand{\Aex}[1]{\ensuremath{A^{\text{exch}}_{#1}}\xspace}
+%% \newcommand{\Ael}[1]{\ensuremath{A^{\text{elst}}_{#1}}\xspace}
+%% \newcommand{\Apen}[1]{\ensuremath{A^{\text{pen}}_{#1}}\xspace}
+%% \newcommand{\Aind}[1]{\ensuremath{A^{\text{ind}}_{#1}}\xspace} % AJM Not ind,sr !!!
+%% \newcommand{\Adhf}[1]{\ensuremath{A^{\dhf}_{#1}}\xspace} % AJM Not ind,sr !!!
+%% 
+%% \newcommand{\Bisa}[1]{\ensuremath{B^{\text{ISA}}_{#1}}\xspace}
+%% \newcommand{\Bip}[1]{\ensuremath{B^{\text{IP}}_{#1}}\xspace}
+%% 
+%% \newcommand{\etot}{\ensuremath{E_{\text{int}}}\xspace}
+%% \newcommand{\erep}{\ensuremath{E^{\text{exch}}}\xspace}
+%% \newcommand{\eelst}{\ensuremath{E^{\text{elst}}}\xspace}
+%% \newcommand{\eind}{\ensuremath{E^{\text{ind}}}\xspace}
+%% \newcommand{\edhf}{\ensuremath{E^{\dhf}}\xspace}
+%% \newcommand{\edisp}{\ensuremath{E^{\text{disp}}}\xspace}
+%% 
+%% \newcommand{\vtot}{\ensuremath{V_{\text{FF}}}\xspace}
+%% \newcommand{\vrep}{\ensuremath{V^{\text{exch}}}\xspace}
+%% \newcommand{\vcp}{\ensuremath{V^{\text{pen}}}\xspace}
+%% \newcommand{\vsrind}{\ensuremath{V^{\text{ind,sr}}}\xspace}
+%% \newcommand{\vsrdisp}{\ensuremath{V^{\text{disp,sr}}}\xspace}
+%% \newcommand{\velst}{\ensuremath{V^{\text{elst}}}\xspace}
+%% \newcommand{\vind}{\ensuremath{V^{\text{ind}}}\xspace}
+%% \newcommand{\vdhf}{\ensuremath{V^{\dhf}}\xspace}
+%% \newcommand{\vdisp}{\ensuremath{V^{\text{disp}}}\xspace}
+%% \newcommand{\vlr}{\ensuremath{V_{lr}}\xspace}
+%% \newcommand{\vmultipole}{\ensuremath{\sum\limits_{tu}Q_t^iT_{tu}Q_u^j}\xspace}
+%% \newcommand{\vdrude}{\ensuremath{V_{\text{shell}}}\xspace}
+%% \newcommand{\vdrudeind}{\ensuremath{V_{\text{shell}}^{(2)}}\xspace}
+%% \newcommand{\vdrudescf}{\ensuremath{V_{\text{shell}}^{(3-\infty)}}\xspace}
+%% 
+%% \newcommand{\mse}{\ensuremath{\lVert\text{MSE}\rVert}\xspace}
+
+

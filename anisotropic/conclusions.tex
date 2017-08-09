@@ -1,0 +1,48 @@
+We have developed a comprehensive methodology for modeling 
+atomic-level anisotropy in standard intermolecular force fields. 
+By treating this anisotropy through a simple extension of
+standard isotropic force
+fields,\cite{VanVleet2016}
+%% and by accounting for this anisotropy in our models for each
+%% electrostatics, exchange-repulsion, induction, and dispersion,
+we have 
+successfully demonstrated how this computationally-efficient treatment of atomic-level anisotropy leads to
+significant improvements in models for intermolecular interactions.
+Critically, 
+and in contrast to popular assumption, we have shown how the accurate treatment of multipolar electrostatics 
+does not \emph{by itself} account for all energetically-important effects of
+atomic-level anisotropy.
+Rather, our results indicate that anisotropy may need to be included in the
+each electrostatic, exchange and dispersion terms in order to obtain intermolecular
+force fields of the highest quality.
+In the present study,
+and in agreement with the more quantitative metrics proposed by others,\cite{Wheatley2012,Kramer2014} 
+we have found
+a comprehensive model of atomic-level anisotropy to be particularly important for obtaining sub-\kjmolold
+accuracy for describing molecules with heteroatoms
+(particularly ones with exposed lone pairs), carbons in multiple
+bonding environments, and hydrogens bound to anisotropic heavy atoms. 
+Our new intermolecular `\mastiff' force fields show great promise, not only with
+respect to high-quality electronic structure benchmark energies, but also with
+respect to experimental property predictions.
+Importantly, \mastiff maintains high efficiency and transferability.
+and can easily be implemented in common software packages such as 
+OpenMM for use in condensed phase simulations.\cite{Eastman2013} 
+
+Despite the advances presented in this Chapter, several aspects of our force
+field methodology require further improvement, and will be the subject of
+ongoing research. In particular, an improved description of induction effects
+will become essential for accurate bulk simulations of highly polarizable
+molecules such as water.  We are now actively working to develop improved
+models that can describe both long-range anisotropic polarization and
+short-range polarization damping, as these aspects of the force field
+critically affect both the two- and many-body induction energies and
+can account for a sizable fraction of the total interaction energy in
+condensed phases.
+We anticipate that these improved models for induction will, in
+combination with an accurate description of three-body dispersion and
+exchange, yield a general approach to force field development that captures
+both the two- and many-body features of intermolecular interactions, in turn
+enabling highly accurate, `next-generation' force field development capable of
+simulating a wide array of phases and chemical environments.
+

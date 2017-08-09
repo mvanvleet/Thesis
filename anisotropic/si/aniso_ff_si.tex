@@ -1,0 +1,403 @@
+%% \documentclass[12pt,letterpaper]{article}
+%% \usepackage[margin=1in,bottom=1in]{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+%% 
+%% \usepackage{hyperref}
+%% \usepackage[journal=jacs]{chemstyle} %Other chemical formatting
+%% \usepackage{chemscheme} % Chemical graphics
+%% \usepackage{chemcompounds}
+%% \usepackage{caption}
+%% \usepackage{bpchem} % Chemical compounds
+%% \usepackage{setspace}
+%% \usepackage{fullpage}
+%% \usepackage{graphicx}
+%% \usepackage{xspace}
+%% \usepackage{booktabs}
+%% \usepackage{pdflscape}
+%% \usepackage[sort&compress,numbers,super]{natbib}
+%% \usepackage{bibentry}
+%% %\usepackage{xr}
+%% %\externaldocument{isa_ff}
+%% \usepackage{amsmath}
+%% \usepackage{longtable}
+%% \usepackage{xfrac}
+%% \usepackage{multirow}
+%% \usepackage{dcolumn}
+%% \usepackage{siunitx}
+%% \usepackage{subcaption}
+%% 
+%% %eqref
+%% \usepackage{letltxmacro}
+%% \LetLtxMacro{\originaleqref}{\eqref}
+%% \renewcommand{\eqref}{eq.~\originaleqref}
+%% \newcommand{\Eqref}{Eq.~\originaleqref}
+%% 
+%% %figref
+%% \newcommand{\figref}[1]{Figure~\ref{#1}}
+%% \newcommand{\tabref}[1]{Table~\ref{#1}}
+%% \newcommand{\secref}[1]{Section~\ref{#1}}
+%% 
+%% \newcommand{\super}[1]{\textsuperscript{#1}}
+%% \newcommand{\sub}[1]{\textsubscript{#1}}
+%% \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%% \newcommand{\ra}[1]{\renewcommand{\arraystretch{#1}}}
+%% \newcommand{\centercell}[1]{\multicolumn{1}{C}{#1}}
+%% 
+%% % Supplementary Information Labels
+%% \newcommand{\beginsupplement}{%
+%%         \setcounter{table}{0}
+%%         \renewcommand{\thetable}{S\arabic{table}}%
+%%         \setcounter{figure}{0}
+%%         \renewcommand{\thefigure}{S\arabic{figure}}%
+%%         \setcounter{section}{0}
+%%         \renewcommand{\thesection}{S\arabic{section}}%
+%%      }
+%% 
+%% \newcommand{\citeboth}[1]{\citeauthor{#1}\cite{#1}\xspace}
+%% \newcommand*{\citen}[1]{%
+%%   \begingroup
+%%     \romannumeral-`\x % remove space at the beginning of \setcitestyle
+%%     \setcitestyle{numbers}%
+%%     ref. \cite{#1}%
+%%   \endgroup   
+%% }
+%% 
+%% \hyphenation{homodimer}
+%% 
+%% 
+%% % ISA-FF Paper lingo
+%% 
+%% \newcommand{\co}{\BPChem{CO\_2}\xspace}
+%% \newcommand{\ho}{\BPChem{H\_2O}\xspace}
+%% \newcommand{\nh}{\BPChem{NH\_3}\xspace}
+%% \newcommand{\cl}{\BPChem{CH\_3Cl}\xspace}
+%% 
+%% 
+%% \newcommand{\isa}{BS-ISA\xspace}
+%% \newcommand{\isoff}{Iso-Iso FF\xspace}
+%% \newcommand{\isaff}{Aniso-Aniso FF\xspace}
+%% \newcommand{\mastiff}{MASTIFF\xspace}
+%% \newcommand{\saptff}{Born-Mayer-IP FF\xspace}
+%% \newcommand{\bmsisaff}{Born-Mayer-sISA FF\xspace}
+%% \newcommand{\ljff}{LJ FF\xspace}
+%% \newcommand{\sapt}{DFT-SAPT (PBE0/AC)\xspace}
+%% \newcommand{\avtz}{aug-cc-pVTZ\xspace}
+%% \newcommand{\A}{\ensuremath{A_{ij}}\xspace}
+%% \newcommand{\B}{\ensuremath{B_{ij}}\xspace}
+%% \newcommand{\C}{\ensuremath{C_{ij,n}}\xspace}
+%% \newcommand{\R}{\ensuremath{r_{ij}}\xspace}
+%% 
+%% \newcommand{\dhf}{\ensuremath{\delta^{\text{HF}}}\xspace}
+%% 
+%% \newcommand{\Asr}[1]{\ensuremath{A^{\text{sr}}_{#1}}\xspace}
+%% \newcommand{\Aex}[1]{\ensuremath{A^{\text{exch}}_{#1}}\xspace}
+%% \newcommand{\Ael}[1]{\ensuremath{A^{\text{elst}}_{#1}}\xspace}
+%% \newcommand{\Apen}[1]{\ensuremath{A^{\text{pen}}_{#1}}\xspace}
+%% \newcommand{\Aind}[1]{\ensuremath{A^{\text{ind}}_{#1}}\xspace} % AJM Not ind,sr !!!
+%% \newcommand{\Adhf}[1]{\ensuremath{A^{\dhf}_{#1}}\xspace} % AJM Not ind,sr !!!
+%% 
+%% \newcommand{\Bisa}[1]{\ensuremath{B^{\text{ISA}}_{#1}}\xspace}
+%% \newcommand{\Bip}[1]{\ensuremath{B^{\text{IP}}_{#1}}\xspace}
+%% 
+%% \newcommand{\etot}{\ensuremath{E_{\text{int}}}\xspace}
+%% \newcommand{\erep}{\ensuremath{E^{\text{exch}}}\xspace}
+%% \newcommand{\eelst}{\ensuremath{E^{\text{elst}}}\xspace}
+%% \newcommand{\eind}{\ensuremath{E^{\text{ind}}}\xspace}
+%% \newcommand{\edhf}{\ensuremath{E^{\dhf}}\xspace}
+%% \newcommand{\edisp}{\ensuremath{E^{\text{disp}}}\xspace}
+%% 
+%% \newcommand{\vtot}{\ensuremath{V_{\text{FF}}}\xspace}
+%% \newcommand{\vrep}{\ensuremath{V^{\text{exch}}}\xspace}
+%% \newcommand{\vcp}{\ensuremath{V^{\text{pen}}}\xspace}
+%% \newcommand{\vsrind}{\ensuremath{V^{\text{ind,sr}}}\xspace}
+%% \newcommand{\vsrdisp}{\ensuremath{V^{\text{disp,sr}}}\xspace}
+%% \newcommand{\velst}{\ensuremath{V^{\text{elst}}}\xspace}
+%% \newcommand{\vind}{\ensuremath{V^{\text{ind}}}\xspace}
+%% \newcommand{\vdhf}{\ensuremath{V^{\dhf}}\xspace}
+%% \newcommand{\vdisp}{\ensuremath{V^{\text{disp}}}\xspace}
+%% \newcommand{\vlr}{\ensuremath{V_{lr}}\xspace}
+%% \newcommand{\vmultipole}{\ensuremath{\sum\limits_{tu}Q_t^iT_{tu}Q_u^j}\xspace}
+%% \newcommand{\vdrude}{\ensuremath{V_{\text{shell}}}\xspace}
+%% \newcommand{\vdrudeind}{\ensuremath{V_{\text{shell}}^{(2)}}\xspace}
+%% \newcommand{\vdrudescf}{\ensuremath{V_{\text{shell}}^{(3-\infty)}}\xspace}
+%% 
+%% \newcommand{\mse}{\ensuremath{\lVert\text{MSE}\rVert}\xspace}
+%% 
+%% \title{\textbf{Supporting Information} \\ for \\
+%% `New angles on standard force fields: a general approach for incorporating
+%% atomic-level anisotropy'
+%% }
+%% \author{Mary J. Van Vleet, Alston J. Misquitta, J.R. Schmidt}
+%% %\date{April 23, 2015} % delete this line to display the current date
+%% 
+%% \begin{document}
+%% \beginsupplement
+%% \maketitle
+%% \tableofcontents
+%% 
+%% 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \onehalfspacing
+%% 
+%% \begin{section}{\mse Values}
+%% 
+%%     %%%%%%%%%%%% Average MSE %%%%%%%%%%%%%%%
+%%     \begin{figure}
+%%     \includegraphics[width=0.9\textwidth]{../rmse_comparisons/transferability_mae_errors.pdf}
+%%     \caption{
+%%     Characteristic \mse (as described in the main text) for the \isoff
+%% (purple), \isaff (orange), and \mastiff (green) over the 91
+%%     dimer test set. Terms and labels are as in the main text.
+%%             }
+%%     \label{fig:mse}
+%%     \end{figure}
+%%     %%%%%%%%%%%% Average MSE %%%%%%%%%%%%%%%
+%% 
+%% \end{section}
+%% \clearpage
+%% 
+%% 
+%% \begin{section}{Improvement Ratios}
+%% 
+%%     %%%%%%%%%%%% Average MSE %%%%%%%%%%%%%%%
+%%     \begin{table}
+%%     \includegraphics[width=0.8\textwidth]{all_error_ratios.pdf}
+%%     \caption{
+%% Improvement ratios (see main text) for all species in the 91 dimer test set.
+%%             }
+%%     \label{tab:all_ratios}
+%%     \end{table}
+%%     %%%%%%%%%%%% Average MSE %%%%%%%%%%%%%%%
+%% 
+%% \end{section}
+%% \clearpage
+%% 
+%% 
+%% 
+%% \begin{section}{Monomer Geometries}
+%% \label{sec:geometries}
+%% 
+%% Geometries for each molecule in the 91 dimer test set are listed below, in
+%% alphabetical order. Also listed are the relevant energies (highest occupied
+%% molecular orbital and ionization potential) for the asymptotic correction
+%% required in DFT-SAPT calculations of each molecule. All asymptotic corrections
+%% were performed at a PBE0/\avtz level of theory. Distances and energies are in
+%% a.u.
+%% 
+%% \scriptsize
+%% \input{monomer_geometries.tex}
+%% \normalsize
+%% 
+%% 
+%% \end{section}
+\begin{section}{Local Axis Definitions}
+\label{sec:mastiff-local_axis_defs}
+
+For each molecule in the 91 dimer test set, listed below are any atom types
+which have been treated anisotropically. For each anisotropic atom type, the
+approximate symmetry and all
+terms included in the spherical harmonic expansion are listed to the right of
+the atom type. Additionally, the local axis reference frame for each
+anisotropic atom type is
+defined in the Axes subsection using the z-then-x convention employed by
+AMOEBA and other potentials. The first column
+of the axes subsection denotes the index of the anisotropic atom (atom
+ordering as in \cref{sec:appendices-monomers}), and the second column denotes whether the
+z or x axis is being defined. For certain local symmetries, the
+choice of x-axis is unimportant, and so not every anisotropic atom type has a
+defined x-axis. 
+The remaining columns define the direction vector for the
+axis in terms of atomic indices. The first index (often
+the anisotropic atom itself) lists the start of the vector, and the endpoint
+of the vector is defined as the midpoint of all subsequently listed atoms.
+
+To use water as an example, the oxygen atom is treated anisotropically
+using a spherical harmonic expansion that includes y10, y20, and y22c terms
+(notation as in \citen{stone2013theory}). The z-axis points from the oxygen to
+the midpoint between the two hydrogens, and the xz plane (and subsequently the
+x-axis) is defined by one of
+the O--H bonds. 
+
+\input{anisotropic/si/local_axes.tex}
+
+\end{section}
+%% \clearpage
+%% \begin{section}{\mastiff Parameters and Fits}
+%% %\label{sec:mastiff-fits}
+%% 
+%% 
+%% \mastiff parameters for each homomonomeric dimer are given
+%% in the attached homodimer\_params.tgz file. Parameters for \isoff
+%% and/or \isaff can be made available upon request. For each dimer, multipole
+%% moments are listed in a .mom file, polarization parameters (thole damping
+%% parameters, spring constants, and drude charges) are found in the .param file, and all other
+%% parameters can be found in the fit\_exp\_coeffs\_unconstrained.out file. With the
+%% exception of anisotropy parameters, which are unitless, all parameters are in
+%% atomic units. 
+%% 
+%% homodimer\_params.tgz additionally contains fitting results for each
+%% homomonomeric species. Fitting results for \isaff and for heteromonomeric
+%% species can be made available upon request. For each dimer, geometries and
+%% DFT-SAPT results are given in the .sapt file, and both SAPT and \mastiff
+%% energies are listed (respectively, and in the same order as the .sapt file) for each energy
+%% component (as discussed in the main text) in a corresponding .dat file. 
+%% The energies in these .dat files correspond to the scatterplots shown in
+%% \secref{sec:homodimer_fits}. Once again, all quantities are in atomic units,
+%% with the exception that the energies in the .sapt file are in mH.
+%% 
+%% \end{section}
+%% \begin{section}{\mastiff-CC Parameters}
+%% 
+%% \mastiff-CC paramters for \co, \nh, \cl, and \ho are given (in a .xml format
+%% which can be read directly into OpenMM) in the attached
+%% mastiff-cc\_reference.tgz file. Aside from the \co force field, many-body
+%% effects have not been included/tested for the other \mastiff-CC force fields, and so
+%% caution is advised before using these potentials in bulk simulations. Any use of
+%% the \mastiff-CC potentials should reference this work and \citen{VanVleet2016}.
+%% 
+%% \end{section}
+\begin{section}{Homodimer Fits}
+\label{sec:mastiff-fits}
+
+    %%%%%%%% All Scatter %%%%%%%%%%
+    \begin{figure}
+    \begin{subfigure}{\textwidth}
+        \caption{Acetone Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/acetone_acetone_comparison.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Ar Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/ar_ar_comparison.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{Chloromethane Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/chloromethane_chloromethane_comparison.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{\co Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/co2_co2_comparison.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{Dimethyl Ether Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/dimethyl_ether_dimethyl_ether_comparison.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Ethane Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/ethane_ethane_comparison.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{Ethanol Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/ethanol_ethanol_comparison.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Ethene Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/ethene_ethene_comparison.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{\ho Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/h2o_h2o_comparison.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Methane Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/methane_methane_comparison.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{Methanol Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/methanol_methanol_comparison.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Methyl Amine Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/methyl_amine_methyl_amine_comparison.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{\nh Dimer}
+        \includegraphics[width=0.9\textwidth]{anisotropic/si/homodimer_figures/nh3_nh3_comparison.pdf}
+    \end{subfigure}
+    \caption{
+    Force field fits for each homomoneric systems using the \isoff (purple),
+\isaff (orange), and \mastiff (purple). 
+    Two views of the fit to the total energy are displayed along with
+    corresponding RMSE (aRMSE for the inset showing attractive configurations). 
+    The $y=x$ line (black) indicates perfect agreement between reference energies
+    and each force field, while shaded grey areas represent points within $\pm
+    1$ kJ/mol agreement of the benchmark. 
+     }
+    \label{fig:all-scatter}
+    \end{figure}
+    %%%%%%%% All Scatter %%%%%%%%%%
+
+\end{section}
+\clearpage
+
+%\begin{section}{\mastiff-CC energies for \co}
+%\begin{section}{2- and 3-body \mastiff-CC \BPChem{CO\_2} energies}
+\begin{section}{2- and 3-body \mastiff-CC \texorpdfstring{\co} {} energies}
+\label{sec:mastiff-co2_snapshots}
+
+    %%%%%%%%%%%% Average MSE %%%%%%%%%%%%%%%
+    \begin{figure}
+      \includegraphics[height=0.8\textwidth]{anisotropic/si/co2_snapshots/trimers_helmann/co2_trimer_comparison.pdf}
+        \caption{
+        Three-body interaction energies for \co as compared to the
+        \citeboth{Hellmann2017} database of
+        9401 reference trimer configurations computed at a CCSD(T) level of theory.
+                }
+    \label{fig:hellmann}
+    \end{figure}
+    %%%%%%%%%%%% Average MSE %%%%%%%%%%%%%%%
+
+    %%%%%%%%%%%% Average MSE %%%%%%%%%%%%%%%
+    \begin{figure}
+      \centering
+      \begin{minipage}[b]{0.4\textwidth}
+      \includegraphics[height=2\textwidth]{anisotropic/si/co2_snapshots/dimer_snapshot/co2_dimer_comparison.pdf}
+      \end{minipage}
+      \hfill
+      \begin{minipage}[b]{0.4\textwidth}
+      \includegraphics[height=2\textwidth]{anisotropic/si/co2_snapshots/trimers_snapshot/co2_trimer_comparison.pdf}
+      \end{minipage}
+        \caption{
+        Force field quality for \mastiff-CC in reproducing (left) two-body and
+(right) three-body \co interaction energies. The $y=x$ line (solid) and $\pm 1$
+kJ/mol boundaries (dashed lines) are shown for reference. All dimer/trimer configurations were 
+taken from a snapshot of \co liquid simulated using \mastiff-CC at 273.15 K and 100 bar.
+Reference energies are taken from the \citeboth{Kalugina2014} PES for the
+two-body energies, and the \citeboth{Hellmann2017} PES for the three-body
+energies. A total of 62,583 dimer configurations and 43,784 trimer
+configurations are represented in the two plots.
+                }
+    \label{fig:2b_3b_comparison}
+    \end{figure}
+    %%%%%%%%%%%% Average MSE %%%%%%%%%%%%%%%
+
+
+\end{section}
+%% \clearpage
+%% 
+%% \singlespacing
+%% 
+%% \renewcommand{\baselinestretch}{1}
+%% 
+%% \bibliographystyle{achemso}
+%% \bibliography{../library}
+%% %\bibliography{rp_extras}
+%% 
+%% 
+%% \end{document}

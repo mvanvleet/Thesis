@@ -1,0 +1,314 @@
+\begin{subsection}{The 91 Dimer Test Set}
+
+Our benchmarking procedures
+are the same as in \cref{ch:isaff},\cite{VanVleet2016}
+and we briefly summarize the relevant technical details. A full discussion of
+results and example calculations are presented in \cref{sec:results}.
+
+We have previously developed a large library of benchmark energies
+for interactions between the following 13 atomic and organic species: acetone, argon, ammonia, carbon dioxide,
+chloromethane, dimethyl ether, ethane, ethanol, ethene, methane, methanol,
+methyl amine, and water. Using these 13 monomers, we have generated a library of dimer interaction
+energies for each of the 91 possible unique dimer combinations (13 homomonomeric, 78
+heteromonomeric). For each of these dimer combinations, interaction energies were
+computed at a DFT-SAPT
+\cite{Misquitta2002,Misquitta2003,Misquitta2005,Heßelmann2005a,Podeszwa2006a,Heßelmann2002,Heßelmann2003,Heßelmann2002a,Jansen2001}
+level of theory for 1000 quasi-randomly chosen dimer configurations,
+representing 91,000 benchmark interaction energies in total. 
+As described below, parameters for a given force field methodology are then
+fit on a component-by-component basis to reproduce the benchmark DFT-SAPT energies. 
+
+\end{subsection}
+\begin{subsection}{Parameter Determination}
+
+We will present three types of force field fitting methodologies in this
+Chapter,
+termed \isoff, \isaff, and \anisoff (alternately referred to as \mastiff, as
+discussed below). The nomenclature of each
+name refers to, first, the isotropic/anisotropic treatment of multipolar
+electrostatics and, second, the isotropic/anisotropic treatment of dispersion
+and short-range effects. 
+All studied force fields
+use the following general functional form:
+%
+\begin{align}
+%
+\label{eq:ff_form}
+\vtot &= \sum\limits_{ij} \vrep_{ij} + \velst_{ij} + \vind_{ij} + \vdhf_{ij} +
+\vdisp_{ij} 
+\intertext{where}
+\begin{split}
+\label{eq:ff_details}
+\vrep_{ij} &= \Aex{ij} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) \\
+\velst_{ij} &= -\Ael{ij} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) + \vmultipole
+\\
+\vind_{ij} &= -\Aind{ij} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) + \vdrudeind \\
+\vdhf_{ij} &= -\Adhf{ij} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) +
+\vdrudescf \\
+\vdisp_{ij} &= - \Adisp{ij} \sum\limits_{n=3}^{6} f_{2n}(x) \frac{C_{ij,2n}}{r_{ij}^{2n}}
+\\
+P(B_{ij},r_{ij}) &= \frac13 (B_{ij} r_{ij})^2 + B_{ij} r_{ij} + 1 \\
+\A &= A_iA_j \\
+\B &= \sqrt{B_iB_j} \\
+\C &= \sqrt{C_{i,2n}C_{j,2n}} \\
+f_{2n}(x) &= 1 - e^{-x} \sum \limits_{k=0}^{2n} \frac{(x)^k}{k!} \\
+x &= B_{ij}r_{ij} - \frac{2 B_{ij}^2 r_{ij} + 3 B_{ij} }
+{ B_{ij}^2 r_{ij}^2 + 3 B_{ij} r_{ij} + 3} r_{ij}
+\end{split}
+\end{align}
+%
+For both \isoff and \isaff, $A_i$ is a fit parameter, and
+$\Adisp{ij} = 1$. For \isoff (our completely isotropic model), the multipole expansion
+\vmultipole is truncated to point charges, whereas \isaff and \mastiff both use a
+multipole
+expansion up to quadrupoles.
+Finally, for
+our anisotropic model, \mastiff, 
+each $A_i$ is treated as an orientation-dependent function, and is represented
+by the spherical harmonic
+expansion 
+\begin{align}
+\label{eq:v_aniso}
+\begin{split}
+A_{i}(\theta_i,\phi_i) &= 
+A_{i,\text{iso}}\big(1 + \aniso{} \big), \\
+\aniso{} &\equiv \sum\limits_{l>0,k} a_{i,lk}  C_{lk}(\theta_i,\phi_i)
+\end{split}
+\end{align}
+where $A_{i,\text{iso}}$ and $a_{i,lk}$ are fitted parameters with the
+exception that $A_{i,\text{iso}}^{\text{disp}} = 1$.
+
+%% %
+%% \begin{align}
+%% \label{eq:a_params}
+%% A_{i}(\theta_i,\phi_i) = A_{i,\text{iso}}\left(1 + \sum\limits_{l>0k} a_{i,lk}
+%% C_{lk}(\theta_i,\phi_i)\right)
+%% \end{align}
+%% %
+
+Because DFT-SAPT provides a physically-meaningful energy decomposition into electrostatic,
+exchange-repulsion, induction, and dispersion terms, parameters for each term in
+\cref{eq:ff_form} are directly fit to model the corresponding DFT-SAPT energy
+(see \citen{VanVleet2016} and references therein for details on the DFT-SAPT
+terminology): 
+%
+\begin{align}
+\begin{split}
+\vrep \approx \erep &\equiv E^{(1)}_{\text{exch}} \\
+\velst \approx \eelst &\equiv E^{(1)}_{\text{pol}} \\
+\vind \approx \eind &\equiv E^{(2)}_{\text{ind}} + E^{(2)}_{\text{ind-exch}} \\
+\vdhf \approx \edhf &\equiv \delta(\text{HF}) \\
+\vdisp \approx \edisp &\equiv E^{(2)}_{\text{disp}} + E^{(2)}_{\text{disp-exch}}.
+\end{split}
+\end{align}
+%
+Fitting parameters on a component-by-component basis helps ensure parameter
+transferability and minimizes reliance on error cancellation. Note that no
+parameters are fit to reproduce the total energy and that,
+because the DFT-SAPT energy decomposition is only calculated to second-order, 
+third- and higher-order terms (mostly consisting of higher-order induction)
+are estimated by \edhf.
+
+\begin{subsubsection}{Parameters Calculated from Monomer Properties}
+
+Of the parameters listed in \cref{eq:ff_details}, most do not need to be
+fit to the DFT-SAPT energies, but can instead be calculated directly on the
+basis of monomer electron densities. In particular, all multipolar
+coefficients, $Q$, polarizabilities (involved in the calculation of \vdrude),
+dispersion coefficients $C$, and atom-in-molecule exponents, $B^{\text{ISA}}$, are calculated in a manner nearly
+identical to \citen{VanVleet2016}. Note that, for our atom-in-molecule exponents, we tested
+the effects of treating $B^{\text{ISA}}$ both as a hard- and as a
+soft-constraint in the final force field fit. While the conclusions from this
+study are rather insensitive to this choice of constraint methodology, we have
+found that the overall force field quality is somewhat improved by
+relaxing the $B^{\text{ISA}}$ coefficients in the presence of a harmonic
+penalty function (technical details of which can be
+found in the Supporting Information of \citen{VanVleet2016}). The optimized $B$
+coefficients in this Chapter are always within 5--10\% of the calculated $B^{\text{ISA}}$
+coefficients from \cref{ch:isaff}, demonstrating the good accuracy of the $B^{\text{ISA}}$
+calculations themselves.
+
+As a second distinction from our prior work, and for reasons of compatibility
+with the OpenMM\cite{Eastman2013} software we use for all molecular dynamics
+simulations, here our molecular simulations use an induced
+dipole model to describe polarization effects.
+Numerical differences between this
+model and the drude model used previously are very minor.
+Additionally, the Thole-damping functions used in this Chapter follow
+the same functional form used in the AMOEBA model,\cite{Ren2003} with a damping
+parameter of 0.39. 
+
+\end{subsubsection}
+\begin{subsubsection}{Parameters Fit to Dimer Properties}
+
+In addition to the soft-constrained $B$ parameters, all other free parameters
+($A$ and $a$ parameters from \cref{eq:ff_form}
+and \cref{eq:v_aniso}) are fit to reproduce
+DFT-SAPT energies from the 91 dimer test set described above. For each dimer
+pair, 4-5 separate optimizations (for exchange, electrostatics, induction,
+\dhf, and, for \mastiff, dispersion) were carried out to minimize a weighted
+least-squares error, with the weighting function given by a Fermi-Dirac functional
+form,
+%
+\begin{align}
+\label{eq:weighting-function}
+w_i = \frac{1}{\exp(-E_i/kT) + 1},
+\end{align}
+%
+where $E_i$ is the reference energy and 
+the parameter $kT$, which sets the energy scale for the
+weighting function, is calculated from an estimate of the global minimum well
+depth, 
+$E_{\text{min}}$, such that
+$kT = 5.0 |E_{\text{min}}|$. 
+
+\end{subsubsection}
+\begin{subsubsection}{Local Axis Determination}
+
+Identically to AMOEBA and other force fields that incorporate some degree of
+atomic-level anisotropy,\cite{Ren2003,Day2003,Totton2010} we use a z-then-x
+convention to describe the relative orientation of atomic species. By design,
+the z-axis is chosen to lie parallel to the principal symmetry axis (or
+approximate local symmetry axis) of an atom
+in its molecular environment, and the xz-plane is similarly chosen to
+correspond to a secondary symmetry axis or plane. Based on the assigned symmetry
+of the local reference frame, many terms in the
+spherical expansion of \cref{eq:gij} can then be set to zero, minimizing the
+number of free parameters that need to be fit to a given atom type. 
+%TODO: Add to SI
+Representative local reference frames are shown for a few atom types in
+\cref{fig:local_axis}, and a complete listing of anisotropic atom types
+(along with their respective local reference frames and non-zero spherical
+harmonic expansion terms)
+are given in the \cref{sec:mastiff-local_axis_defs}.
+
+\end{subsubsection}
+\begin{subsubsection}{CCSD(T) Force Fields}
+
+DFT-SAPT is known to systematically underestimate the interaction energies of
+hydrogen-bonding compounds, and can also exhibit small but important errors
+for dispersion-dominated compounds.\cite{Parker2014} Consequently, for
+simulations involving \co, \cl, \nh, and \ho, we refit our SAPT-based force
+fields to reproduce benchmark supermolecular, counterpoise-corrected CCSD(T)-F12a/aVTZ
+calculations on the respective dimers. All calculations were performed using
+the Molpro 2012 software.\cite{MOLPRO} Fits were still performed on a
+component-by-component basis, with the energy of most components matching the
+DFT-SAPT calculations used in \cref{ch:isaff}.\cite{VanVleet2016} However, so that
+the total benchmark energy corresponded to the total interaction energy
+calculated by CCSD(T)-F12a/aVTZ, the difference between coupled-cluster and
+SAPT energies was added to the SAPT dispersion energy,
+%
+\begin{align}
+\begin{split}
+\vrep \approx \erep &\equiv E^{(1)}_{\text{exch}} \\
+\velst \approx \eelst &\equiv E^{(1)}_{\text{pol}} \\
+\vind \approx \eind &\equiv E^{(2)}_{\text{ind}} + E^{(2)}_{\text{ind-exch}} \\
+\vdhf \approx \edhf &\equiv \delta(\text{HF}) \\
+\vdisp \approx \edisp &\equiv E^{(2)}_{\text{disp}} +
+E^{(2)}_{\text{disp-exch}} + \delta(\text{CC}),
+\end{split}
+\end{align}
+%
+where $\delta(\text{CC}) \equiv E_{\text{int}}^{\text{CCSD(T)-F12a}} -
+E_{\text{int}}^{\text{DFT-SAPT\phantom{()}}}$.
+%
+
+In fitting these CCSD(T)-f12a-based force fields, and to account for small
+errors in the original SAPT dispersion energy, we somewhat relaxed the
+constraint that $\Adisp{} = 1$ for all atom types, and instead let $ 0.7 \le
+\Adisp{} \le 1.3$. This constraint relaxation led, in some cases, to modest
+improvements in the fitted potential.
+
+
+\end{subsubsection}
+
+\begin{subsubsection}{\co 3-body potential}
+For the \co dimer, we developed a three-body model to
+account for three-body dispersion effects. This three-body model is based on
+the three-body dispersion Axilrod-Teller-Muto (ATM) type model developed by \citeboth{Oakley2009a}. These
+authors fit the ATM term with the constraint that the total molecular $C_9$
+coefficient be 1970 a.u. Based on our own calculations using a CCSD/AVTZ
+level of theory,\cite{Korona2011} we have obtained an
+isotropic molecular $C_9$ coefficient of 2246 a.u.; consequently, a 1.13 universal
+scale factor was introduced to the Oakley potential so as to obtain dispersion
+energies in line with this new dispersion coefficient.
+\end{subsubsection}
+
+\end{subsection}
+
+%% \begin{subsection}{Comparison to Ab Initio Benchmarks}
+%% 
+%% As in previous work, root-mean-square (\rmse) and mean-signed errors (MSE),
+%% both with respect to the DFT-SAPT reference energies,
+%% were calculated for each methodology and for each dimer pair. Similarly,
+%% `attractive \rmse/MSE' (a\rmse/aMSE) were computed by only considering the
+%% subset of dimer configurations with net attractive total energies (as measured
+%% by DFT-SAPT). After taking the absolute value of the MSE values, the
+%% various error metrics were then averaged in the geometric mean sense to
+%% obtain one `characteristic' \rmse or \mse for the entire 91 dimer
+%% test set.
+%% 
+%% \end{subsection}
+\begin{subsection}{Simulation Protocols}
+
+
+
+\begin{subsubsection}{\deltahsub for \co}
+
+For \co, the molar enthalphy of sublimation was determined according to 
+%
+\begin{align}
+\begin{split}
+\deltahsub &= H_{\text{g}} - H_{\text{crys}}  \\
+           &= (U_{\text g} + PV_{\text g}) - (U_{\text{el,crystal,0K}} 
+                +\Delta U_{\text{el,crystal,0K}\to T_{\text{sub}}} + PV_{\text{crys}} + E_{\text{vib,crystal}}) \\
+           &\approx (RT) - \left(U_{\text{el,crystal,0K}} 
+                + \int_{0K}^{T_\text{sub}} C_p dT \quad + E_{\text{vib,crystal}}\right) \\
+\end{split}
+\end{align}
+%
+which assumes ideal gas behavior and $PV_{\text{g}} >> PV_{\text{crys}}$.
+For the crystal, an experimental measure of $C_p$ was obtained from \citen{Giauque1937} and numerically
+integrated to obtain a value $\Delta U_{\text{el,crystal,0K}\to
+T_{\text{sub}}} = 6.70 \kjmolold$. Theoretical measures of
+$E_{\text{vib,crystal}} \approx 2.24 - 2.6 \kjmolold$ were obtained from
+(respectively) \citen{Cervinka2017} and \citen{Heit2016a}, 
+and
+$U_{\text{el,crystal,0K}}$ was determined from the intermolecular force field
+using a unit cell geometry taken from experiment.\cite{Simon1980}
+
+\end{subsubsection}
+\begin{subsubsection}{Other \co Simulations}
+
+To determine the densities and enthalpies of vaporization used in this Chapter,
+simulations were run in OpenMM using NPT and NVT ensembles, respectively. After an
+equilibration period of at least 100ps, data was collected for a minimum of 500ps, and
+uncertainties were calculated using the block averaging method. Average densities
+were obtained directly from simulation, and 
+the molar enthalpy of vaporization for \co was determined from the following
+formula:
+%
+\begin{align}
+\begin{split}
+\deltahvap &= H_{\text{g}} - H_{\text{liq}} \\
+           &= U_{\text{g}} - U_{\text{liq}} + P(V_{\text{g}} - V_{\text{liq}})
+\end{split}
+\end{align}
+%
+Note that, at the state points studied, the ideal gas approximation is
+insufficiently accurate, and thus simulations were run for both the gas and
+liquid phases at experimentally-determined
+densities and pressures.\cite{Span1996}
+
+\end{subsubsection}
+\begin{subsubsection}{2\textsuperscript{nd} Virial Calculations}
+
+Classical second virial coefficients were calculated for \nh, \ho, \co,
+and \cl using rigid monomer geometries and following the procedure described in
+\citen{McDaniel2013}.
+
+
+\end{subsubsection}
+\end{subsection}
+
+

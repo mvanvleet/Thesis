@@ -1,0 +1,74 @@
+As shown elsewhere,\cite{Stone1978,Stone1984}
+an exact (under the ansatz of
+radial and angular separability) model for \gij is given by Stone's $\bar{S}$-functions, 
+which form a complete basis set for describing any scalar function which
+depends on the relative orientation
+between molecules, and are given (following Stone's
+notation\cite{stone2013theory}) by the formula
+% General s-function
+\begin{align}
+%
+\bar{S}^{k_1 k_2}_{l_1 l_2 j} = 
+i^{l_1 - l_2 -j}
+\begin{pmatrix} l_1 & l_2 & j \\ 0 & 0 & 0 \end{pmatrix}^{-1}
+\sum \limits_{m_1 m_2 m} 
+[D^{l_1}_{m_1 k_1}(\Omega_1)]^*
+[D^{l_2}_{m_2 k_2}(\Omega_2)]^*
+C_{lm}(\theta,\phi)
+\begin{pmatrix} l_1 & l_2 & j \\ m_1 & m_2 & m \end{pmatrix}.
+%
+\end{align}
+The general form of these $\bar{S}$-functions can be quite complicated, and
+involve both the Wigner $D$ rotation matrices and Wigner $3j$-symbols (quantities
+in parentheses) as well as the degree ($l_1$, $l_2$, and $j$) and order
+($m_1$, $m_2$, and $m$ for the global coordinate system, $k_1$ and $k_2$ for the
+various local coordinate systems) of the spherical harmonic tensors. Here
+subscripts reference either molecule 1 or molecule 2, and subscriptless
+quantities refer to the dimer as a whole.
+
+In order to obtain a functional form for the exchange-repulsion that is
+amenable to simple combination rules (a necessary prerequisite for
+transferable potentials), we must somehow be able to separate \gij into monomer
+contributions. Unfortunately, many of the \sfunc depend on the relative
+orientation of the dimer itself, and thus must be excluded in the development
+of \emph{transferable} potentials.
+Thus as a second ansatz (empirically validated by us in \cref{sec:results} and by
+others\cite{Millot1992})
+we neglect all contributions from \sfunc that depend
+on both local coordinate systems. This leaves us with two sets of \sfunc, namely
+%
+\begin{align}
+\bar{S}^{k0}_{l0l} = C_{lk}(\theta_i,\phi_i)
+\end{align}
+%
+and
+%
+\begin{align}
+\bar{S}^{0k}_{0ll} = C_{lk}(\theta_j,\phi_j)
+\end{align}
+%
+which are simply the renormalized spherical harmonics (\cref{eq:sph_harm})
+expressed in each of the two local coordinate systems.
+
+Given our truncated expressions for the \sfunc, we now need only extend our
+functional form for \fij to incorporate these anisotropic contributions.
+We choose, in a manner analogous to literature precedent,
+\cite{Stone2007,Mitchell2001,Price2000,Stone1988,Day2003,Torheyden2006,Totton2010,Misquitta2016,Price2010a}
+to expand the \Aex{i} and \Aex{j} parameters of \cref{eq:aij} in terms of a truncated
+expansion of \sfunc. 
+(In principle, we could also account for anisotropy in the \B parameters of
+our model for \fij. However, previous literature suggests that in practice this `hardness'
+parameter can often be treated as constant, and we also neglect its possible
+anisotropy in this Chapter.) 
+Consequently, all short-range anisotropies are modeled in this Chapter
+by the expressions given in \cref{eq:gij} and \cref{eq:vex}.
+
+%% Finally, and as with exchange-repulsion, molecular anisotropic long-range
+%% dispersion coefficients can be determined from an \sfunc expansion of the form
+%% %
+%% \begin{align}
+%% \vdisp = - \sum\limits_{l_A l'_A l_B l'_B}
+%%            \sum\limits_{L_A L_B J K_A K_B}
+%%             \bar{C}_n(L_A L_B J; K_A K_B)R^{-n} S^{K_A K_B}_{L_A L_B J}
+%% \end{align} 
+%% %

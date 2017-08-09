@@ -1,0 +1,117 @@
+%auto-ignore
+Molecular simulation is an essential tool for interpreting and predicting
+the structure, thermodynamics, and dynamics of chemical and
+biochemical systems.  The fundamental inputs into these simulations are the
+intra- and intermolecular force fields, which provide simple and
+computationally efficient descriptions of molecular interactions.
+Consequently, the predictive and explanatory power of molecular simulations
+depends on the fidelity of the force field to the underlying (exact) potential
+energy surface.
+
+In the case of intermolecular interactions, the dominant contributions for
+non-reactive systems can be decomposed into the following
+physically-meaningful
+energy components: electrostatic, exchange-repulsion, induction and dispersion. 
+\cite{stone2013theory,margenau1969theory,Riley2010,Stone2007,Dykstra2000}
+At large intermolecular distances, where monomer electron overlap can be
+neglected, the physics of intermolecular interactions can be described
+entirely on the basis of monomer properties (e.g. multipole moments,
+polarizabilities), all of which can be calculated with high accuracy from
+first principles. 
+\cite{Stone1984}
+In conjunction with associated distribution schemes that decompose 
+molecular monomer properties into atomic contributions,
+\cite{stone2013theory,Stone2007,Williams2003,Misquitta2006,Dehez2001,Stone2005,Misquitta2014}
+these monomer properties lead to an accurate and computationally efficient
+model of `long-range' intermolecular interactions as a sum of atom-atom terms, which
+can be straightforwardly included in common molecular simulation packages.
+
+At shorter separations, where the molecular electron density
+overlap cannot be neglected, the asymptotic description of
+intermolecular interactions breaks down due to the influence of Pauli
+repulsion, charge penetration and charge transfer.  These effects
+can be quantitatively described using modern electronic
+structure methods,\cite{Riley2010,Jeziorski1994,Szalewicz2012,Raghavachari1989,Grimme2011} 
+but are far more challenging to model accurately using computationally
+inexpensive force fields.
+For efficiency and ease of parameterization, most simple force fields use a single
+`repulsive' term to model the cumulative influence of (chemically distinct)
+short-range interactions. 
+These simple models have seen comparatively little progress over the past
+eighty years, and the Lennard-Jones\cite{Lennard-Jones1931} (${A}/{r^{12}}$)
+and Born-Mayer \cite{Born1932,Buckingham1938}
+($A\exp(-Br)$) forms continue as popular descriptions of
+short-range effects in standard force fields despite some well-known
+limitations (\emph{vide infra}).  
+
+Because the prediction of physical and chemical properties depends on
+the choice of short-range interaction model,
+\cite{Nezbeda2005,
+Galliero2008,Gordon2006,Ruckenstein1997,Galliero2007,Wu2000,Errington1998,McGrath2010,
+Parker2015,Sherrill2009,Zgarbova2010,
+Bastea2003,Errington1999,Ross1980}
+it is essential to develop sufficiently accurate short-range force fields.
+This is particularly true in the case of ab initio force field development.
+A principle goal
+of such a first-principles approach is the reproduction of a calculated
+potential energy surface (PES), thus (ideally) yielding accurate predictions
+of bulk properties.
+\cite{Schmidt2015}
+ Substantial deviations between a fitted and calculated PES
+lead to non-trivial challenges in the parameterization process, which
+in turn can often degrade the quality of property predictions.
+The challenge of reproducing an ab initio PES becomes particularly
+pronounced at short inter-molecular separations, where many common force field
+functional forms are insufficiently accurate.  For example, the popular
+Lennard-Jones ($A/{r^{12}}$) functional form is well-known to be substantially
+too repulsive at short contacts as compared to the exact
+potential.
+\cite{Abrahamson1963,Mackerell2004,Parker2015,Sherrill2009,Zgarbova2010}
+While the Born-Mayer ($A\exp(-Br)$) functional form is more
+physically-justified\cite{Buckingham1938} and fares
+better in this regard,\cite{Abrahamson1963} substantial deviations often
+persist.\cite{Halgren1992} In addition, parameterization of the Born-Mayer form
+is complicated by the strong coupling of the pre-exponential ($A$) and exponent
+($B$) parameters, hindering the transferability of the resulting force field.
+These considerations, along with the observed sensitivity of
+structural and dynamic properties to the treatment of short-range
+repulsion,\cite{Nezbeda2005} highlight the need for new approaches
+to model short-range repulsive interactions.
+
+Our primary goal in this Chapter is to derive a simple and accurate description
+of short-range interactions in molecular systems that improves upon both the
+standard Lennard-Jones and Born-Mayer potentials in terms of accuracy,
+transferability, and ease of parameterization. Our focus is on ab
+initio force field development, and thus we will use the
+fidelity of a given force field with respect to an accurate ab initio PES as a
+principle metric of force field quality. We note
+that other metrics may be more appropriate for the development of empirical
+potentials, where Lennard-Jones or Born-Mayer forms may yield highly accurate
+`effective' potentials when parameterized against select bulk properties.
+Nonetheless, we anticipate that the models proposed in this Chapter may prove
+useful for empirical force field development in cases where a more
+physically-motivated functional form is necessary.
+\cite{Parker2015,Sherrill2009,Zgarbova2010}
+
+The outline of this Chapter is thus as follows: first, we derive a new functional form
+capable of describing short-range repulsion from first principles, and show how the
+standard Born-Mayer form follows as an approximation to this more exact model.
+Our generalization of the Born-Mayer functional form allows for an
+improved description of a variety of short-range effects,
+namely electrostatic charge penetration, exchange-repulsion, and density
+overlap effects on induction and dispersion. Crucially, we also demonstrate how the associated
+atomic exponents can be extracted from
+first-principles monomer charge densities via an iterated stockholder atoms
+(ISA) density partitioning scheme, thereby reducing the number of required
+fitting parameters compared to the Born-Mayer model.
+Benchmarking this `Slater-ISA' methodology (functional form and atomic
+exponents) against high-level ab initio
+calculations and experiment, we find that the approach exhibits increased
+accuracy, transferability, and robustness as compared to a typical
+Lennard-Jones or Born-Mayer potential.
+In addition, we show how the ISA-derived exponents
+can be adapted for use within the standard Born-Mayer form (Born-Mayer-sISA),
+while still retaining retaining many of the advantages of the Slater-ISA
+approach. As such, our methodology also offers an opportunity to dramatically
+simplify the development of both empirically-parameterized and ab initio
+simulation potentials based upon the standard Born-Mayer form.
