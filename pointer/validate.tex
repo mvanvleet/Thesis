@@ -10,7 +10,7 @@ to those that require additional computations.
 
 Once the \pointer code has been successfully run, the resulting force fields
 should always be visualized, possibly with the aid of the included
-visualization scripts:
+visualization scripts,
 
 \begin{lstlisting}
 plot_compare_sapt_components.py -p <file_prefix> -s <file_suffix>'.dat' --display
@@ -21,7 +21,9 @@ where additional visualization options are available by inserting the \verb|-h|
 flag into the function call for either script. Such visualizations are shown,
 using the pyridine dimer as an example, in
 \cref{fig:pointer-pyridine_fits,fig:pointer-pyridine_errors}, and additional
-visuals for water and other molecules are shown in \cref{sec:mastiff-fits}.
+visuals for water and other molecules are shown in
+\cref{fig:pointer-water_fits,fig:pointer-water_errors,fig:pointer-asymptotic_water_fits,sec:mastiff-fits},
+rspectively.
 
 % \begin{landscape}
 \begin{figure}
@@ -79,8 +81,8 @@ are easily possible when developing isotropic force fields. Even more
 important than this precision, we must ensure that \emph{on average} the force
 field energies are accurate in the minimum energy region. Any systematic
 errors in the force field will have a pronounced effect on simulation quality,
-particularly for studying bulk properties (as these primarily depend on system
-energy averages). 
+particularly for studying bulk properties, as many properties depend only on
+the average of system energy. 
 
 \cref{fig:pointer-pyridine_errors,fig:pointer-water_errors} show errors in the minimum
 energy region for both pyridine and water, and serve as illustrative examples.
@@ -89,7 +91,7 @@ degrade simulation quality and be the focus of future improvement.
 
 In the case of pyridine, the force field fit shows fairly little systematic
 error, and could probably be used to simulate bulk properties without issue.
-Random errors on the order of \kjmol(0.5--1.0) are typical for this force
+Random errors on the order of \kjmol{0.5--1.0} are typical for this force
 field, which may or may not be an issue depending on the desired accuracy
 level and types of simulations one intends to run. 
 (A few outliers show large errors compared to the
@@ -102,10 +104,10 @@ the force field on a component-by-component basis. \cref{fig:pointer-pyridine_er
 shows how errors in the exchange component dominate the overall
 error, and should be the first target for improvement. Since the exchange energy
 only depends on a short-range exponential decay, this error could possibly be
-mitigated by increasing the number of atomtypes (right now this force field
-only has three atomtypes) or by including anisotropy on additional atomtypes
-(right now the potential only includes anisotropy on the nitrogen atom, though
-anisotropy in the carbon atoms is almost certainly important).
+mitigated by increasing the number of atomtypes (as shown, this force field
+only has three atomtypes) or by including anisotropy on additional atomtypes,
+as this potential only includes anisotropy on the nitrogen atom, and neglects
+possibly-important anisotropies in the carbon atoms.
 
 As for water, we see relatively little random error in the force field
 (especially compared to the more isotropic models discussed in
@@ -113,18 +115,18 @@ As for water, we see relatively little random error in the force field
 to the exchange energy. In contrast to pyridine, however, we see some evidence
 for systematic error in the water potential near the minimum energy
 configurations. (Indeed, after testing our water force field against the
-larger CC-pol database,\cite{Babin2013} we've again found evidence for
+larger CC-pol database,\cite{Babin2013} we continued to find evidence for
 overly-repulsive predictions in the minimum energy region.) This systematic
 error, small as it may seem, is exacerbated in modeling larger clusters (vida
 infra), and would need to be fixed before we could expect good success with
-this force field in general water simulations. Looking at the errors on a
+this force field in general simulations involving water. Looking at the errors on a
 component-by-component basis, we can see that systematic errors in the potential
 are heavily correlated with errors in the induction energy, making this
 induction energy the most important target for improved modeling. As will be
 discussed in \cref{ch:future}, improving our polarization model (both in terms
 of the polarization damping and the long-range polarizabilities themselves)
 will hopefully serve to reduce these systematic errors and improve the overall
-quality of our water force field.
+quality of force fields for strongly polarizable molecules.
 
 \end{paragraph}
 
@@ -150,17 +152,19 @@ optimal scaling values for the dispersion coefficients (see
 \end{subsection}
 \begin{subsection}{Validation}
 
-\begin{paragraph}{Trimer Configurations}
+\begin{paragraph}{Trimer and Other Cluster Interaction Energies}
 
 Currently, it is hard to guarantee that our polarization models will
 correctly describe both the two- and three-body polarization energies. In
 order to validate the many-body portion of the potential, trimer
-energies should be computed for a subset of energetically-important configurations
+interaction energies should be computed for a subset of energetically-important configurations
 (preferably those taken from simulation) and compared to an accurate
 electronic structure benchmark. These validation studies are especially
 critical for highly-polar systems (such as water), as in these cases the
 many-body polarization energy can account for a non-negligable fraction of the
-total system energy.
+total system energy. For such polar systems, it can also be important to study
+the interactions of larger clusters in order to probe four-body and higher
+interactions.\cite{Medders2015a,Cisneros2016,Medders2013}
 
 \end{paragraph}
 

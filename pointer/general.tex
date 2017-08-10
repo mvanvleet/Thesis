@@ -1,14 +1,14 @@
-In conjunction with the \pointer software, we can finally turn to one of the
+In conjunction with the \pointer software, we can finally turn to the
 main topics of interest in this Chapter: how can we accurately and
-systematically develop intermolecular force fields? To use
-\citeauthor{Halgren1995}'s terminology, with our \sapt-based force fields,
-select aspects of the development process remain an `art', and are thus
-usually guided by chemical intuition, whereas other aspects of force field
+systematically develop intermolecular force fields? As discussed earlier,
+with \mastiff
+some aspects of the force field development process remain an `art', and are thus
+usually guided by chemical intuition, whereas increasingly more aspects of force field
 fitting now can be carried out in a systematic and reasonably black-box manner. Here
 we offer an in-depth analysis of the force field development process for
-\sapt-based force fields, paying
+\mastiff and related force fields, paying
 specific attention to addressing both the `artistic' and `scientific' choices
-that must be made when developing force fields for new systems. 
+that must be made when developing models for new systems. 
 
 \begin{figure}
 \centering
@@ -19,16 +19,17 @@ that must be made when developing force fields for new systems.
 
 \begin{subsection}{General}
 
-In general, a large number of choices must be made prior to force field
+In general, a large number of development choices must be made prior to force field
 fitting: which benchmark energies to use, how to sample the dimer \pes, which
 parameters to treat as hard constraints, etc. While some of these choices have
-been discussed in \cref{ch:workflow}, the following considerations also apply:
+been discussed in \cref{ch:workflow}, the following considerations also bear
+mention:
 
 \begin{paragraph}{Atom-typing}
 In developing force fields for new systems (specifically with regards to the \mastiff approach, though
 many of the principles below apply generally to other ab initio force fields),
-an initial choice must be made as to how to sort each atom into a so-called
-`atomtype', where by definition all atoms within the same \atomtype share the
+an initial choice must be made as to how to categorize each atom into 
+`atomtypes', where by definition all atoms within the same \atomtype share the
 same force field functional form and parameters. In some cases, such as with
 water, atomtyping is a fairly obvious decision, and it is easy to see how two
 unique types should be used to describe the system. With other molecules
@@ -48,17 +49,10 @@ systems to ensure good accuracy and transferability.
 \begin{paragraph}{Anisotropy}
 With the \mastiff approach, each atomtype can be treated as being either
 isotropic or anisotropic, and for anisotropic atoms an arbitrary number of
-spherical harmonic terms can be, in principle, included. These spherical
+spherical harmonic terms can be, in principle, included in the functional form. These spherical
 harmonic expansions are always calculated with respect to a user-defined local
 atomic coordinate system, and this coordinate system should be chosen so as to
 maximize the symmetry (or approximate symmetry) of the system (vida infra).
-
-For most atomtypes (see \cref{ch:mastiff} for details), an isotropic description of the system is
-sufficient, and so anisotropy should typically only be necessary for
-atomtypes corresponding or spatially proximate to heteroatoms and/or multiple
-bonding environments. Still, it is always worthwhile to explicitly test the effects of treating
-different atoms anisotropically via comparison to the \sapt exchange energy
-(see \cref{sec:pointer-exchange} for details). 
 
 For anisotropic atomtypes, in addition to specifying a local coordinate system
 it is necessary to specify the ranks and orders of included spherical harmonic
@@ -71,6 +65,14 @@ instabilities, and so only symmetry-allowed spherical harmonics (based on the
 local coordinate system) should be included.  With the \pointer code, these
 specifications for anisotropy are listed in the .axes file, with notation as
 in \cref{lst:pointer-axes}. 
+
+For most atomtypes (see \cref{ch:mastiff} for details), an isotropic description of the system is
+sufficient, and so anisotropy should typically only be necessary for
+atomtypes corresponding or spatially proximate to heteroatoms and/or multiple
+bonding environments. Still, it is always worthwhile to explicitly test the effects of treating
+different atoms anisotropically via comparison to the \sapt exchange energy
+(see \cref{sec:pointer-exchange} for details). 
+
 \end{paragraph}
 
 \begin{paragraph}{Benchmark Energies and Correction Factors}
@@ -81,7 +83,7 @@ development, and have suggested strategies for improvement in these cases.
 For most systems, however, a \sapt-based decomposition will be of good
 accuracy, and any deviations between \sapt and gold-standard \ccsdt can be accounted for using a \dccsdt correction
 term as in \cref{ch:mastiff}.
-Preliminary results on \co, \cl, \ch, and \nh suggest that this \dccsdt term
+Preliminary results on \co, \cl, \ho, and \nh suggest that this \dccsdt term
 should be included as part of the dispersion energy (see \cref{sec:pointer-dispersion}), however
 more systems should be tested to see if this practice is appropriate for
 general force field development.

@@ -3,57 +3,144 @@ The challenge for current and future work on force-field development is to
 improve the form of the potential energy function, to improve the methodology
 used in determining the potential energy parameters, and to use these
 advances to generate improved potential energy functions.
-\dots That these force fields differ substantially in form and in manner of
+[\dots] That these force fields differ substantially in form and in manner of
 derivation serves to emphasize that force field development is still as much a
 matter of art as of science. Someday, consensus on the form and manner of
 parameterization of molecular force fields may exist, but for now much remains
 to be learned.
---- \citeauthor{Halgren1995}
+\\ \phantom{abc} \hfill
+--- TA \citeauthor{Halgren1995}, \citeyear{Halgren1995}, adapted from \citen{Halgren1995}
 \end{quote}
 
-
-
-Thus far, our focus has primarily been on addressing 
-the following fundamental (and occasionally practical) issues related to ab-initio intermolecular force field development:
-\begin{enumerate}
-\item What functional forms should we use to optimally describe two-body
-intermolecular interactions? 
-(\cref{ch:isaff,ch:mastiff})
-\item How can we obtain accurate parameters for the two-body force field?
-(\cref{ch:isaff,ch:mastiff,ch:workflow})
-\item What benchmark \pes should we use in the fitting process, and how should
-it be sampled?
-(\cref{ch:lmoeda,ch:workflow})
-\end{enumerate}
-Building on these theoretical advances, we turn now our discussion to bear on
-a much
-more practical set of questions: using currently available techniques and softwares,
-how can we optimally develop intermolecular force fields for simulating
-arbitrary $N$ body systems?
+More than twenty years later, Halgren's perspective on biomolecular force
+field development remains suprisingly prescient, and the same challenges felt
+by early force field developers continue into the present day. The current scope of
+force field development is vastly complex, and Halgren's dream of
+`consensus' in functional form and parameterization methodologies has yet to
+be realized, especially in comparing the fundamentally different approaches
+used in parameterization of either empirical or ab initio force fields.
 %
-This Chapter is designed to address several practical issues related to 
-ab initio intermolecular force field development, with a special emphasis on
-explaining and documenting the main software (\acrshort{pointer}) that has been
-developed expressly for the purposes of optimizing parameters for the various
-force field functional forms described in
-\cref{ch:isaff,ch:mastiff}. In particular, we attempt in this Chapter to
-address the following questions:
-\begin{enumerate}
-\item What algorithms and procedures are involved in fitting \sapt-based force
-fields?
-\item What functional forms should be used to describe the two-body force
-field for a particular system or application?
-\item How can we properly include a treatment of many-body effects 
-so as to yield a final model for describing arbitrary $N$-body
-systems?
-\item Once we've settled on a functional form and set of parameters for the
-$N$-body force field, how can we evaluate the
-quality of this force field and its utility for molecular simulation? 
-\end{enumerate}
+% TODO: Cite more useful things here and throughout this paragraph
+Despite these differences, real progress has been made
+to improve and standardize force field development within certain
+\emph{categories}
+(empirical, ab initio, etc.) of development methodologies. 
+\cite{Wang2014a,Schmidt2015,Stone2007,Hagler2015,Wildman2016}
+With ab
+initio force field development, for example, promising commonalities 
+have emerged in how scientists
+tend to formulate and parameterize new molecular models. 
+\cite{McDaniel2016a}
+Explicit polarization, originally a cost-inefficient and understudied model, is
+now becoming commonplace in intermolecular force fields,\cite{Cieplak2009} 
+and accurate, distributed multipolar descriptions of electrostatics seem
+poised to become broadly employed over the next
+decade.
+\cite{Albaugh2016,Cardamone2014,Ponder2010,Demerdash2014,Price2010a,Unke2017,Chaudret2013}
+Systematic methods for obtaining distributed dispersion models have been
+developed within the past decade,
+and are constantly being improved for general use in molecular
+simulation.
+\cite{Price2000,Williams2003,Misquitta2008,McDaniel2013,McDaniel2014}
+Even with models for short-range interactions, where there is less consensus in
+terms of which functional form(s) and parameterization schemes should be used,
+many have begun the process of 
+including physically-meaningful terms to describe charge penetration,
+\cite{Parker2015,Wang2015a,Freitag2000,Zgarbova2010,Misquitta2016,Wang2015,Slipchenko2009,Sherrill2009,Ohrn2016,Duke2014a}
+exchange-repulsion,
+\cite{Konieczny2015,VanVleet2016}
+charge transfer,
+\cite{Misquitta2013,Gordon2013,Vandenbrande2016,Duke2014a,Mei2015}
+and anisotropic effects.
+\cite{VanVleet2017,Bartocci2015,Stone2013,Duke2014a,Cisneros2006,Elking2010,Chaudret2014a,Gavezzotti2003,Torheyden2006,Stone2007,Mitchell2001,Price2000,Stone1988,Day2003,Totton2010,Misquitta2016,Price2010a,Misquitta2008,Langhoff1971,Williams2003,Stone2007,Krishtal2011}
 
+Building on the topics discussed in \cref{ch:workflow}, our goal in 
+this Chapter, broadly speaking, is to discuss the current state of `consensus'
+regarding functional forms, parameterization methods, and best practices for
+the limited scope of \sapt-based force field development.
+Here the focus will be on both the `scientific' and `artistic' elements
+of this force field development methodology, particularly as it pertains to 
+\mastiff (\cref{ch:mastiff}) and related models (\cref{ch:isaff}). As discussed below, 
+and to use Halgren's terminology, for some asepcts of the \mastiff
+development methodology there is good `consensus' as to the required
+functional forms and the manner in which these forms should be parameterized.
+In these cases of general consensus, a somewhat black-box
+workflow is possible for developing new \mastiff models, and our first goal in
+this Chapter is to detail 
+the ways in which a recently
+developed piece of software, the \pointer, can automate such tasks in the
+course of
+routine force field development.
 
+For other aspects of force field development, such as with models for
+multipolar electrostatics, 
+%% despite theoretical consensus as to appropriate functional
+%% forms and parameters, 
+there can remain pratical limitations 
+which,
+depending on the specific application and software package used,
+may requite alternative, and potentially less accurate, strategies
+for force field development. For these areas, a second
+goal in this Chapter is to outline, both conceptually and using the \pointer
+software, current best practices for force field development in the event of
+limitations due to computational cost or software requirements.
+available functional forms.
 
-=========================================
+Lastly, there remain select elements of force field development (namely the induction
+models discussed in \cref{sec:pointer-induction}) for which there has not yet
+been established a `consensus' or set of best practices for force field
+development, either in a theoretical or practical sense. Such
+aspects of force field development will need to be the subject of future work (see
+\cref{ch:future}), both in our group and across the scientific community.
+In the meantime, our third and
+final goal in this Chapter is to discuss the ambiguities involved in these
+`non-consensus' aspects of force field development, and we offer some
+practical modeling recommendations and software tools to assist in both
+present and future `next-generation' force field development.
+
+%% ====================
+%% 
+%% Thus far, our focus has primarily been on addressing 
+%% the following fundamental (and occasionally practical) issues related to ab-initio intermolecular force field development:
+%% \begin{enumerate}
+%% \item What functional forms should we use to optimally describe two-body
+%% intermolecular interactions? 
+%% (\cref{ch:isaff,ch:mastiff})
+%% \item How can we obtain accurate parameters for the two-body force field?
+%% (\cref{ch:isaff,ch:mastiff,ch:workflow})
+%% \item What benchmark \pes should we use in the fitting process, and how should
+%% it be sampled?
+%% (\cref{ch:lmoeda,ch:workflow})
+%% \end{enumerate}
+%% Building on these theoretical advances, we turn now our discussion to bear on
+%% a much
+%% more practical set of questions: using currently available techniques and softwares,
+%% how can we optimally develop intermolecular force fields for simulating
+%% arbitrary $N$ body systems?
+%% %
+%% This Chapter is designed to address several practical issues related to 
+%% ab initio intermolecular force field development, with a special emphasis on
+%% explaining and documenting the main software (\acrshort{pointer}) that has been
+%% developed expressly for the purposes of optimizing parameters for the various
+%% force field functional forms described in
+%% \cref{ch:isaff,ch:mastiff}. In particular, we attempt in this Chapter to
+%% address the following questions:
+%% \begin{enumerate}
+%% \item What algorithms and procedures are involved in fitting \sapt-based force
+%% fields?
+%% \item What functional forms should be used to describe the two-body force
+%% field for a particular system or application?
+%% \item How can we properly include a treatment of many-body effects 
+%% so as to yield a final model for describing arbitrary $N$-body
+%% systems?
+%% \item Once we've settled on a functional form and set of parameters for the
+%% $N$-body force field, how can we evaluate the
+%% quality of this force field and its utility for molecular simulation? 
+%% \end{enumerate}
+%% 
+%% 
+%% 
+%% =========================================
 
 
 

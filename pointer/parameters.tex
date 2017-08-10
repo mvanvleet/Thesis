@@ -1,21 +1,26 @@
 \begin{subsection}{Theory}
 
 For \sapt-based force fields with functional forms similar to those in
-\cref{ch:isaff,ch:mastiff} -- \mastiff being a prime example -- 
+\cref{ch:isaff,ch:mastiff} -- \mastiff being a prime example\footnotemark{} -- 
 we have discussed in \cref{ch:workflow} a number of practical approaches for
-intermolecular force field development.
-(Here and throughout this Chapter, much of our
-our discussion is restricted to examples with the \mastiff force field. Nevertheless, most
+beginning intermolecular force field development.
+In particular, we have already described strategies for optimally obtaining benchmark
+electronic structure theory data and for calculating some of the
+monomer-property-based parameters
+that will (vida infra) be utilized in the final force field. Nevertheless, 
+we have not yet focused on the actual process of force field fitting, nor on
+strategies for assessing the accuracy and transferability of the resulting
+functional forms and parameters. It is
+to these two crucial topics that we now turn.
+
+\footnotetext{
+As mentioned above, our focus in this Chapter is primarily on the
+\mastiff force field. Nevertheless, most
 of the principles and ideas presented below should pertain generally to other
 force fields (\saptff, \isaffold, etc.) that are fit on a term-by-term basis
-to reproduce a benchmark \eda, and this Chapter is also intended to provide a
-helpful guide for fitting and analyzing these types of force fields.)
-In particular, we have already discussed strategies for optimally obtaining benchmark
-electronic structure theory data and for calculating some of the parameters
-that will be used in the final force fields themselves. Nevertheless, up
-until now we have not focused on the actual process of force field fitting, nor on
-strategies for assessing the quality of the resulting force fields. It is
-to these two crucial topics that we now turn.
+to reproduce a benchmark \eda, and this Chapter should also provide a helpful
+set of `best practices' for fitting and analyzing these types of force fields.
+}
 
 %%%%%%%%%%%% Fitting Equations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\bij}{\textcolor{black}{B_{ij}}}
@@ -72,13 +77,14 @@ See main text for details.
 %%%%%%%%%%%% Fitting Equations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-In regards to the force field fitting process, we begin by asking the obvious
+In regards to the force field fitting process itself, we begin by asking the obvious
 question: "What parameters actually need to be fit in order to obtain a final
 force field?" To this end, we have highlighted in \cref{fig:pointer-ff} all
 of the parameters required to completely specify the \mastiff force field, and
-have grouped these parameters according to how we choose to calculate/optimize
-them in practice. In particular, all our force field parameters can be thought
-of in terms of the following three categories:
+have grouped these parameters according to how these parameters are
+calculated/optimized
+in practice. Specifically, all force field parameters in \mastiff can be thought
+of in terms of one of the following three categories:
 %
 \begin{itemize}
 \item \textcolor{fit}{Unconstrained} parameters: These parameters have not
@@ -87,7 +93,7 @@ be directly fit to the two-body energy itself.
 %
 \item \textcolor{cfit}{Soft-Constrained} parameters: These parameters
 \emph{can} be fit entirely on the basis of monomer properties, however it is
-sometimes advantageous to further refine this category of parameters with respect to the
+sometimes advantageous to further refine these parameters with respect to the
 benchmark two-body energies. In this case, soft
 constraints\cite{Misquitta2016} are often applied to
 the fitting process to ensure that the parameters do not deviate strongly from
@@ -98,8 +104,9 @@ entirely from monomer properties, and are not futher involved in the force
 field fitting process except as hard constraints.
 \end{itemize}
 
-To use \mastiff (see \cref{ch:mastiff}) as an example, an overview of the required parameters and
-strategies for parameter fitting is as follows:
+To use \mastiff (see \cref{ch:mastiff}) as an example, an overview of the
+required parameters, and
+the manner in which these parameters are fit, is as follows:
 \begin{itemize}
 \item \textcolor{fit}{\Aex{i}, \Ael{i}, \Aind{i}, \Adhf{i}}: 
 The force field energy depends linearly on a number of short-range prefactors, and
@@ -146,12 +153,12 @@ nominally $\Adisp{i} \approx 1$ for most systems. Still, parameters must
 sometimes be fit to the dispersion energy due to one or both of the following reasons: 
     \begin{enumerate}
     \item For anisotropic atoms, we must model the orientational dependence of
-    the dispersion energy, and this model requires parameters outside of 
+    the dispersion energy, and this model requires parameters in addition to
     the isotropic dispersion coefficients calculated in
     \cref{sec:workflow-dispersion}).
     \item Uncertainties in the \idma and/or \isa-pol dispersion coefficients can
-    sometimes lead to inaccuracies in even the isotropic portion of the
-    dispersion model, and these inaccuracies must sometimes be corrected by rescaling
+    sometimes lead to inaccuracies in the isotropic dispersion coefficients,
+    and these inaccuracies can sometimes be corrected by rescaling
     the isotropic dispersion coefficients themselves
     \end{enumerate}
 In practice, when calculating \Adisp{ij} we often treat the \emph{anisotropic}
@@ -168,15 +175,15 @@ dispersion energy pre-factor:
 \sum\limits_{l>0,k} \textcolor{fit}{\adisp}  \mathcal{C}_{lk}(\theta_i,\phi_i)
 \right)
 \end{align}
-where the colors serve to indicate that both free and soft-constrained
-parameters may be contained within the pre-factor.
+where the colors serve to indicate that both free and constrained
+parameters are contained within the pre-factor.
 %
 \item \textcolor{mon}{$Q^i_t$}:
 Multipole moments $Q^i_t$ can be directly calculated from monomer properties
 using the techniques discussed in \cref{sec:workflow-multipoles}. These
 \isa-based multipoles are generally quite accurate, however (vida infra) when
 using cheaper point charge models some care must be taken to ensure that the
-effective model does not lead to a deterioration in force field accuracy 
+effective model does not lead to a deterioration in force field accuracy.
 %TODO: Reference where we discuss electrostatic models
 \item \textcolor{mon}{\vdrude}:
 As with multipole moments, polarization parameters
@@ -184,13 +191,13 @@ As with multipole moments, polarization parameters
 constraints during the force field fitting process. Currently, there is not a
 consensus on what functional forms and/or damping parameters should be used to 
 model the short-range polarization energy, and this topic and its associated
-practical issues will be the subject of \cref{sec:pointer-polarization}.
+practical issues will be the subject of \cref{sec:pointer-induction}.
 \item \textcolor{mon}{$C_{i,2n}$}:
 Dispersion coefficients are calculated via the approaches discussed in
 \cref{sec:workflow-dispersion}, and are generally treated as hard constraints in the
 force field fitting process. In some cases (vida supra), these dispersion
 coefficients are scaled to reproduce the \sapt energies, however we discuss in
-\cref{sec:pointer-dispersion} some practical issues involved with such
+\cref{sec:pointer-dispersion} some practical concerns involved with such
 scaling.
 \end{itemize}
 

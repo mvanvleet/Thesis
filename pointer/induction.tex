@@ -1,6 +1,7 @@
 We turn now to a discussion of the \sapt induction energy, arguably the most
-complicated energy component to understand and correctly model. A good
-induction model needs to account for all of the following physical phenomenon:
+complicated energy component to understand and correctly model. Though there
+is, as of yet, no one `best practice' for modeling the \sapt induction energy, a good
+induction model will need to account for all of the following physical phenomenon:
 \begin{itemize}
 \item Long-range polarization
 \item Polarization damping at short-range
@@ -12,9 +13,10 @@ exist and can be modeled in simulation,\cite{Rick2002,Holt2008,Misquitta2007a,Mi
 there is currently little literature consensus as how best to separate out and
 model the various physically-meaningful induction effects. Complicating matters further,
 even though the \sapt induction energy is purely a 2-body effect, the
-polarization model we develop based on the induction energy also defines
+polarization model we develop based on the induction energy also implicitly defines
 the model for \emph{many}-body polarization, which accounts for a sizeable
-fraction of the total many-body energy discussed in \cref{sec:pointer-many_body}.
+fraction of the total many-body energy discussed in
+\cref{sec:pointer-many_body_effects}.
 Consequently, it is easily possible to obtain an induction model which shows good
 accuracy for dimer computations, but which leads to substantial inaccuracies
 in modeling larger clusters or bulk liquids.
@@ -27,7 +29,7 @@ common induction models that can be used to fit \sapt-based force fields.
 For reasonably isotropic systems, long-range polarization effects can be described
 either by a Drude oscillator model or via induced
 dipoles.\cite{Rick2002,Lopes2009} In practice, these models tend to be
-numerically similar, and we use them interchangeably in parameterization and
+numerically similar, and we use them both during parameterization and
 simulation.\footnotemark{} \pointer uses a Drude oscillator model for the
 purposes of computing the polarization energy, and the Drude charges and
 associated spring constants are read in as input in the \verb|<monomer>.drude|
@@ -41,8 +43,8 @@ For more anisotropic systems (such as water), higher-order polarizabilities
 have been shown to be important, and need to be included for best
 accuracy.\cite{Cisneros2016,Misquitta2008b,Misquitta2016,Welch2008}
 At present, however, higher-order polarizabilities have not been implemented
-in most common software packages, and we are currently exploring the use of
-off-site polarizabilities to describe highly anisotropic systems.
+in most common software packages, and we are in the process of investigating
+how to use off-site polarizabilities for modeling highly anisotropic systems.
 \end{paragraph}
 
 \footnotetext{In specific, Drude oscillator models have been used
@@ -58,7 +60,7 @@ polarization sites mutually polarize each other to
 infinite values. While there is widespread consensus as to the importance and
 necessity of including polarization damping, functional forms and parameters
 for the polarization damping vary widely.\cite{Cieplak2009,Lopes2009,Thole1981,Slipchenko2009,Wang2011}
-Thole-type damping functions\footnotemark are some of the more commonly used, and some
+Thole-type damping functions\footnotemark{} are some of the more commonly used, and some
 effort has been put forth to compare between several similar damping functions
 and parameterization schemes.\cite{Wang2011,Wang2012,Liu2017}
 
@@ -66,9 +68,10 @@ Historically,\cite{McDaniel2013} several members of our group have used an
 exponentially-decaying Thole function with an associated damping parameter of
 2.0.\cite{Yu2011} More recently, and due to software limitations in \openmm,
 we have taken to using the `Thole-tinker' model with a universal Thole damping
-parameter $a=0.33$, which is reasonably similar to the parameter used by the
-AMOEBA force field.\cite{VanVleet2017} These models can be changed in \pointer
-in the \verb|settings.py| file:
+parameter $a=0.33$, which is reasonably similar to the damping parameter used by the
+AMOEBA force field.\cite{VanVleet2017} Various Thole-type models can be
+specified in \pointer
+via the \verb|settings.py| file:
 \begin{lstlisting}[language=python]
 # Induction Settings: Choose the type and parameters for the polarization
 # damping functions. Options for thole_damping_type are 'thole_tinker' and
@@ -105,14 +108,15 @@ different Thole-type damping functions was meant.}
 In addition to polarization damping, charge transfer and inductive charge
 penetration can become important at shorter intermolecular separations.
 Physically-motivated functional forms for these effects are generally lacking,
-though \citeauthor{Misquitta2013} has suggested a double exponential decay,
+though \citet{Misquitta2013} has suggested a double exponential decay,
 and work in our own group has empirically found a single exponential decay
 (with \isa-derived exponents $B_i$) to be reasonably satisfactory.
 
 \end{paragraph}
 
+\begin{paragraph}{Conclusions and Recommendations}
 
-In summary, our current approach to modeling inductive effects include a sum
+Our current approach to modeling inductive effects include a sum
 over two contributions:
 %
 \begin{align}
@@ -121,9 +125,16 @@ over two contributions:
 \end{align}
 %
 The \sapt benchmark separates the induction energy into 2\super{nd}- and higher-order
-(i.e. \dhf) induction, and we fit the terms separately (Note that this expansion is in orders of perturbation theory,
-not in orders of the \acrlong{mbe}.)
+(i.e. \dhf) induction, and we fit both induction-like terms
+separately.\footnotemark{} 
 All parameters for the polarization model \vdrude are currently read in as hard
-constraints, and the \Aind{i}\/\Adhf{i} prefactors (which effectively accounts for both
-charge transfer and charge penetration) are explicitly fit by \pointer.
+constraints, and the \Aind{i} and \Adhf{i} prefactors (which effectively accounts for both
+charge transfer and charge penetration) are directly fit by \pointer.
+
+\footnotetext{
+Note that this expansion is in orders of perturbation theory,
+not in orders of the \acrlong{mbe}.
+}
+
+\end{paragraph}
 

@@ -1,8 +1,8 @@
 Dispersion is the last energy component that we must model in order to
-completely describe the two-body energy. Asymptotically, the dispersion energy follows a
+completely describe the two-body force field. Asymptotically, the dispersion energy follows a
 well-defined expansion in powers of $1/r^{2n}$, and at shorter distances the
 energy expression is typically damped by a Tang-Toennies
-function\cite{Tang1984,Tang1992} as follows:
+function,\cite{Tang1984,Tang1992} 
 %
 \begin{align}
 \vdisp_{ij} &= -{\Adisp{i}\Adisp{j}} \sum\limits_{n=3}^{6} f_{2n}(x)
@@ -18,13 +18,15 @@ where $f(x)$ is the Tang-Toennies damping function from
 \cref{eq:pointer-ff_form}, and the various colors highlight (as in
 \cref{fig:pointer-ff}) the different ways in which the dispersion parameters
 are calculated/fit.
-Dispersion coefficients must always be read into
+Dispersion coefficients 
+${C_{ij,2n}}$
+must always be read into
 \pointer as input, and methods for obtaining these coefficients are as
 described in  \cref{sec:workflow-dispersion}. 
 
 In obtaining a final model for dispersion, it is important to ensure that any
 model is quantitatively correct in the asymptotic regime, as the
-least-squares optimization procedure \pointer uses does not ensure this
+least-squares optimization procedure \pointer will not explicitly ensure this
 physically-correct behavior. Unless directly fitting atomtype-specific scale
 factors to the dispersion energy (vida infra), a good strategy is to (using
 the methods in \cref{sec:workflow-dispersion}) manually fit a universal scale factor to
@@ -45,10 +47,12 @@ fit_dispersion             =    'anisotropic'
 In select cases, such as when a \dccsdt correction is added to the
 dispersion energy, it can be worthwhile to scale the isotropic
 dispersion coefficients in an atomtype-specific manner. (This strategy was
-used in \cref{ch:mastiff} to obtain dispersion parameters for \co, \nh, \ho,
+used in \cref{ch:mastiff} to obtain \mastiff-CC dispersion parameters for \co, \nh, \ho,
 and \cl.) This behavior is also allowed in \pointer using the above flags,
 however care must be taken to ensure that this optimization does not degrade
-accuracy in the asymptotic regime. In general, it is usually best to
-\emph{not} fit isotropic scale factors to the dispersion energy in the absence
-of significant improvements to the overall force field fit quality.
+accuracy in the asymptotic regime. In general, 
+and in the absence
+of subsequent significant improvements to the overall force field fit quality,
+it is usually advised
+\emph{not} to fit isotropic scale factors to the dispersion energy. 
 

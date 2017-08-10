@@ -2,7 +2,7 @@ Having identified the required parameters that completely specify \mastiff
 and other similar force fields, we now turn to a discussion of the actual
 fitting process itself. We begin in this section with an overview of the
 software used to optimize each unconstrained/soft-constrained parameter, and
-next (in \cref{sec:pointer-fitting}) discussion principles and practices
+next (in \cref{sec:pointer-fitting}) discuss principles and practices
 related to fitting each component of the benchmark \sapt energy.
 
 As the name suggests, the \acrfull{pointer} is a Python package developed to aid in the fitting of
@@ -13,7 +13,7 @@ open-source and is available for download from
 %uploaded to github
 Documentation and examples for using \pointer are available through the wiki at
 \url{https://git.chem.wisc.edu/schmidt/force_fields/wikis/home}, but for
-convenience we include here a brief overview of the program input, usage, and
+convenience we include here a brief overview of the program input, output, usage, and
 main capabilities:
 
 
@@ -36,7 +36,8 @@ unique monomer being fit. Files highlighted in
 \textcolor{codegreen}{teal} or \textcolor{codepurple}{red} indicates that the input file
 sometimes or always require
 manual modification before running \pointer, whereas files in black are
-created automatically from the various scripts used in the Workflow:
+created automatically from the various scripts used in the Workflow, and
+usually don't require further alteration.
 
 \begin{itemize}
 \item \textbf{<monomer1>\_<monomer2>.sapt}:
@@ -55,11 +56,11 @@ Contains multipole moments for each monomer
 Empty file required to keep Python's module structure happy
 \item \textcolor{codegreen}{\textbf{<monomer>.constraints}:}
 Constraints file, used to include hard-constraints for any \A parameters
-for any previously-fit atomtypes. See \cref{sec:pointer-prior_fitting} for
+for any previously-fit atomtypes. See \cref{sec:pointer-advanced_options} for
 details and \cref{lst:pointer-constraints} for an example input file.
 \item \textcolor{codegreen}{\textbf{<monomer>.axes}:}
 Axes file, used to specify the local axes and included spherical harmonics for
-any anisotropic atomtypes. See \cref{sec:pointer-anisotropy} for details and
+any anisotropic atomtypes. See \cref{sec:pointer-fitting} for details and
 \cref{lst:pointer-axes} for an example input file.
 \item \textcolor{codegreen}{\textbf{defaults.py}:}
 List of default settings for the \pointer program; these defaults rarely need
@@ -67,7 +68,7 @@ to be changed for routine force field development.
 See \cref{lst:pointer-defaults} for an example input file.
 \item \textcolor{codepurple}{\textbf{settings.py}:}
 List of modular settings for the \pointer program; many of these settings can
-get changed in the course of routine force field development.  See
+get changed in the course of routine force field development. See
 \cref{sec:pointer-fitting} for details and \cref{lst:pointer-settings} for
 an example input file.
 \end{itemize}

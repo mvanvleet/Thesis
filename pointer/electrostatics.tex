@@ -10,7 +10,7 @@ penetration (at short-range):
 it is not recommended to attempt to re-fit the $B_i$ parameters to the
 electrostatic energy. As for the multipole energy, in the simplest case (i.e.
 without off-sites) these
-parameters can simply be read in using the \verb|settings.py| file:
+parameters can simply be read in using the \verb|settings.py| file,
 %
 \begin{lstlisting}[language=python]
 # Electrostatic Settings: choose which multipole files the program should use
@@ -24,8 +24,13 @@ to compare the energies obtained from point-charge
 models to those achievable with the $L2$ model.
 
 \begin{paragraph}{Off-site models}
-When dealing with systems containing lone-pairs or other off-site multipoles,
-the following modifications are required:
+As described in \cref{ch:workflow}, practical software limitations and issues
+of computational expense may sometimes require us to forego use of
+higher-order multipole terms. 
+When modeling the electrostatic energy via a point charge model, best accuracy
+is often achieved by including off-site charges. Such off-site point charge
+models can be treated using \pointer, though 
+the following modifications to the standard input scripts are required:
 \begin{enumerate}
 \item Add the off-site positions to the .sapt file. Scripts for doing this are
 discussed in \cref{sec:workflow-dimer_parameters}.
@@ -51,9 +56,13 @@ lone_pair_flags                     =  ['Du' , 'lp']
     \end{enumerate}
 \end{enumerate}
 %
-Energies between the off-site model and the (simpler) $L2$/$L0$ models should
+Energies between the off-site point charge model and the (more standard) $L2$/$L0$ models should
 always be compared as a sanity check: if the errors in the offsite model are
 larger than the errors from the $L0$ model, this is usually a sign that
-something has gone wrong. 
+something has gone wrong. On the other hand, if the electrostatic energies are
+of a similar accuracy to those obtained with the $L2$ model, this indicates
+that the point charge model is a fairly optimal description of the system's
+multipolar electrostatics, and can be used without further modification in
+molecular simulation.
 \end{paragraph}
 
