@@ -1,0 +1,1121 @@
+%% \documentclass[12pt,letterpaper]{article}
+%% \usepackage[margin=1in,bottom=1in]{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+%% 
+%% \usepackage{hyperref}
+%% \usepackage[journal=jacs]{chemstyle} %Other chemical formatting
+%% \usepackage{chemscheme} % Chemical graphics
+%% \usepackage{chemcompounds}
+%% \usepackage{caption}
+%% \usepackage{bpchem} % Chemical compounds
+%% \usepackage{setspace}
+%% \usepackage{fullpage}
+%% \usepackage{graphicx}
+%% \usepackage{xspace}
+%% \usepackage{booktabs}
+%% \usepackage{pdflscape}
+%% \usepackage[sort&compress,numbers,super]{natbib}
+%% \usepackage{bibentry}
+%% %\usepackage{xr}
+%% %\externaldocument{isa_ff}
+%% \usepackage{amsmath}
+%% \usepackage{longtable}
+%% \usepackage{xfrac}
+%% \usepackage{multirow}
+%% \usepackage{dcolumn}
+%% \usepackage{siunitx}
+%% \usepackage{subcaption}
+%% 
+%% %eqref
+%% \usepackage{letltxmacro}
+%% \LetLtxMacro{\originaleqref}{\eqref}
+%% \renewcommand{\eqref}{eq.~\originaleqref}
+%% \newcommand{\Eqref}{Eq.~\originaleqref}
+%% 
+%% %figref
+%% \newcommand{\figref}[1]{Figure~\ref{#1}}
+%% \newcommand{\tabref}[1]{Table~\ref{#1}}
+%% \newcommand{\secref}[1]{Section~\ref{#1}}
+%% 
+%% \newcommand{\super}[1]{\textsuperscript{#1}}
+%% \newcommand{\sub}[1]{\textsubscript{#1}}
+%% \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%% \newcommand{\ra}[1]{\renewcommand{\arraystretch{#1}}}
+%% \newcommand{\centercell}[1]{\multicolumn{1}{C}{#1}}
+%% 
+%% % Supplementary Information Labels
+%% \newcommand{\beginsupplement}{%
+%%         \setcounter{table}{0}
+%%         \renewcommand{\thetable}{S\arabic{table}}%
+%%         \setcounter{figure}{0}
+%%         \renewcommand{\thefigure}{S\arabic{figure}}%
+%%         \setcounter{section}{0}
+%%         \renewcommand{\thesection}{S\arabic{section}}%
+%%      }
+%% 
+%% \newcommand*{\citen}[1]{%
+%%   \begingroup
+%%     \romannumeral-`\x % remove space at the beginning of \setcitestyle
+%%     \setcitestyle{numbers}%
+%%     ref. \cite{#1}%
+%%   \endgroup   
+%% }
+%% 
+% ISA-FF Paper lingo
+%% \newcommand{\isa}{BS-ISA\xspace}
+%% \newcommand{\isaffold}{Slater-ISA FF\xspace}
+%% \newcommand{\saptff}{Born-Mayer-IP FF\xspace}
+%% \newcommand{\bmsisaff}{Born-Mayer-sISA FF\xspace}
+%% \newcommand{\saptpbeo}{DFT-SAPT (PBE0/AC)\xspace}
+%% \newcommand{\avtz}{aug-cc-pVTZ\xspace}
+%% \newcommand{\A}{\ensuremath{A_{ij}}\xspace}
+%% \newcommand{\B}{\ensuremath{B_{ij}}\xspace}
+%% \newcommand{\C}{\ensuremath{C_{ij,n}}\xspace}
+%% \newcommand{\R}{\ensuremath{r_{ij}}\xspace}
+%% 
+%% \newcommand{\dhf}{\ensuremath{\delta^{\text{HF}}}\xspace}
+%% 
+%% \newcommand{\vtot}{\ensuremath{V_{FF}}\xspace}
+%% \newcommand{\vrep}{\ensuremath{V^{exch}}\xspace}
+%% \newcommand{\vcp}{\ensuremath{V^{pen}}\xspace}
+%% \newcommand{\vsrind}{\ensuremath{V^{ind,sr}}\xspace}
+%% \newcommand{\vsrdisp}{\ensuremath{V^{disp,sr}}\xspace}
+%% \newcommand{\velst}{\ensuremath{V^{elst}}\xspace}
+%% \newcommand{\vind}{\ensuremath{V^{ind}}\xspace}
+%% \newcommand{\vdhf}{\ensuremath{V^{\dhf}}\xspace}
+%% \newcommand{\vdisp}{\ensuremath{V^{disp}}\xspace}
+%% \newcommand{\vlr}{\ensuremath{V_{lr}}\xspace}
+%% \newcommand{\vmultipole}{\ensuremath{\sum\limits_{tu}Q_t^iT_{tu}Q_u^j}\xspace}
+%% \newcommand{\vdrude}{\ensuremath{V_{shell}}\xspace}
+%% \newcommand{\vdrudeind}{\ensuremath{V_{shell}^{(2)}}\xspace}
+%% \newcommand{\vdrudescf}{\ensuremath{V_{shell}^{(3-\infty)}}\xspace}
+%% 
+\newcommand{\sijapprox}{\ensuremath{S^{ij}_{B_i = B_j}}\xspace}
+\newcommand{\sijexact}{\ensuremath{S^{ij}_{B_i \ne B_j}}\xspace}
+%% 
+%% % ISA-FF Paper lingo
+%% \newcommand{\isa}{BS-ISA\xspace}
+%% \newcommand{\isaffold}{Slater-ISA FF\xspace}
+%% \newcommand{\saptff}{Born-Mayer-IP FF\xspace}
+%% \newcommand{\bmsisaff}{Born-Mayer-sISA FF\xspace}
+%% \newcommand{\ljff}{LJ FF\xspace}
+%% \newcommand{\saptpbeo}{DFT-SAPT (PBE0/AC)\xspace}
+%% \newcommand{\avtz}{aug-cc-pVTZ\xspace}
+%% \newcommand{\A}{\ensuremath{A_{ij}}\xspace}
+%% \newcommand{\B}{\ensuremath{B_{ij}}\xspace}
+%% \newcommand{\C}{\ensuremath{C_{ij,n}}\xspace}
+%% \newcommand{\R}{\ensuremath{r_{ij}}\xspace}
+%% 
+%% \newcommand{\dhf}{\ensuremath{\delta^{\text{HF}}}\xspace}
+%% 
+%% \newcommand{\Asr}[1]{\ensuremath{A^{\text{sr}}_{#1}}\xspace}
+%% \newcommand{\Aex}[1]{\ensuremath{A^{\text{exch}}_{#1}}\xspace}
+%% \newcommand{\Ael}[1]{\ensuremath{A^{\text{elst}}_{#1}}\xspace}
+%% \newcommand{\Apen}[1]{\ensuremath{A^{\text{pen}}_{#1}}\xspace}
+%% \newcommand{\Aind}[1]{\ensuremath{A^{\text{ind}}_{#1}}\xspace} % AJM Not ind,sr !!!
+%% \newcommand{\Adhf}[1]{\ensuremath{A^{\dhf}_{#1}}\xspace} % AJM Not ind,sr !!!
+%% 
+%% \newcommand{\Bisa}[1]{\ensuremath{B^{\text{ISA}}_{#1}}\xspace}
+%% \newcommand{\Bip}[1]{\ensuremath{B^{\text{IP}}_{#1}}\xspace}
+%% 
+%% \newcommand{\etot}{\ensuremath{E_{\text{int}}}\xspace}
+%% \newcommand{\erep}{\ensuremath{E^{\text{exch}}}\xspace}
+%% \newcommand{\eelst}{\ensuremath{E^{\text{elst}}}\xspace}
+%% \newcommand{\eind}{\ensuremath{E^{\text{ind}}}\xspace}
+%% \newcommand{\edhf}{\ensuremath{E^{\dhf}}\xspace}
+%% \newcommand{\edisp}{\ensuremath{E^{\text{disp}}}\xspace}
+%% 
+%% \newcommand{\vtot}{\ensuremath{V_{\text{FF}}}\xspace}
+%% \newcommand{\vrep}{\ensuremath{V^{\text{exch}}}\xspace}
+%% \newcommand{\vcp}{\ensuremath{V^{\text{pen}}}\xspace}
+%% \newcommand{\vsrind}{\ensuremath{V^{\text{ind,sr}}}\xspace}
+%% \newcommand{\vsrdisp}{\ensuremath{V^{\text{disp,sr}}}\xspace}
+%% \newcommand{\velst}{\ensuremath{V^{\text{elst}}}\xspace}
+%% \newcommand{\vind}{\ensuremath{V^{\text{ind}}}\xspace}
+%% \newcommand{\vdhf}{\ensuremath{V^{\dhf}}\xspace}
+%% \newcommand{\vdisp}{\ensuremath{V^{\text{disp}}}\xspace}
+%% \newcommand{\vlr}{\ensuremath{V_{lr}}\xspace}
+%% \newcommand{\vmultipole}{\ensuremath{\sum\limits_{tu}Q_t^iT_{tu}Q_u^j}\xspace}
+%% \newcommand{\vdrude}{\ensuremath{V_{\text{shell}}}\xspace}
+%% \newcommand{\vdrudeind}{\ensuremath{V_{\text{shell}}^{(2)}}\xspace}
+%% \newcommand{\vdrudescf}{\ensuremath{V_{\text{shell}}^{(3-\infty)}}\xspace}
+%% 
+%% \newcommand{\mse}{\ensuremath{\lVert\text{MSE}\rVert}\xspace}
+%% 
+%% \title{\textbf{Supporting Information} \\ for \\
+%% `Beyond Born-Mayer: Improved models for short-range repulsion in ab initio
+%% force fields'
+%% }
+%% \author{Mary J. Van Vleet, Alston J. Misquitta, Athony J. Stone, J.R. Schmidt}
+%% %\date{April 23, 2015} % delete this line to display the current date
+%% 
+%% \begin{document}
+%% \beginsupplement
+%% \maketitle
+%% \tableofcontents
+%% 
+%% 
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \onehalfspacing
+%% 
+\begin{section}{Waldman-Hagler Analysis of $B_{ij}$ Combination Rule}
+\label{sec:bij_combo_rule}
+
+The exact expressions for the overlap of two Slater densities 
+$\rho_i = D_i \exp(-B_i r)$ and $\rho_j = D_j \exp(-B_j r)$ 
+are shown here, first in the limiting case where the two
+exponents are equal ($B_i = B_j = B_{ij}$): 
+
+\begin{align}
+\label{eq:simple_overlap}
+\begin{split}
+%S^{ij}_{b_i = b_j} &= D_{ij} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) \\
+\sijapprox &= D_{ij} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) \\
+D_{ij} &= \pi D_i D_j B_{ij}^{-3} \\
+P(B_{ij},r_{ij}) &= \frac13 (B_{ij} r_{ij})^2 + B_{ij} r_{ij} + 1 ,
+\end{split}
+\end{align}
+
+and second in the case where $B_i \ne B_j$:
+
+\begin{align}
+\label{eq:complicated_overlap}
+\begin{split}
+%S^{ij}_{b_i\ne b_j} = &
+\sijexact = &
+\frac{16\pi D_i D_j \exp(-\{B_i + B_j\}r_{ij}/2)}{(B_i^2-B_j^2)^3r_{ij}}
+\times \\
+\Bigg [ &
+\left(\frac{B_i - B_j}{2}\right)^2 
+\bigg(\exp \left(\{B_i-B_j\}\frac{r_{ij}}{2}\right) - \exp \left(-\{B_i-B_j\}\frac{r_{ij}}{2}\right) \bigg) \\
+& \qquad \times \left( \left(\frac{B_i + B_j}{2}\right)^2r_{ij}^2 + (B_i + B_j)r_{ij} + 2 \right) \\
+& - \left(\frac{B_i + B_j}{2}\right)^2 \exp \left(\{B_i-B_j\}\frac{r_{ij}}{2}\right)
+\times \left( \left(\frac{B_i - B_j}{2}\right)^2r_{ij}^2 - (B_i - B_j)r_{ij} + 2 \right) \\
+& + \left(\frac{B_i + B_j}{2}\right)^2 \exp \left(-\{B_i-B_j\}\frac{r_{ij}}{2}\right)
+\times \left( \left(\frac{B_i - B_j}{2}\right)^2r_{ij}^2 + (B_i - B_j)r_{ij} + 2 \right)
+\Bigg ] .
+\end{split}
+\end{align}
+Each overlap formula has been given a subscript to indicate
+limits on $B_i$ and $B_j$.
+
+Our goal is to ascertain the extent to which \sijexact can
+be accurately modeled by the functional form and variables of \sijapprox.
+$D_i$ and $D_j$ are pre-factors appearing in both equations, and we set
+these variables to unity without loss of generality. To 
+find values of \B such that $\sijexact(B_i,B_j,r_{ij}) \approx
+\sijapprox(\B,r_{ij})$, we first treat \B as a completely adjustable
+parameter, and later test for the existence of some simple combining function
+$f$ such that $\B = f(B_i, B_j)$.
+
+To optimize $\B$, we first require a training set of
+relevant \sijexact values. $B_i$, $B_j$, and $r_{ij}$ are the only
+variables appearing in \sijexact, and we could in principle fit \B values over a
+grid of $B_i$, $B_j$ and \R
+combinations. However, we are only interested in the subset of 
+points which are chemically relevant.
+Consequently, we developed a
+library of $B_i$ values by deriving exponents from the ionization potentials of the first three rows of
+the periodic table (plus bromine and iodine).
+For each pair of elements, $B = 2\sqrt{2\text{IP}},$\cite{Yu2011} and a range of \R
+values corresponding to 0.8-1.2 times the sum of the van der Waals radii of the two
+atoms was selected. \B values in \sijapprox were
+then optimized (in a least-squares sense) for each element pair separately;
+Mean absolute percent errors (MAPE) for fitted overlaps are shown
+in \ref{fig:bij_mape} and in \ref{tab:all_bij_exponents}.
+
+
+    %%%%%%%%%%%%%%% Bij MAPE %%%%%%%%%%%%%%%%%
+    \begin{figure}[t]
+    \includegraphics[width=0.9\textwidth]{isotropic/si/bij_mape.pdf}
+    \caption{
+        Mean absolute percent error of fitted overlap values as a function of the
+        absolute difference between $B_i$ and $B_j$ values. Element pairs containing
+        He, Li, Ne and/or Na are shown as empty circles.  Deviations below 1\% are
+        seen for most element pairs, with noble gases and alkali metals posing a more
+        significant challenge. Scatter in the plot is due to small variations in the
+        absolute values of \R fit for each pair.  As expected, \sijexact and
+        \sijapprox closely agree for $|B_i - B_j| \approx 0$. 
+           		  }
+    \label{fig:bij_mape}
+    \end{figure}
+    %%%%%%%%%%%%%%% Bij MAPE %%%%%%%%%%%%%%%%%
+
+Relative errors for fitting are acceptably small for all element pairs.
+Excluding certain noble gases and alkali metals (He, Li, Ne,
+Na) from consideration, these being the elements with the most disparate $B_i$
+values compared to other elements, MAPE drops below 3\% for all pairs, with
+the vast majority of MAPE below 1\%. Our focus in this work is primarily on
+organic compounds where $|B_i - B_j|$ is small; empirically, these errors always translate to very small
+errors in the exchange energy itself.  
+Use of an effective \B may require further testing in cases with extremely
+disparate $B_i$ and $B_j$ values.
+
+We next tested whether the optimized \B could instead be modeled by
+a combination rule $\B = f(B_i,B_j)$.  On the basis of symmetry and scaling
+considerations, \citeauthor{Waldman1993} demonstrate that if a
+combination rule $f(B_i,B_j)$ exists, a plot of $\sfrac{\B}{B_i}$ vs.
+$\sfrac{B_j}{B_i}$ should lie on a single curve.\cite{Waldman1993} Remarkably
+(see \ref{fig:bij_combination_rule}), a geometric mean combination rule $\B =
+\sqrt{B_iB_j}$ models the fitted \B values near quantitatively. This
+result allows the computation of Slater overlaps
+using the much simpler
+form of \sijapprox (\ref{eq:simple_overlap}) 
+from individual atoms-in-molecule exponents $B_i$ and $B_j$.
+
+    %%%%%%%%% Bij Combination Rule %%%%%%%%%%%
+    \begin{figure}[t]
+    \includegraphics[width=0.9\textwidth]{isotropic/si/bij_combination_rule.pdf}
+    \caption{
+    Waldman-Hagler-style analsysis of possible $B_{ij}$ combination rules.  Exact
+    $B_{ij}$ values are derived from fitting an approximate overlap density of the form $S_{ij}
+    = A_{ij} K_2(r_{ij})\exp(-B_{ij}r_{ij})$ to the exact overlap density (as given by Rosen
+    and by Tai\cite{Rosen1931,Tai1986}) of two distinct Slater orbitals whose exponents
+    correspond to atomic exponents for the elements H-Ar, Cl, Br, and I. For each overlap pair,
+    a range of \R values was used from 0.8 to 1.2 times the sum of the pair's van der Waals radii.
+    The geometric mean combination rule $B_{ij} = \sqrt{B_iB_j}$ models the exact $B_{ij}$
+    values with near-perfect agreement, justifying our choice of combination rule.
+           		  }
+    \label{fig:bij_combination_rule}        
+    \end{figure}
+    %%%%%%%%% Bij Combination Rule %%%%%%%%%%%
+
+\end{section}
+%% \begin{section}{Force Field Fit Quality: Exact Overlap Model vs. \isaffold}
+%% 
+%% 
+%% A direct test of the approximate overlap model (Equation
+%% \ref{eq:simple_overlap} with $B_i$ values extracted from ISA calculations,
+%% synonymous with the \isaffold in the main text) is
+%% made by directly comparing the accuracy of force fields fit by the exact and
+%% approximate overlap models.
+%% \ref{tab:rmse_comparison} shows average RMS errors for each energy component
+%% that uses an explicit short-range term. 
+%% Differences in RMS errors between models are
+%% negligible, with use of the more approximate overlap model introducing (at
+%% most) an additional 2\% extra error compared to the exact overlap model. 
+%% Use of \sijapprox to compute all overlaps is thus
+%% well justified.
+%% 
+%% \begin{table}
+%% \centering
+%% \renewcommand\arraystretch{1.1}
+%% \begin{tabular}{@{}rcccc@{}}
+%% \hline
+%% \toprule
+%% \multirow{2}{*}{Component} & &  \isaffold & Exact Overlap Model & \multirow{2}{*}{$\alpha$}  \\
+%%      & & \multicolumn{1}{c}{(kJ mol$^{-1}$)}& \multicolumn{1}{c}{(kJ mol$^{-1}$)} &  \\
+%% \midrule
+%% Exchange        & &    2.641  (0.686)  &  2.581  (0.679) &  1.023 (1.010) \\
+%% Electrostatics  & &    1.087  (0.351)  &  1.083  (0.350) &  1.004 (1.003) \\
+%% Induction       & &    0.251  (0.095)  &  0.252  (0.095) &  0.998 (0.999) \\
+%% \dhf            & &    0.246  (0.068)  &  0.245  (0.068) &  1.004 (1.007) \\
+%% \bottomrule
+%% \hline
+%% \end{tabular}
+%% \caption{
+%%     Comparison of geometric mean RMS errors over the 91 dimer test
+%%     set for the Approximate Overlap Model (that is, the \isaffold) and the
+%%     Exact Overlap Model.  `Attractive' RMS errors, representing the average RMS
+%%     error for the subset of points whose energies are net attractive ($\etot < 0$), 
+%%     are shown in parentheses to the right of the total average RMS errors.
+%%     The average ratio of RMS errors (\isaffold / Exact Overlap Model) for each pair in
+%%     the 91 dimer test set, $\alpha$ (dimensionless), is also shown. $\alpha$
+%%     values greater than 1 indicate that on average the Exact Overlap Model is more
+%%     accurate compared to the \isaffold.
+%% 	}
+%% \label{tab:rmse_comparison}
+%% \end{table}
+%% 
+%% 
+%% \end{section}
+%% \clearpage
+%% \begin{section}{Extrapolation Algorithm for ISA Exponents}
+%% 
+%% Unphysical asymptotic charge density decays occasionally arise in the ISA
+%% procedure due to basis set incompleteness and numerical instabilities. These
+%% unphysical decays can
+%% skew optimization of $B_i^{ISA}$ parameters, and need to be corrected.
+%% Generally speaking, there exists some range of distances in the valence region
+%% that \emph{does} exhibit the expected exponential decay; we extrapolate the
+%% decay from this intermediate region to describe the asymptotic region using
+%% the following algorithm:
+%% 
+%% \begin{enumerate}
+%% 
+%% \item Take the log of each atomic density (henceforth logdens) to linearize
+%% the asymptotic density.
+%% \label{step1}
+%% \item Compute the 2\super{nd} derivative of logdens. This can be
+%% done analytically, as the \isa procedure outputs an analytical expression (in
+%% terms of Gaussian basis functions) for the atomic density.
+%% \label{step2}
+%% \item Determine the `intermediate region' of exponential decay by locating the
+%% largest range where the 2\super{nd} derivative of logdens is zero
+%% to within a fixed tolerance.  Here we utilize a tolerance of 0.3 a.u. (absolute cutoff)
+%% or 190\% of the smallest exponent in the Gaussian basis set (relative cutoff),
+%% whichever is smaller.  
+%% The latter cutoff accounts for the eventual asymptotic Gaussian-type decay
+%% dictated by the smallest $\zeta$ in the ISA basis.
+%% The endpoints of this intermediate region are denoted $r1$ and $r2$, respectively.
+%% \item Calculate the slope $m$ and intercept $b$ for the line defined by
+%% $r1$, $r2$, and their respective values of logdens. 
+%% \label{step3}
+%% \item Replace all values of logdens after $r2$ with $mr + b$.  The resulting
+%% atomic density is labeled in the main text as `Asymptotically-corrected ISA
+%% densities'.
+%% \label{step4}
+%% 
+%% \end{enumerate}
+%% 
+%% A visual of these steps is shown in \ref{fig:acetone-extrapolation}.
+%% 
+%% 
+%%     %%%%%%%%% Bij Combination Rule %%%%%%%%%%%
+%%     \begin{figure}
+%%     \includegraphics[width=0.9\textwidth]{isotropic/si/acetone_extrapolation.pdf}
+%%     \caption{
+%%         Linear extrapolation algorithm for the methyl carbon in acetone.
+%% Depicted are (in legend order) Steps \ref{step1}, \ref{step2}, \ref{step3},
+%% and \ref{step4} in the extrapolation algorithm. Note that some portions of the
+%% $2^{nd}$ derivative extend off the graph; also note that most of logdens
+%% is located underneath the asymptotically-corrected curve.
+%%            		  }
+%%     \label{fig:acetone-extrapolation}        
+%%     \end{figure}
+%%     %%%%%%%%% Bij Combination Rule %%%%%%%%%%%
+%% 
+%% 
+%% 
+%% \end{section}
+%% \clearpage
+%% \begin{section}{Non-polarizable, point-charge Lennard-Jones Force Fields}
+%% 
+%% As described in the main text, a non-polarizable, rank 0 multipole version of
+%% \ljff was fit in order to produce force fields most in line with popular
+%% standard force fields. Results for this \ljff are shown in
+%% \tabref{tab:lj_rmse}; unsurprisingly, these force fields are less accurate and
+%% less transferable compared to \ljff in the main text, which includes
+%% polarizability and higher-order multipole moments.
+%% 
+%% 
+%% %%%%%%%%%%%%%%%%%%%%% Average LJ RMSE Table %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %\begin{landscape}
+%% \begin{table}
+%% \small
+%% \centering
+%% \renewcommand\arraystretch{1.1}
+%% \begin{tabular}{@{}rcccc@{}}
+%% \hline
+%% \toprule
+%% & \phantom{} &
+%%   \multicolumn{1}{c}{Dimer-Specific Fits} &
+%%   \phantom{ab} &
+%%   \multicolumn{1}{c}{Transferable Fits} \\
+%% %\cmidrule{2} \cmidrule{3}
+%% 
+%% %% Component & & \ljff-q0, $\lambda=0.1$ & \ljff-q2, $\lambda=0.1$ & \ljff-q2, $\lambda=2.0$ 
+%% %%           & & \ljff-q0, $\lambda=0.1$ & \ljff-q2, $\lambda=0.1$ & \ljff-q2, $\lambda=2.0$ \\
+%% %%           & & \ljff-q2,               & \ljff-q2,               & \ljff-q0,               
+%% %%           & & \ljff-q2,               & \ljff-q2,               & \ljff-q0,               \\
+%% %%           & &           $\lambda=2.0$ &           $\lambda=0.1$ &           $\lambda=0.1$ 
+%% %%           & &           $\lambda=2.0$ &           $\lambda=0.1$ &           $\lambda=0.1$ \\
+%%      & & \multicolumn{1}{c}{(kJ mol$^{-1}$)} 
+%%      & & \multicolumn{1}{c}{(kJ mol$^{-1}$)} \\
+%% \midrule
+%% %\addlinespace
+%% %\textbf{
+%% %Total Energy}   \\
+%% %\emph{RMSE}             & &  1.984 (0.603)   &  6.058 (0.413)  &  5.116 (0.560)   && 2.054 (0.640)  &  5.760 (0.457)  &  4.513 (0.658) \\
+%% \emph{RMSE}             & &    5.116 (0.560)   &&   4.513 (0.658) \\
+%% %\addlinespace
+%% \emph{\mse}
+%%                  %& &  0.322 (0.345)   &  1.610 (0.041)  &  0.803 (0.038)   && 0.311 (0.368)  &  1.410 (0.060)  &  0.562 (0.079) \\
+%%                  & &    0.803 (0.038)   &&   0.562 (0.079) \\
+%% \bottomrule
+%% \hline
+%% \end{tabular}
+%% \caption{
+%%     Comparison of characteristic RMSE and \mse over the 91 dimer test
+%%     set for the non-polarizable, rank 0 multipole Lennard-Jones model. The LJ
+%%     models are not parameterized on a component-by-component basis, thus
+%%     RMSE/\mse values for only the total FF energy is shown.  `Attractive'
+%%     errors, representing the average RMSE/\mse for the subset of points
+%%     whose energies are net attractive ($\etot < 0$), are shown in parentheses to
+%%     the right of the total average RMS errors. `Dimer-Specific Fits' and
+%%     `Transferable Fits' are as in the main text.
+%% 	}
+%% \label{tab:lj_rmse}
+%% \end{table}
+%% \normalsize
+%% %\end{landscape}
+%% %%%%%%%%%%%%%%%%%%%%% Average LJ RMSE Table %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% 
+%% \end{section}
+%% \begin{section}{Born-Mayer-sISA: Scale Factor Tests}
+%% 
+%% \begin{subsection}{Comparison to $S_{ij}$}
+%% 
+%% Exact $S_{ij}$ (\eqref{eq:simple_overlap} and \eqref{eq:complicated_overlap})
+%% values were computed for various element pairs as in
+%% \secref{sec:bij_combo_rule}. Born-Mayer overlaps of the form
+%% %
+%% \begin{align*}
+%% S_{ij} &\approx K_{ij}\exp(-\xi B_{ij} \R) \\
+%% \intertext{where}
+%% K_{ij} &= \frac{K}{B^{3}_{ij}} \\
+%% B_{ij} &= \sqrt{B_i B_j}
+%% \end{align*}
+%% %
+%% were fit to these exact overlaps; $K$ and $\xi$ were optimized as universal
+%% parameters by performing a log-weighted fit over the entire set of $S_{ij}$
+%% values. 
+%% 
+%% %%%%%%%%%%%%%%%%%%%%% Optimized S_IJ parameters Table %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \begin{table}
+%% \small
+%% \centering
+%% \renewcommand\arraystretch{1.1}
+%% \begin{tabular}{@{}rcccc@{}}
+%% \hline
+%% \toprule
+%% Range of \R & \phantom{ab} & $\xi$ & \phantom{ab} & K \\
+%% %% \multicolumn{5}{l}{(Fraction of Van der Waals radii for each atom pair)} \\
+%% \midrule
+%% {$[0.8,1.2]$} & & 0.738   & & 12.2  \\
+%% {$[1.0,2.0]$} & & 0.812   & & 20.9  \\
+%% {$[1.0,4.0]$} & & 0.878   & & 42.6  \\ 
+%% 
+%% \bottomrule
+%% \hline
+%% \end{tabular}
+%% \caption{
+%%     Optimized Born-Mayer parameters, $\xi$ and $K$, for fits to \\
+%% $S_{ij} \approx \frac{K}{(B_iB_j)^{\sfrac32}}\exp(-\xi \sqrt{B_iB_j} \R)$.
+%% $B_i$ and $B_j$ values have been chosen as in \ref{sec:bij_combo_rule}.
+%% Tabulated \R ranges are expressed as a fraction of the sum of van der Waals
+%% radii for atoms $i$ and $j$.
+%% 	}
+%% \label{tab:sij_scale_factor}
+%% \end{table}
+%% \normalsize
+%% %%%%%%%%%%%%%%%%%%%%% Optimized S_IJ parameters Table %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% Optimized parameters are shown in \ref{tab:sij_scale_factor} for various
+%% ranges of \R.
+%% As shown in
+%% \ref{tab:sij_scale_factor}, the scale factor $\xi$ is highly sensitive to
+%% the values of \R included in the fits, with larger values of \R tending to
+%% increase $\xi$. On the other hand, $\xi$ is fairly insensitive to the
+%% values of $B_i$ and $B_j$: setting $\xi = \xi_0 + \xi_1 B_{ij}$ does
+%% not significantly improve fit quality. On the grounds of our overlap
+%% tests, it is difficult to establish a precise value for $\xi$, though our
+%% results do suggest that $\xi \sim 0.80$ and is largely independent of
+%% the atomic exponents themselves.
+%% 
+%% \end{subsection}
+%% \begin{subsection}{Comparison to \vtot}
+%% 
+%% Alternatively, we
+%% optimized the \bmsisaff scale factor by minimizing errors in the force field 
+%% itself. Average RMS errors for a variety of scale factors are shown in
+%% \ref{tab:bmsisaff_scale_rmse}. Regardless of whether we consider each energy
+%% component separately, or focus on the overall energy, setting $\xi=0.84$
+%% is optimal; RMS errors for this choice are
+%% comparable to the \isaffold itself.
+%% 
+%% %%%%%%%%%%%%%%%%%%%%% Average RMSE Table %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% \begin{landscape}
+%% \begin{table}
+%% \small
+%% \centering
+%% \renewcommand\arraystretch{1.1}
+%% \begin{tabular}{@{}rccccccc@{}}
+%% \hline
+%% \toprule
+%% & \phantom{ab} &
+%%   \multicolumn{6}{c}{Born-Mayer-sISA Scale Factor} 
+%%   \\
+%% \cmidrule{3-8}
+%% 
+%% Component & & $\xi= 0.80$ & $\xi= 0.82$ & $\xi= 0.84$ & $\xi= 0.86$ & $\xi = 0.88$ & $\xi = 0.90$  \\
+%%      %% & & \multicolumn{1}{c}{(kJ mol$^{-1}$)} & \multicolumn{1}{c}{(kJ mol$^{-1}$)} &  \multicolumn{1}{c}{(kJ mol$^{-1}$)}
+%%      %% & & \multicolumn{1}{c}{(kJ mol$^{-1}$)}& \multicolumn{1}{c}{(kJ mol$^{-1}$)} \\
+%% \midrule
+%% Exchange        & &  3.078 (0.697)   &    2.690 (0.668) &  2.677 (0.686)  & 2.841 (0.702)  &    3.225 (0.742)  &    3.798 (0.791) \\
+%% Electrostatics  & &  1.144 (0.418)   &    1.105 (0.378) &  1.083 (0.352)  &    1.077 (0.342)  &    1.104 (0.354)  &    1.105 (0.373)  \\
+%% Induction       & &  0.258 (0.099)   &    0.253 (0.097) &  0.250 (0.096)  &    0.246 (0.095)  &    0.243 (0.094)  &    0.240 (0.094)  \\
+%% \dhf            & &  0.241 (0.072)   &    0.244 (0.069) &  0.248 (0.068)  &    0.255 (0.070)  &    0.263 (0.075)  &    0.272 (0.082)  \\
+%% Dispersion      & &  0.934 (0.383)   &    0.803 (0.337) &  0.856 (0.336)  &    1.078 (0.370)  &    1.388 (0.426)  &    1.740 (0.496)  \\
+%% \addlinespace                                                                                                                        
+%% \textbf{                                                                                                                             
+%% Total Energy}   & &  1.970 (0.503)   &    1.775 (0.455) &  1.751 (0.453)  &    1.818 (0.465)  &    2.084 (0.516)  &    2.451 (0.577) \\
+%% \bottomrule
+%% 
+%% 
+%% \hline
+%% \end{tabular}
+%% \caption{
+%% 	Average RMS errors over the 91 dimer test set for \bmsisaff using different exponential scale factors. 
+%% 	All quantities are in kJ mol$^{-1}$ except for scale factors, which are unitless.
+%%     `Attractive' RMS errors, representing the average RMS error for
+%%     the subset of points whose energies are net attractive (i.e., where $E_{tot} <
+%%     0$), are shown in parentheses to the right of the total average RMS errors.
+%%     Geometric (rather than arithmetic) averages are used in all cases.
+%% 	}
+%% \label{tab:bmsisaff_scale_rmse}
+%% \end{table}
+%% \normalsize
+%% \end{landscape}
+%% %%%%%%%%%%%%%%%%%%%%% Average RMSE Table %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% \end{subsection}
+%% 
+%% \end{section}
+%% \begin{section}{Slater-OPT and Born-Mayer-OPT Force Fields}
+%% 
+%% We developed a Slater-OPT force field,
+%% identical to the \isaffold except that \B parameters were optimized to reproduce the
+%% DFT-SAPT exchange-repulsion energy.
+%% Analogously, we developed Born-Mayer-OPT as an
+%% extension of the \bmsisaff. Treating \B as a completely
+%% unconstrained parameter led to poor dispersion energies and overall
+%% transferability, and was not considered further.
+%% Instead, exponents were optimized using a harmonic
+%% penalty function of the form $k(B-B_0)^2$, with $k=10^{-5}$ a.u.  For
+%% Slater-OPT, $B_0$ values were taken from the \isaffold; for Born-Mayer-OPT, the \saptff
+%% values were used. 
+%% RMS errors for Slater-OPT and Born-Mayer-OPT are shown in
+%% \ref{tab:bmopt_rmse}. 
+%% For both Dimer-Specific and Transferable fits, Slater-OPT and Born-Mayer-OPT are
+%% of comparable quality. Both force fields are only slight improvements to
+%% either the \isaffold or the \bmsisaff; considering the extra number of free parameters
+%% required to optimize atomic exponents, we consider these results further
+%% confirmation of the inherent quality of the ISA exponents.
+%% 
+%% %%%%%%%%%%%%%%%%%%%%% Average RMSE Table %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %\begin{landscape}
+%% \begin{table}
+%% \small
+%% \centering
+%% \renewcommand\arraystretch{1.1}
+%% \begin{tabular}{@{}rcccccc@{}}
+%% \hline
+%% \toprule
+%% & \phantom{ab} &
+%%   \multicolumn{2}{c}{Dimer-Specific Fits} &
+%%   \phantom{ab} &
+%%   \multicolumn{2}{c}{Transferable Fits} \\
+%% \cmidrule{3-4} \cmidrule{6-7}
+%% 
+%% Component & & Slater-OPT & Born-Mayer-OPT & & Slater-OPT & Born-Mayer-OPT  \\
+%%      & & \multicolumn{1}{c}{(kJ mol$^{-1}$)}  &  \multicolumn{1}{c}{(kJ mol$^{-1}$)}
+%%      & & \multicolumn{1}{c}{(kJ mol$^{-1}$)}  &  \multicolumn{1}{c}{(kJ mol$^{-1}$)} \\
+%% \midrule
+%% Exchange        & &    2.513 (0.636)   &    2.433 (0.639)  & &    2.507 (0.665)  &   2.459 (0.671) \\
+%% Electrostatics  & &    1.087 (0.362)   &    1.068 (0.352)  & &    1.129 (0.359)  &   1.113 (0.352) \\
+%% Induction       & &    0.256 (0.097)   &    0.252 (0.096)  & &    0.282 (0.102)  &   0.280 (0.102) \\
+%% \dhf            & &    0.241 (0.068)   &    0.244 (0.067)  & &    0.272 (0.077)  &   0.276 (0.077) \\
+%% Dispersion      & &    0.836 (0.330)   &    0.822 (0.349)  & &    0.823 (0.331)  &   0.820 (0.350) \\
+%% \addlinespace                                                                        
+%% \textbf{                                                                
+%% Total Energy}  \\ 
+%% \emph{RMSE}
+%%                 & &    1.549 (0.448)   &    1.597 (0.450)  & &    1.482 (0.454)  &   1.532 (0.458) \\
+%% \emph{\mse}
+%%                 & &    0.160 (0.065)   &    0.160 (0.084)  & &    0.149 (0.057)  &   0.204 (0.130) \\
+%% \bottomrule
+%% 
+%% \hline
+%% \end{tabular}
+%% \caption{
+%%     Comparison of geometric mean RMS errors over the 91 dimer test
+%%     set for the Slater-OPT and Born-Mayer-OPT methods.
+%%     `Attractive' RMS errors, representing the average RMS
+%%     error for the subset of points whose energies are net attractive ($\etot < 0$), 
+%%     are shown in parentheses to the right of the total average RMS errors.
+%% 	}
+%% \label{tab:bmopt_rmse}
+%% \end{table}
+%% \normalsize
+%% %\end{landscape}
+%% %%%%%%%%%%%%%%%%%%%%% Average RMSE Table %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 
+%% 
+%% 
+%% 
+%% \end{section}
+%% 
+%% 
+%% \begin{section}{Monomer Geometries}
+%% 
+%% Geometries for each molecule in the 91 dimer test set are listed below, in
+%% alphabetical order. Also listed are the relevant energies (highest occupied
+%% molecular orbital and ionization potential) for the asymptotic correction
+%% required in DFT-SAPT calculations of each molecule. All asymptotic corrections
+%% were performed at a PBE0/\avtz level of theory. Distances and energies are in
+%% a.u.
+%% 
+%% \scriptsize
+%% \input{monomer_geometries.tex}
+%% \normalsize
+%% 
+%% 
+%% \end{section}
+%% \begin{section}{Homomonomeric Parameters}
+%% 
+%% 
+%% Parameters for each molecule (as fit to homomonomeric dimers) are given
+%% for the \isaffold, the \saptff, and the \bmsisaff. Multipole moments are listed in
+%% the first subsection, as these values are identical for all
+%% force fields. The next subsections list $A_i$, $B_{i}$, $C_{i,n}$
+%% parameters for each atom type in each molecule, as well as Drude oscillator
+%% charges $Q_{drude}$.
+%% 
+%% \begin{subsection}{Multipole Moments}
+%% 
+%% Multipole moments for each atom in each molecule are listed in
+%% \ref{tab:multipoles}. Multipoles are expressed in spherical form
+%% following notation used by \citeauthor{stone2013theory}.\cite{stone2013theory}
+%% Note that the global coordinate system is used, with molecular geometries as
+%% in \ref{tab:geometries}. 
+%% 
+%% \scriptsize
+%% \input{monomer_multipoles.tex}
+%% \normalsize
+%% 
+%% \end{subsection}
+%% \clearpage
+%% \begin{subsection}{\isaffold Parameters}
+%% 
+%% $A_i$, $B_i$, $C_{i,n}$ parameters for the \isaffold are listed in \ref{tab:isaffold}.
+%% \A, \B, and $C_{ij,n}$ parameters can be determined from the following
+%% combination rules:
+%% \begin{align*}
+%% \A &= A_iA_j \\
+%% \B &= \sqrt{B_iB_j} \\
+%% C_{ij,n} &= \sqrt{C_{i,n}C_{j,n}}
+%% \end{align*}
+%% %
+%% Parameters are given for each unique atom type in each molecule; where
+%% multiple atom types exist for a particular element, atom types are labeled 
+%% first with the element name and second by connectivity. Thus the carbonyl
+%% carbon in acetone is labeled `CO', whereas the methyl carbon is labeled `CH'.
+%% 
+%% The total force field energy is defined by the following equations:
+%% %
+%% \begin{align*}
+%% B_i &= B_i^{ISA} \\
+%% P(B_{ij},r_{ij}) &= \frac13 (B_{ij} r_{ij})^2 + B_{ij} r_{ij} + 1 \\
+%% x &= B_{ij}r_{ij} - \frac{2 B_{ij}^2 r_{ij} + 3 B_{ij} }
+%% { B_{ij}^2 r_{ij}^2 + 3 B_{ij} r_{ij} + 3} r_{ij} \\
+%% f_{2n}(x) &= 1 - e^{-x} \sum \limits_{k=0}^{2n} \frac{(x)^k}{k!} \\
+%% \vrep_{ij} &= A_{ij}^{exch} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) \\
+%% \velst_{ij} &= -A_{ij}^{elst} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) + \vmultipole \\
+%% \vind_{ij} &= -A_{ij}^{ind} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) + \vdrudeind \\
+%% \vdhf_{ij} &= -A_{ij}^{\dhf} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) +
+%% \vdrudescf \\
+%% \vdisp_{ij} &= - \sum\limits_{n=3}^{6} f_{2n}(x) \frac{C_{ij,2n}}{r_{ij}^{2n}} \\
+%% \\
+%% \vtot &= \sum\limits_{ij} \velst_{ij} + \vrep_{ij} + \vind_{ij} + \vdhf_{ij} + \vdisp_{ij}
+%% \end{align*}
+%% %
+%% The Tang-Toennies damping function $f$ is defined in the main text; the
+%% polarization energy $\vdrude = \vdrudeind + \vdrudescf$ arising from drude oscillators is defined in
+%% \citen{Yu2011}.
+%% 
+%% \scriptsize
+%% \input{all_isaffold_params.tex}
+%% \normalsize
+%% 
+%% \end{subsection}
+%% \clearpage
+%% \begin{subsection}{\saptff Parameters}
+%% 
+%% $A_i$, $B_i$, $C_{i,n}$ parameters for the \saptff are listed in \ref{tab:saptff}.
+%% \A, \B, and $C_{ij,n}$ parameters can be determined from the following
+%% combination rules:
+%% \begin{align*}
+%% \A &= A_iA_j \\
+%% \B &= \frac{B_iB_j(B_i + B_j)}{B_i^2 + B_j^2} \\
+%% C_{ij,n} &= \sqrt{C_{i,n}C_{j,n}}
+%% \end{align*}
+%% %
+%% Parameters are given for each unique atom type in each molecule; where
+%% multiple atom types exist for a particular element, atom types are labeled 
+%% first with the element name and second by connectivity. Thus the carbonyl
+%% carbon in acetone is labeled `CO', whereas the methyl carbon is labeled `CH'.
+%% 
+%% The total force field energy is defined by the following equations:
+%% %
+%% \begin{align*}
+%% B_i &= 2\sqrt{2IP_i} \\
+%% P(B_{ij},r_{ij}) &= 1 \\
+%% x &= B_{ij}r_{ij} \\
+%% f_{2n}(x) &= 1 - e^{-x} \sum \limits_{k=0}^{2n} \frac{(x)^k}{k!} \\
+%% \vrep_{ij} &= A_{ij}^{exch} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) \\
+%% \velst_{ij} &= -A_{ij}^{elst} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) + \vmultipole \\
+%% \vind_{ij} &= -A_{ij}^{ind} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) + \vdrudeind \\
+%% \vdhf_{ij} &= -A_{ij}^{\dhf} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) +
+%% \vdrudescf \\
+%% \vdisp_{ij} &= - \sum\limits_{n=3}^{6} f_{2n}(x) \frac{C_{ij,2n}}{r_{ij}^{2n}} \\
+%% \\
+%% \vtot &= \sum\limits_{ij} \velst_{ij} + \vrep_{ij} + \vind_{ij} + \vdhf_{ij} +
+%% \vdisp_{ij}
+%% \end{align*}
+%% %
+%% The Tang-Toennies damping function $f$ is defined in the main text; the
+%% polarization energy $E_{pol}$ arising from drude oscillators is defined in
+%% \citen{Yu2011}.
+%% 
+%% \scriptsize
+%% \input{all_saptff_params.tex}
+%% \normalsize
+%% %
+%% \end{subsection}
+%% \clearpage
+%% \begin{subsection}{\bmsisaff Parameters}
+%% 
+%% $A_i$, $B_i$, $C_{i,n}$ parameters for the \bmsisaff are listed in \ref{tab:bmsisaff}.
+%% \A, \B, and $C_{ij,n}$ parameters can be determined from the following
+%% combination rules:
+%% \begin{align*}
+%% \A &= A_iA_j \\
+%% \B &= \sqrt{B_iB_j} \\
+%% C_{ij,n} &= \sqrt{C_{i,n}C_{j,n}}
+%% \end{align*}
+%% %
+%% Parameters are given for each unique atom type in each molecule; where
+%% multiple atom types exist for a particular element, atom types are labeled 
+%% first with the element name and second by connectivity. Thus the carbonyl
+%% carbon in acetone is labeled `CO', whereas the methyl carbon is labeled `CH'.
+%% 
+%% The total force field energy is defined by the following equations:
+%% %
+%% \begin{align*}
+%% B_i &= 0.84B_i^{ISA} \\
+%% P(B_{ij},r_{ij}) &= 1 \\
+%% x &= B_{ij}r_{ij} \\
+%% f_{2n}(x) &= 1 - e^{-x} \sum \limits_{k=0}^{2n} \frac{(x)^k}{k!} \\
+%% \vrep_{ij} &= A_{ij}^{exch} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) \\
+%% \velst_{ij} &= -A_{ij}^{elst} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) + \vmultipole \\
+%% \vind_{ij} &= -A_{ij}^{ind} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) + \vdrudeind \\
+%% \vdhf_{ij} &= -A_{ij}^{\dhf} P(B_{ij}, r_{ij}) \exp(-B_{ij}r_{ij}) +
+%% \vdrudescf \\
+%% \vdisp_{ij} &= - \sum\limits_{n=3}^{6} f_{2n}(x) \frac{C_{ij,2n}}{r_{ij}^{2n}} \\
+%% \\
+%% \vtot &= \sum\limits_{ij} \velst_{ij} + \vrep_{ij} + \vind_{ij} + \vdhf_{ij} + \vdisp_{ij}
+%% \end{align*}
+%% %
+%% The Tang-Toennies damping function $f$ is defined in the main text; the
+%% polarization energy $\vdrude = \vdrudeind + \vdrudescf$ arising from drude oscillators is defined in
+%% \citen{Yu2011}.
+%% 
+%% \scriptsize
+%% \input{all_bmsisaff_params.tex}
+%% \normalsize
+%% 
+%% \end{subsection}
+%% \end{section}
+\begin{section}{Force Field Fits for Homomonomeric Systems}
+
+Scatter plots are shown for each homomonomeric system as
+an indication of force field quality with respect to \saptpbeo benchmark energies
+(\ref{fig:all-scatter}). 
+As in the main text, fits for each energy component are displayed along with
+two views of the total interaction energy.  
+
+    %%%%%%%% All Scatter %%%%%%%%%%
+    \begin{figure}
+    \begin{subfigure}{\textwidth}
+        \caption{Acetone Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/acetone_acetone_scatter.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Ar Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/ar_ar_scatter.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{Chloromethane Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/chloromethane_chloromethane_scatter.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{\co Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/co2_co2_scatter.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{Dimethyl Ether Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/dimethyl_ether_dimethyl_ether_scatter.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Ethane Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/ethane_ethane_scatter.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{Ethanol Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/ethanol_ethanol_scatter.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Ethene Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/ethene_ethene_scatter.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{\ho Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/h2o_h2o_scatter.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Methane Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/methane_methane_scatter.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{Methanol Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/methanol_methanol_scatter.pdf}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \caption{Methyl Amine Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/methyl_amine_methyl_amine_scatter.pdf}
+    \end{subfigure}
+    \end{figure}
+    \begin{figure}
+    \ContinuedFloat
+    \begin{subfigure}{\textwidth}
+        \caption{\nh Dimer}
+        \includegraphics[width=0.9\textwidth]{isotropic/si/nh3_nh3_scatter.pdf}
+    \end{subfigure}
+    \caption{
+    Force field fits for the homomoneric systems using the \isaffold (green), \saptff
+(orange) and \bmsisaff (blue).
+    Fits for each energy component are displayed along with two views of the total interaction energy.
+    The $y=x$ line (black) indicates perfect agreement between reference energies
+    and each force field, while shaded grey areas represent points within $\pm
+    10\%$ agreement of the benchmark. To guide the eye, a line of best fit (dotted
+    line) has been computed for each force field and for each energy component.
+     }
+    \label{fig:all-scatter}
+    \end{figure}
+    %%%%%%%% All Scatter %%%%%%%%%%
+
+
+
+
+
+
+\end{section}
+%% \clearpage
+%% \begin{section}{Force Field Accuracy for \ljff}
+%% 
+%%     %%%%%%%%%%%% Ar-Ar PES %%%%%%%%%%%%%%%%%%
+%%     \begin{figure}
+%%     \includegraphics[width=0.9\textwidth]{isotropic/si/ar_ar_pes_wi_lj.pdf}
+%%     \caption{
+%%     Potential energy surface for the argon dimer. 
+%%     Interaction energies for the \isaffold (dashed curves), \saptff (dash-dotted
+%%     curves), and \ljff (dotted curves) are shown alongside benchmark \saptpbeo energies (solid curves). 
+%%     Note that, for the \ljff force fields, 
+%%     the magnitude of the attractive tail region is overestimated by the
+%%     effective $C_{ij,6}$ dispersion parameter.
+%%     }
+%%     \label{fig:ar-pes}
+%%     \end{figure}
+%%     %%%%%%%%%%%% Ar-Ar PES %%%%%%%%%%%%%%%%%%
+%% 
+%% 
+%%     %%%%%%%% Ethane-Ethane Scatter %%%%%%%%%%
+%%     \begin{figure}
+%%     %\includegraphics[width=0.9\textwidth]{isotropic/si/ammonia_ff_quality.png}
+%%     \includegraphics[width=0.9\textwidth]{isotropic/si/ethane_ethane_lj_scatter.pdf}
+%%     \caption[foo]{
+%%     Fits for two views of the total interaction energy for 
+%%     the ethane dimer using the Slater-ISA (teal),
+%%     LJ $\lambda = 0.1$ (pink) and LJ $\lambda = 2.0$ (lime green) FFs.
+%%     The diagonal line (black) indicates perfect agreement between reference energies
+%%     and each force field, while shaded grey areas represent points within $\pm
+%%     10\%$ agreement of the benchmark. To guide the eye, a line of best fit (dotted
+%%     line) has been computed for each force field.
+%%      }
+%%     \label{fig:ethane-scatter}
+%%     \end{figure}
+%%     %%%%%%%% Ethane-Ethane Scatter %%%%%%%%%%
+%% 
+%%     %%%%%%%%%%% Ethane-Ethane PES %%%%%%%%%%%
+%%     \begin{figure}
+%%     \includegraphics[width=0.9\textwidth]{isotropic/si/ethane_ethane_pes_wi_lj.pdf}
+%%     \caption{
+%%     A representative potential energy scan near a local minimum for the ethane dimer. 
+%%     Interaction energies for the \isaffold (dashed curves), \saptff (dash-dotted
+%%     curves), and \ljff (dotted curves)  are shown alongside benchmark \saptpbeo energies (solid curves). The
+%%     energy decomposition for DFT-SAPT and for each force field is shown for reference.
+%%      The ethane dimer configuration in this scan corresponds to the most
+%%     energetically attractive dimer included in the training set; other
+%%     points along this scan are not included in the training set.
+%%     }
+%%     \label{fig:ethane-pes}
+%%     \end{figure}
+%%     %%%%%%%%%%% Ethane-Ethane PES %%%%%%%%%%%
+%% 
+%%     %%%%%%%% Acetone-Acetone Scatter %%%%%%%%%%
+%%     \begin{figure}
+%%     %\includegraphics[width=0.9\textwidth]{isotropic/si/ammonia_ff_quality.png}
+%%     \includegraphics[width=0.9\textwidth]{isotropic/si/acetone_acetone_lj_scatter.pdf}
+%%     \caption{
+%%     Force field fits for the acetone dimer using the Slater-ISA (teal), LJ
+%% $\lambda = 0.1$ (pink) and LJ $\lambda = 2.0$ (lime green) FFs.
+%%     Fits for two views of the total interaction energy are displayed.
+%%     The diagonal line (black) indicates perfect agreement between reference energies
+%%     and each force field, while shaded grey areas represent points within $\pm
+%%     10\%$ agreement of the benchmark. To guide the eye, a line of best fit (dotted
+%%     line) has been computed for each force field.
+%%      }
+%%     \label{fig:acetone-scatter}
+%%     \end{figure}
+%%     %%%%%%%% Acetone-Acetone Scatter %%%%%%%%%%
+%% 
+%%     %%%%%%%%%%% Acetone-Acetone PES %%%%%%%%%%%
+%%     \begin{figure}
+%%     \includegraphics[width=0.9\textwidth]{isotropic/si/acetone_acetone_pes_wi_lj.pdf}
+%%     \caption{
+%%     A representative potential energy scan near a local minimum for the acetone dimer. 
+%%     Interaction energies for the \isaffold (dashed curves), \saptff (dash-dotted
+%%     curves), and \ljff (dotted curves) are shown alongside benchmark \saptpbeo energies (solid curves). The
+%%     energy decomposition for DFT-SAPT and for each force field is shown for reference.
+%%       The intermolecular distance is taken to be the
+%%       internuclear distance between the two carbonyl carbons on each acetone
+%%       monomer.  
+%%      The acetone dimer configuration in this scan corresponds to the most
+%%     energetically attractive dimer included in the training set; other
+%%     points along this scan are not included in the training set.
+%%     }
+%%     \label{fig:acetone-pes}
+%%     \end{figure}
+%%     %%%%%%%%%%% Acetone-Acetone PES %%%%%%%%%%%
+%% 
+%% 
+%% \end{section}
+%% \clearpage
+%% \begin{section}{Parameter Robustness for Argon}
+%% 
+%% Argon parameters were tested for robustness by changing the weighting function
+%% as described in the main text. As with ethane, optimized \isaffold \A parameters are
+%% much less sensitive to the choice of weighting function compared to
+%% the \saptff. As a result, the \isaffold shows decreased uncertainty when computing
+%% the 2\super{nd} virial coefficient. Virial coefficients for the \saptff, on the
+%% other hand, depend more strongly on the choice of weighting function. The
+%% fortuitous agreement with experiment for the \saptff with $\lambda = 0.5$ may
+%% point to inaccuracies in the DFT-SAPT potential itself, but is not indicative of
+%% enhanced force field fitting quality. (Indeed,
+%% \ref{fig:ar-weighting} shows that this weighting function leads to the worst
+%% agreement with DFT-SAPT compared to other $\lambda$ values). Overall, the
+%% argon fits demonstrate increased parameter robustness for the \isaffold.
+%% 
+%% 
+%%     %%%%%%%% Weighting Function Tests %%%%%%%
+%%     \begin{figure}
+%%     \includegraphics[width=0.8\textwidth]{isotropic/si/compare_ar_ar_scan.pdf}
+%%     \vspace{10 mm}
+%%     \includegraphics[width=0.8\textwidth]{isotropic/si/weighted_ar_2nd_virial.pdf}
+%%     \caption[foo]{
+%%         Comparison of the \isaffold and the \saptff in terms of sensitivity to the
+%%         weighting function employed in parameter optimization for the Ar 
+%%         dimer. Three weighting functions, $\lambda = 0.5$ (purple), $\lambda = 2.0$
+%%         (blue), and $\lambda = 5.0$ (green) are shown, with higher $\lambda$ values
+%%         indicating more weighting of repulsive configurations.
+%%               
+%%         (top) Total interaction energies for the \isaffold (left) and the \saptff (right)
+%%         indicating the accuracy of each force field with respect to \saptpbeo benchmark
+%%         energies. DFT-SAPT energies are shown as black solid lines, force field fits with
+%%         dotted lines. Colors for the different weighting functions is as above.
+%%               
+%%         (bottom) Computed 2$^\text{nd}$ virial coefficients for argon. Data for
+%%         the \isaffold and \saptff are depicted using open circles and shaded squares,
+%%         respectively; coloration for the different weighting functions is as above.
+%%         Experimental data from \citeauthor{Dymond1980} (black line) is also shown.
+%%       %ASK: Do we actually cite Dymond and Smith for this, since it's a compiled
+%%       %work, or do I need to try and dig up the original experimentallist?
+%%     }
+%%     \label{fig:ar-weighting}
+%% 
+%%     \end{figure}
+%%     %%%%%%%% Weighting Function Tests %%%%%%%
+%% 
+%% \end{section}
+%% 
+%% 
+%% \clearpage
+%% \begin{section}{Parameter Robustness for Ethane; \ljff results}
+%% 
+%% 
+%% Ethane parameters were tested for robustness by changing the weighting function
+%% as described in the main text. Optimized \isaffold \A parameters are
+%% much less sensitive to the choice of weighting function compared to
+%% the \ljff. As a result, the \isaffold shows decreased uncertainty when computing
+%% the 2\super{nd} virial coefficient. Virial coefficients for the \ljff, on the
+%% other hand, depend more strongly on the choice of weighting function. 
+%% 
+%% 
+%%     %%%%%%%% Weighting Function Tests %%%%%%%
+%%     \begin{figure}
+%%     \includegraphics[width=0.8\textwidth]{isotropic/si/compare_lj_ethane_ethane_scatter.pdf}
+%%     \vspace{10 mm}
+%%     \includegraphics[width=0.8\textwidth]{isotropic/si/weighted_ethane_2nd_virial_lj.pdf}
+%%     \caption[foo]{
+%%         Comparison of the \isaffold and the \ljff in terms of sensitivity to the
+%%         weighting function employed in parameter optimization for the ethane
+%%         dimer. Three weighting functions, $\lambda = 0.5$ (purple), $\lambda = 2.0$
+%%         (blue), and $\lambda = 5.0$ (green) are shown, with higher $\lambda$ values
+%%         indicating more weighting of repulsive configurations.
+%% 
+%%         (top) Total interaction energies for the \isaffold (left) and the \ljff (right)
+%%         indicating the accuracy of each force field with respect to \saptpbeo benchmark
+%%         energies.  The diagonal line (black) indicates perfect agreement between
+%%         reference energies and each force field, while shaded grey areas represent
+%%         points within $\pm 10\%$ agreement of the benchmark.  To guide the eye, a line
+%%         of best fit (dotted line) has been computed for each force field and for each
+%%         weighting function.
+%%               
+%%         (bottom) Computed 2$^\text{nd}$ virial coefficients for argon. Data for
+%%         the \isaffold and the \saptff are depicted using open circles and shaded squares,
+%%         respectively; coloration for the different weighting functions is as above.
+%%         Experimental data from \citeauthor{Dymond1980} (black line) is also shown.
+%%       %ASK: Do we actually cite Dymond and Smith for this, since it's a compiled
+%%       %work, or do I need to try and dig up the original experimentallist?
+%%     }
+%%     \label{fig:ar-weighting}
+%% 
+%%     \end{figure}
+%%     %%%%%%%% Weighting Function Tests %%%%%%%
+%% \end{section}
+%% 
+%% 
+%% \pagebreak
+%% \scriptsize
+%% \input{all_bij_exponents.tex}
+%% \normalsize
+%% 
+%% %% \end{section}
+%% 
+%% 
+%% \singlespacing
+%% 
+%% \renewcommand{\baselinestretch}{1}
+%% 
+%% \bibliographystyle{achemso}
+%% \bibliography{/Users/Mary/Documents/library}
+%% %\bibliography{rp_extras}
+%% 
+%% 
+%% \end{document}
