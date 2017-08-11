@@ -1,0 +1,164 @@
+\begin{section}{Force Fields}
+
+Despite the advantages and opportunities afforded by their computational efficiency, molecular
+simulation can also be \emph{limited} by force fields in the sense that, in
+the absence of fortuitous error cancellation, the predictive accuracy of
+molecular simulation is inextricably tied to the accuracy of the force field
+used to run the simulation. For this reason, one of the central challenges
+facing molecular simulation today is the development of new and more accurate
+force fields.\cite{Freddolino2010,Ballone2014}
+
+To understand why the development of accurate force fields remains so
+challenging, it's worthwhile to briefly discuss the development process
+itself, both in terms of the functional forms that get used in force fields as
+well as the manner in which these functional forms are parameterized.
+Traditionally, force fields have been created by an `empirical' development
+proccess,\cite{Stone2007}
+in which the force field functional form is parameterized so as to reproduce
+select experimental properties of interest. The obvious advantage of such a
+strategy is that, so long as the questions one is interested in are related to
+conditions (both chemical and physical) similar to the ones used in parameterization,
+there is a good chance that empirical force fields will be of good accuracy in
+answering those questions. Thus, for instance, empirical force fields have had
+remarkable success in simulating the behavior of folded proteins under biologically-relevant conditions.
+\cite{Caleman2011,Piana2014,Lopes2015} 
+
+Despite these successes, empirical force field development also faces
+significant challenges. The first challenge is one of `transferability':
+outside of the parameterization scope discussed above,
+there is little
+guarantee that empirical force fields will retain 
+the good accuracy that can be expected within the original parameterization
+conditions.
+\cite{Hornak2006,Freddolino2010}
+To continue with our protein example, it has recently been shown how many
+empirical force fields, all of which generally provide similar predictions
+regarding the properties of folded proteins, differ widely when it comes to
+predicting a structurally-distinct class of partially unfolded,
+`intrinsically-disorded' proteins.
+\cite{Rauscher2015,Piana2014}
+Similarly, and despite much effort, it's still difficult to find an
+empirically-developed force field capable of correctly describing
+water across a wide range of physical and chemical environments.
+\cite{Cisneros2016a,Jorgensen2005}
+More distressingly, even within the limited range of experimental properties over which empirical
+force fields are intended to be used, force field accuracy can still be an
+issue, and time-consuming re-parameterization methods must often be employed
+in order to correct for deficiencies in the original force field parameters.
+\cite{Hornak2006,Freddolino2010}
+
+Arguably, the underlying reason why empirical force field development is
+limited (both in terms of accuracy and transferability) is that the
+force fields themselves are typical based on rather limited, or `effective', physical
+models.
+%TODO: Check (and maybe find more) references here
+\cite{Parker2015,Sherrill2009,Zgarbova2010}
+Explicit many-body polarization, for instance, is not often accounted for in
+empirical force fields, despite the fact that it is known to be an important
+factor in many important chemical phenomenon.
+\cite{Cisneros2016a,Freddolino2010,Cieplak2009}
+Similarly, accurate multipolar expansions of electrostatic energies are often
+reduced to more approximate point charge models,\cite{Cardamone2014} 
+charge penetration effects are usually neglected,
+\cite{Parker2015,Sherrill2009}
+and exchange effects are described by an overly-repulsive (but computationally
+convenient) $1/r_{ij}$ functional form.
+\cite{Abrahamson1963,Mackerell2004,Parker2015,Sherrill2009,Zgarbova2010}
+In some cases, these modeling choices are justified by increased gains in
+computational efficiency; indeed, it is only within the past decade or so that
+explicit polarization and higher-order multipolar electrostatic
+treatments have become computationally-affordable.
+\cite{Albaugh2016,Cardamone2014,Cieplak2009,Simmonett2015,Simmonett2016,Demerdash2014}
+In other cases, however, empirical force field development is limited by the
+significant complications involved in parameterization.
+With empirical force field development, each additional parameter included in
+the model requires new (and expensive) molecular simulations to be run in
+order to optimally tune the parameter. Moreover, because experiment can
+only probe the total energies in a given system, parameters in empirical
+force fields must be fit simultaneously, and models with many parameters are
+usually too time-consuming to optimize, and too prone to issues of
+overfitting,\cite{Hawkins2004} to warrant the effort. For these reasons, it is
+likely that empirically-fit force fields will remain restricted to
+parametrically simple, physically-approximate, models.
+
+To circumvent the practical limitations of empirical force field development,
+an alternate strategy is to fit force fields, not directly against
+experimental properties, but rather to benchmark calculations of the
+underlying \pes itself.\cite{Stone2007} 
+The drawback of such a first-principles, or 'ab initio', methodology, is
+obvious: by not fitting to experimental quantities, we lose room for error in
+ensuring the resulting force field closely match experimental reality,
+and introduce complicating factors (as discussed in \cref{ch:mastiff}) when
+comparing model and experiment such as the accuracy of the underlying
+benchmark \pes, the treatment of many-body and/or quantum effects, and
+possible errors in the experiments themselves.
+\cite{Johnson2009,Taylor2016,Chalasinski2000}
+Nevertheless, ab initio force field development has several clear advantages
+over its empirical counterpart. 
+First, and especially for systems where experimental data is lacking, ab inito
+force fields can be fit to calcuated data in order to make novel experimental
+predictions. Furthermore (and as discussed in \cref{sec:intro-sapt}), ab
+initio force fields can be fit, not merely to the total energy of a system,
+but also on a component-by-component basis to individually reproduce each
+physically-meaningful contribution to the \pes. This, along with the fact that
+directly parameterizing the \pes leads to far simpler optimization protocols,
+means that ab initio force fields can be fit to more complicated and more
+physically-motivated functional
+forms, thus enabling the possibility of increased accuracy in molecular
+simulation. Furthermore, we show in \cref{sec:intro-sapt} how advanced
+ab initio parameterization methods can lead to decreased reliance on error
+cancellation and minimize overfitting, thus augmenting both the accuracy and
+transferability of the resulting force fields. Finally, with ab initio force
+fields we can easily assess the fit quality compared to an underlying
+benchmark \pes, and
+(as will become apparent) such an ability to
+directly evaluate compare between putative model \glspl{pes} has enabled us to
+postulate, test, and evaluate new and improved functional forms and parameterization
+methods for ab initio force field development. 
+
+\end{section}
+
+
+%% step of the parameter optimization process, the required comparisons to experiment 
+%% depend on the results from molecular simulation , 
+%% and so fitting parameters to an empirical force field is usually an incredibly
+%% involved process. As a result, functional forms for empirical force fields
+%% can depend on only a select few parameters, and very simple models for the
+%% physics of molecular interactions are typical. 
+%% With empirical force fields, the molecular \pes is typically
+%% decomposed into `bonding' and 'non-bonding' contributions,
+%% \begin{align}
+%% U = U_b + U_{nb}.
+%% \end{align}
+%% The bonded energy term is designed to model intramolecular covalent
+%% interactions, and is
+%% generally represented in terms of two-, three-, and four-body contributions
+%% between connected atoms,
+%% \begin{align}
+%% \begin{split}
+%% U_b &= \frac12 \sum\limits_{(ij)} K^s_{ij}(r_{ij} - \bar r_{ij})^2
+%% + \frac12 \sum\limits_{(ijk)} K^b_{ijk}(\theta_{ijk} - \bar \theta_{ijk})^2 \\
+%% &\qquad + \frac12 \sum\limits_{(ijkl)} K^{\tau}_{ijkl} \left(1 + \cos(n\phi_{ijkl} - \bar
+%% \phi_{ijkl}) \right)
+%% \end{split}
+%% \end{align}
+%% where the various terms represent, respectively, the effects of bond
+%% stretching, angle bending, and torsions.
+%% \cite{Ballone2014}
+%% Non-bonded interactions are approximately modeled via a simple
+%% functional form intended to account for both
+%% Coulombic and `van
+%% der Waals' (repulsion plus dispersion) interactions,
+%% \begin{align}
+%% U_{nb} = \frac{1}{4\pi\epsilon_0} \sum\limits_{i\ne j} \frac{q_iq_j}{r_{ij}} +
+%% \sum\limits_{i\ne j} 4\epsilon_{ij} \left [
+%% \left(\frac{\sigma_{ij}}{r_{ij}}\right)^{12}
+%% -\left(\frac{\sigma_{ij}}{r_{ij}}\right)^{6}
+%% \right ]
+%% \end{align}
+%% where the first term is sometimes referred to as a `point charge' model, and the second
+%% term is the popular Lennard-Jones 12-6 potential. Notably, while some of the
+%% above non-bonded functional forms are grounded in approximate first-principles
+%% theories, others (such as the
+%% $\sfrac{1}{r_{ij}^{12}}$ repulsive term) are merely a computationally
+%% convenient choice.

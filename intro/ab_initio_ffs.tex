@@ -1,0 +1,148 @@
+\begin{section}{Ab initio force field development with \acrshort{sapt} and
+\acrshort{isa}}
+
+As implied throughout the preceding discussion, our overall goals for ab
+initio force field development can be summarized as follows:
+\begin{enumerate}
+\item \textbf{Accuracy}: 
+Ab initio force fields should
+ideally be able to reproduce a benchamrk \pes (as calculated from high-quality
+\est) to within chemical accuracy or better, with the knowledge that accuracy
+compared to the \pes will be well-correlated with accuracy compared to
+experiment
+\item \textbf{Transferability}: The parameters and
+functional forms used ab inito force fields should be transferable between
+chemical and physical environments without loss of accuracy
+\item \textbf{Cost-Efficiency}: 
+The computational cost of ab initio force fields should ideally be comparable to that
+of empirically-derived models
+\item \textbf{Physicality}: So as to minimize a reliance on error cancellation
+and promote accuracy and transferability, functional forms and parameters for
+ab initio force fields should be grounded in accurate and
+physically-meaningful first principles theories
+\item \textbf{Simplicity}: When possible, and where the accuracy and
+physicality of the model is not compromised, the parameterization methodologies
+and functional forms used in ab initio force field development should be kept
+as simple as possible, particularly so as to avoid overfitting
+\end{enumerate}
+
+A number of strategies for ab inito force field development are present in the
+literature,\cite{Stone2007,Ballone2014} however here we focus on the general
+approach used in our group\cite{Schmidt2015} to meet the above goals for
+developing optimal ab initio force fields. Additionally,
+as the intramolecular portion of a force field is
+usually more straightforward to optimize,\cite{} we limit our discussion to
+the functional forms and parameters used in developing the intermolecular part
+of the potential.
+In what follows, we describe three main strategies employed in our group to
+guide ab inito force field development: separation of the $N$-body
+potential into 2- and many-body contributions via the \mbe (\cref{sec:intro-mbe}), decomposition and
+subsequent component-by-component parameterization of the total two-body
+interaction energy using \sapt (\cref{sec:intro-sapt}), and characterization
+of the atomic contributions to each energy component via \isa
+(\cref{sec:intro-isa}).
+
+\begin{subsection}{The Many-Body Expansion}
+\label{sec:intro-mbe}
+
+
+For an $N$-body system (here and throughout we use the terms `body' and `atom'
+synonymously), the molecular \pes is given as a $3N-6$ 
+dimensional function of particle positions,
+\cite{Stone2007,Cieplak2009,McDaniel2014,Elrodt1997}
+%
+\begin{align}
+V_N(\vec r_1 ,\vec r_2 ,\dots,\vec r_N ) =
+    \sum\limits_{i}^{N} V_1(\vec r_i) +
+    \sum\limits_{i < j}^{N} \Delta V_2(\vec r_i, \vec r_j) +
+    \sum\limits_{i < j < k}^{N} \Delta V_3(\vec r_i, \vec r_j, \vec r_k) +
+\dots
+\end{align}
+%
+Here, and without loss of generality, we have expressed this roughly $3N$-dimensional
+surface as a `many-body' expansion in terms of $n$-body interacting clusters.
+Thus $V_1$ describes one-body, or intramolecular, contributions to the overall
+\pes, and $\Delta V_2$ is referred to as the `pair potential', which represents the
+difference in interaction energies between a two-body cluster (i.e. dimer), and the
+individual monomers themselves. In a similar fashion,
+$\Delta V_3$ corresponds to
+the non-additive contributions (that is, energy not accounted for
+in $V_2$) to the interaction energies of 3-body clusters, and $\Delta V_4$ and
+higher-order terms are defined analagously. 
+
+The utility of the \mbe comes from the fact that, aside from 
+many-body polarization, for which the complete $N$-body effects can readily be
+calculated,\cite{Stone2007,Rick2002} the \mbe is typically
+rapidly convergent, and often only $\Delta V_2$ and
+ $\Delta V_3$ terms are required to completely and accurately describe
+$V_N$.\cite{Stone2007,stone2013theory} In fact, the combination of $\Delta
+V_2$ and $N$-body polarization often account for
+upwards of 90--95\%
+of the total interaction energy,
+\cite{McDaniel2014,stone2013theory}
+such that the accuracy of a given ab initio force field depends primarily on
+the accuracy of the pair potential itself. 
+When
+required, explicit terms for 
+$\Delta V_3$ can easily be added to an ab initio force field as an additive
+correction, and accurate models for  $\Delta V_3$ have been outline in
+previous work.
+\cite{McDaniel2014}
+Nevertheless,
+we can usually restrict our focus to the development of accurate models for $\Delta
+V_2$, with the knowledge that accuracy in describing $\Delta V_2$ will have a
+direct effect on accuracy with respect to $V_N$ and/or experiment. 
+
+%TODO: Describe the practical advantages of the mbe?
+
+\end{subsection}
+
+\begin{subsection}{\sapt}
+\label{sec:intro-sapt}
+
+Having limited our attention to modeling the pair potential,  $\Delta V_2$,
+a second technique we can employ in the development of ab initio force fields is
+to fit our force field parameters on a component-by-component basis to a
+physically-meaningful \eda. Force field fitting on a component-by-component
+basis enables the following:
+\begin{enumerate}
+\item By increasing the amount of ab initio data used in the force field fits,
+we reduce the possibility of overfitting the potential, which in turn aids in
+generating transferable force field parameters\cite{Schmidt2015}
+\item By enforcing a one-to-one correspondence between force field functional
+forms and benchmark ab initio energies, we reduce reliance on error
+cancellation and ensure that all fitted parameters describe the intended physical
+feature, further increasing parameter transferability
+\item By evaluating the resulting fits on a component-by-component basis, we
+can directly relate errors in the potential to errors in the individual energy
+comopnents, thus systematically guiding further improvements to the ab initio
+force field
+\end{enumerate}
+
+In most cases (with the work described in \cref{ch:lmoeda} being an exception,
+we use \acrfull{sapt} as our \eda of choice. \sapt, and \dftsapt in particular
+(a variant of \sapt based on a \dft-based description of monomers, which
+scales reasonably as $N^5$ with respect to the number of electrons in the
+system), serves as an accurate yet affordable approximation to the
+gold-standard \ccsdt calculations discussed earlier, and ab inito force fields
+fit to \dftsapt energies have been shown to lead to good experimental property
+predictions.
+\cite{McDaniel2016a,McDaniel2013}
+Furthermore, and as is especially important in the development of
+\emph{transferable} ab initio force fields, \sapt provides a natural and
+physically-meaningful decomposition into energy components of electrostatics,
+exchange, polarization, and dispersion.
+
+\end{subsection}
+
+\begin{subsection}{\isa}
+\label{sec:intro-isa}
+
+how is isa defined
+how do distribution schemes work
+what property calculations are possible using isa
+
+\end{subsection}
+
+
+\end{section}
