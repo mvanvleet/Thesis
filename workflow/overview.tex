@@ -9,7 +9,7 @@ overview of the workflow itself, and then describe the theoretical and
 practical details of each step in subsequent sections.
 
 In order to gain expertise in practical force field development, new force field developers are encouraged to read through (in order)
-\cref{ch:background,ch:workflow,ch:pointer} to obtain a conceptual
+\cref{ch:introduction,ch:workflow,ch:pointer} to obtain a conceptual
 understanding of the force field development process, after which they should
 work on
 developng their own force field using
@@ -20,7 +20,7 @@ small!) molecule will suffice.
 
 \begin{section}{Overview}
 
-As discussed in \cref{ch:background}, our \sapt-based force field 
+As discussed in \cref{ch:introduction}, our \sapt-based force field 
 methodology principally relies on modeling two-body interactions
 for a given system of interest. These two-body (i.e. dimer)
 interactions are completely defined by the 
@@ -35,7 +35,7 @@ the energetics of gas-phase dimers. After all, aren't we interested in
 simulating a wider variety of chemically-relevant systems, including
 homogeneous and heterogeneous liquids, solids, and super-critical phases?
 This apparent discrepancy can be resolved by looking at the \mbe described in
-\cref{ch:background}. From this expansion, we see that \emph{any} system can
+\cref{ch:introduction}. From this expansion, we see that \emph{any} system can
 be modeled as a sum of two- and many-body interactions, with the two-body
 interactions plus $N$-body polarization (an energy term which we obtain
 automatically in \cref{sec:workflow-polarizabilities}) accounting for upwards of
@@ -78,6 +78,7 @@ calculate and/or fit all force field parameters so as to completely develop a
 force field for the two-body interaction energies. For the \sapt-based force fields described in
 \cref{ch:isaff,ch:mastiff}, 
 these two overarching steps lead to the following workflow:
+
 %
 \begin{minipage}{\linewidth}
 %\begin{enumerate}[I.]

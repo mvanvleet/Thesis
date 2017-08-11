@@ -1,7 +1,7 @@
-\textbf{FIXME:  basically a placeholder; do not believe}
-
-\svnidlong{$LastChangedBy$}{$LastChangedRevision$}{$LastChangedDate$}{$HeadURL: http://freevariable.com/dissertation/branches/diss-template/frontmatter/abstract.tex $}
-\vcinfo{}
+%% \textbf{FIXME:  basically a placeholder; do not believe}
+%% 
+%% \svnidlong{$LastChangedBy$}{$LastChangedRevision$}{$LastChangedDate$}{$HeadURL: http://freevariable.com/dissertation/branches/diss-template/frontmatter/abstract.tex $}
+%% \vcinfo{}
 
 %% I did some research, read a bunch of papers, published a couple myself, (pick one):
 %% \begin{enumerate}
@@ -9,3 +9,88 @@
 %% 	\item proved some theorems
 %% \end{enumerate}
 %% and now I have a job.  I've assembled this document in the last couple of months so you will let me leave.  Thanks!
+
+Molecular simulation is an essential tool for interpreting and predicting the
+structure, thermodynamics, and dynamics of chemical and biochemical systems.
+The fundamental inputs into these simulations are the intra- and
+intermolecular force fields, which provide simple and computationally
+efficient descriptions of molecular interactions.  Consequently, the utility
+of molecular simulation ultimately depends on the fidelity of the force field
+to the underlying (exact) potential energy surface.  This dissertation
+describes a number of novel advances designed to improve the accuracy and
+predictive power of (specifically ab initio) intermolecular force fields.  By
+fitting ab initio force fields to first-principles-based functional forms and
+chemically-meaningful parameters, and by taking frequent advantage of the
+physically-motivated partitioning afforded by \acrfull{sapt} and \acrfull{isa} approaches, we
+demonstrate how the resulting force fields can be applied to describe a broad
+range of molecular systems in different chemical and physical
+environments. 
+Our newly-developed \mastiff approach
+achieves quantitative accuracy with
+respect to both high-level electronic structure theory and experiment, and is
+thus well suited for use in `next-generation' ab initio force field development
+and large-scale molecular simulation.
+
+
+%% \cref{ch:isaff} describes an approach whereby the \isa partitioning scheme can
+%% be used to develop new models
+%% for the \sapt exchange-repulsion energy and related
+%% short-range energy contributions. The methods in \cref{ch:isaff} neglect
+%% important effects due to the orientation dependence, or `atomic-level
+%% anisotropy', of the \isa charge densities, and \cref{ch:mastiff} extends the
+%% original \isa-based method to account for this atomic-level anisotropy in an
+%% accurate cost-efficient
+
+
+%% Herein, we derive a novel short-range functional form based on a simple
+%% Slater-like model of overlapping atomic densities and an iterated stockholder
+%% atom (ISA)
+%% partitioning of the molecular electron density.
+%% We demonstrate that this Slater-ISA methodology yields a more accurate,
+%% transferable, and robust description of the short-range interactions
+%% at minimal additional computational cost compared to standard
+%% Lennard-Jones or Born-Mayer approaches.
+%% 
+%% Nearly all standard force fields employ the `sum-of-spheres' approximation,
+%% which models intermolecular interactions
+%% purely in terms of interatomic distances. In stark contrast to this
+%% assumption, atoms in molecules can have significantly non-spherical shapes,
+%% leading to interatomic interaction energies with strong orientation
+%% dependencies.
+%% Neglecting this `atomic-level
+%% anisotropy' can lead to significant errors in predicting interaction energies,
+%% and herein we propose a general and computationally-efficient model
+%% (\mastiff) whereby atomic-level orientation dependence can be incorporated
+%% into standard intermolecular force fields. Importantly, our \mastiff model
+%% includes anisotropic effects, not only for long-range (multipolar)
+%% electrostatics, but also for dispersion, exchange-repulsion, and charge
+%% penetration. We benchmark \mastiff against various sum-of-spheres models
+%% over a large library of intermolecular interactions, and find that \mastiff
+%% achieves quantitative accuracy with
+%% respect to both high-level electronic structure theory and experiment.
+%% \mastiff is highly transferable and requires minimal additional
+%% parameterization, and thus is
+%% well suited for use in next-generation ab initio force field development.
+%% 
+%% 
+%% 
+%% Short-range repulsion within inter-molecular force fields
+%% is conventionally described by either Lennard-Jones (${A}/{r^{12}}$)
+%% or Born-Mayer ($A\exp(-Br)$) forms. Despite their widespread use,
+%% these simple functional forms are often unable to describe the
+%% interaction energy accurately over a broad range of inter-molecular distances,
+%% thus
+%% creating challenges in the development of ab initio force fields and
+%% potentially leading to decreased accuracy and transferability.
+%% Herein, we derive a novel short-range functional form based on a simple
+%% Slater-like model of overlapping atomic densities and an iterated stockholder
+%% atom (ISA)
+%% partitioning of the molecular electron density.
+%% We demonstrate that this Slater-ISA methodology yields a more accurate,
+%% transferable, and robust description of the short-range interactions
+%% at minimal additional computational cost compared to standard
+%% Lennard-Jones or Born-Mayer approaches.
+%% Finally, we show how this methodology can be adapted to yield the standard
+%% Born-Mayer
+%% functional form while still retaining many of the advantages
+%% of the Slater-ISA approach.

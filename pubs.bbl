@@ -2,7 +2,7 @@
 \providecommand*\mcitethebibliography{\thebibliography}
 \csname @ifundefined\endcsname{endmcitethebibliography}
   {\let\endmcitethebibliography\endthebibliography}{}
-\begin{mcitethebibliography}{1}
+\begin{mcitethebibliography}{3}
 \providecommand*\natexlab[1]{#1}
 \providecommand*\mciteSetBstSublistMode[1]{}
 \providecommand*\mciteSetBstMaxWidthForm[2]{}
@@ -24,6 +24,22 @@
   Schmidt]{VanVleet2016}
 {Van Vleet},~M.~J.; Misquitta,~A.~J.; Stone,~A.~J.; Schmidt,~J.~R. \emph{J.
   Chem. Theory Comput.} \textbf{2016}, \emph{12}, 3851--3870\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{Van Vleet} \latin{et~al.}(2017){Van Vleet}, Misquitta, and
+  Schmidt]{VanVleet2017}
+{Van Vleet},~M.~J.; Misquitta,~A.~J.; Schmidt,~J.~R. \emph{J. Chem. Theory
+  Comput.} \textbf{2017}, submitted\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[{Van Vleet} \latin{et~al.}(2017){Van Vleet}, Weng, and
+  Schmidt]{VanVleet2017a}
+{Van Vleet},~M.; Weng,~T.; Schmidt,~J. \emph{Chem. Rev.} \textbf{2017},
+  invited, manuscript in preparation\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

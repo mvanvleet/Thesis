@@ -242,15 +242,6 @@ Allen,~M.~P.; Tildesley,~D.~J. \emph{{Computer Simulation of Liquids}}; Oxford
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
 \EndOfBibitem
-\bibitem[Boltzmann(1898)]{boltzmann1898vorlesungen}
-Boltzmann,~L. \emph{{Vorlesungen {\{}{\"{u}}{\}}ber Gastheorie: Th. Theorie van
-  der Waals'; Gase mit zusammengesetzten Molek{\{}{\"{u}}{\}}len;
-  Gasdissociation; Schlussbemerkungen}}; Vorlesungen {\{}{\"{u}}{\}}ber
-  Gastheorie; J. A. Barth, 1898\relax
-\mciteBstWouldAddEndPuncttrue
-\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
-{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
-\EndOfBibitem
 \bibitem[Karplus(2014)]{Karplus2014}
 Karplus,~M. \emph{Angew. Chemie Int. Ed.} \textbf{2014}, \emph{53},
   9992--10005\relax
@@ -270,6 +261,15 @@ Metropolis,~N.; Rosenbluth,~A.~W.; Rosenbluth,~M.~N.; Teller,~A.~H.; Teller,~E.
   Leroy]{Harrison2010}
 Harrison,~R.~L.; Granja,~C.; Leroy,~C. {Introduction to Monte Carlo
   Simulation}. AIP Conf. Proc. 2010; pp 17--21\relax
+\mciteBstWouldAddEndPuncttrue
+\mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
+{\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
+\EndOfBibitem
+\bibitem[Boltzmann(1898)]{boltzmann1898vorlesungen}
+Boltzmann,~L. \emph{{Vorlesungen {\{}{\"{u}}{\}}ber Gastheorie: Th. Theorie van
+  der Waals'; Gase mit zusammengesetzten Molek{\{}{\"{u}}{\}}len;
+  Gasdissociation; Schlussbemerkungen}}; Vorlesungen {\{}{\"{u}}{\}}ber
+  Gastheorie; J. A. Barth, 1898\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax
@@ -1973,8 +1973,8 @@ Thole,~B.~T. \emph{Chem. Phys.} \textbf{1981}, \emph{59}, 341--350\relax
 \EndOfBibitem
 \bibitem[{Van Vleet} \latin{et~al.}(2017){Van Vleet}, Misquitta, and
   Schmidt]{VanVleet2017}
-{Van Vleet},~M.~J.; Misquitta,~A.~J.; Schmidt,~J.~R. \emph{J. Chem. Phys.}
-  \textbf{2017}, invited, manuscript in preparation\relax
+{Van Vleet},~M.~J.; Misquitta,~A.~J.; Schmidt,~J.~R. \emph{J. Chem. Theory
+  Comput.} \textbf{2017}, submitted\relax
 \mciteBstWouldAddEndPuncttrue
 \mciteSetBstMidEndSepPunct{\mcitedefaultmidpunct}
 {\mcitedefaultendpunct}{\mcitedefaultseppunct}\relax

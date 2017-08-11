@@ -20,37 +20,51 @@ and directly simulate hard-to-understand phase transformations at an atomistic l
 The question, of course, is: how?
 
 
-To understand the link between computer simulation and obervable experimental properties
+To understand the manner in which computer simulation can be used to obtain obervable experimental properties
 of interest,\footnotemark{} we first summarize several fundamental
 physical principles
 that help define the
-scope and importance of molecular simulation.
-One insight comes from the field of
-statistical mechanics, where by the early 20\super{th} century it was discovered
+fundemand inputs and important techniques required for molecular simulation.
+The foundation for molecular simulation comes from the field of
+statistical mechanics, where by the mid 19-\super{th} century it was discovered
 that experimental observables, which we denote \obs, depend entirely on
 a system's temperature, $T$, and the energies available to that system,
 %
 \begin{align}
 \label{eq:intro-boltzmann}
-\braket{\obs} = \frac{\sum\limits_n \obs_n \exp (-E_n/k_BT)}
-                    {\sum\limits_n \exp (-E_n/k_BT)}.
+%% \braket{\obs} = \frac{\sum\limits_n \obs_n \exp (-E_n/k_BT)}
+%%                     {\sum\limits_n \exp (-E_n/k_BT)}.
+\braket{\obs} = 
+\frac{\int d\bm p d\bm x \, \obs(\bm p, \bm x) \exp (-H(\bm p, \bm q)/k_BT)}
+{\int  d\bm p d\bm x \, \exp (-H(\bm p, \bm x)/k_BT) }
 \end{align}
 %
 Here the angle brackets denote that we're interested in some \emph{average}
-value of the observable, the subscript $n$ indicates a possible state of the
-system (defined in terms of the positions and momenta of all of the particles
-in the system) with energy $E_n$ and value of the observable
-$\obs_n$, 
+value of the observable, $\bm p$ and $\bm x$ denote, respectiely, the momentum
+and positions of the particles in the system, 
+$H$ defines the classical Hamiltonian describing the potential and kinetic
+energy of that system,
 and $k_B$ is Boltzmann's constant.\cite{allen1989computer}
- Technically,
-this expression only holds for discrete systems at constant temperature,
+Technically,
+this expression only holds for classical systems at constant temperature,
 however conceptually-similar expressions can be derived outside of these
 assumptions. 
 %TODO: Cite useful things here
-Regadless, \cref{eq:intro-boltzmann} and related formulae show how, 
-given knowledge of all possible energy states of a system, we can
-have exact information for that system about any macroscropic properties of
-interest. 
+Even though atomic behavior is, in principle, quantum mechanical,
+subsequent research over the years have shown that
+very satisfactory molecular properties, particularly for heavier atoms at higher
+temperatures,
+\cite{Karplus2014}
+can be obtained by treating molecular systems according to the above classical
+description.
+As a result of this highly important insight (indeed, Karplus, Levitt, and
+Warshel won the Nobel prize in 2013 for these ideas and related
+work),\cite{Karplus2014} it becomes possible to use
+\cref{eq:intro-boltzmann} to
+extract information regarding macroscropic properties of
+interest 
+given knowledge of the potential and kinetic energies available in a classical
+description of the molecular system. 
 
 \footnotetext{
 We've been intentionally vague about what these `experimental
@@ -64,77 +78,19 @@ and the optimization of putative solar cell materials often focuses on
 open circuit voltages and/or short-circuit currents.\cite{Bereau2016}
 }
 
-In practice, most chemical systems contain large numbers of particles, and
-the number of avaiable system states become intractably large. Thus in all but the
-simplest cases, 
-\cref{eq:intro-boltzmann} is overly difficult to solve by mere enumeration and
-averaging of states.\cite{allen1989computer}
-Fortunately,
-several crucial scientific advances 
-%% (one at the turn of the 20\super{th}
-%% century,\cite{boltzmann1898vorlesungen} and others in the 1950s and 60s\cite{allen1989computer})
-paved the way to reformulate the relationship between $\braket{\obs}$ and $E_n$ in terms
-of known --- and tractable --- problems in such disparate fields as classical dynamics
-and probability theory.
-The connection to classical dynamics began at the turn of the 20\super{th} century,
-when Ludwig Boltzmann proposed his now-famous `ergodic' hypothesis.\cite{boltzmann1898vorlesungen} Over sufficiently
-long time periods, according to Boltzmann, the `ensemble average' defined in \cref{eq:intro-boltzmann} becomes
-identical to the `time-average' that results from studying the system's
-dynamical behavior:
-%
-\newcommand{\tobs}{\ensuremath{t_{\text{obs}}}\xspace}
-\begin{align}
-\label{eq:intro-md}
-\braket{\obs} = \braket{\obs}_{\text{time}} 
-= \braket{\obs(\bm{\Gamma}(t)}_{\text{time}} 
-= \lim_{t_{\text{obs}} \to \infty} \frac{1}{t_{\text{obs}}}
-\int\limits_0^{t_{\text{obs}}}
-\obs(\bm{\Gamma}(t)) dt .
-\end{align}
-%
-Here we have used $\bm{\Gamma}(t)$ to denote the collective positions and
-momenta that define the state of the system as a function of time, and \tobs
-to indicate the length of time over which we average the system's
-properties.\cite{allen1989computer} The
-right-hand side of \cref{eq:intro-md} proves remarkably useful: so long as we know and can
-solve for the equations of motion that govern a given system's behavior, we can
-simulate the time evolution of that system until the r.h.s. of
-\cref{eq:intro-md} converges, and in doing so obtain an average value for any desired
-property of that system. 
-
-Boltzmann's ergodic hypothesis wasn't fully taken advantage of until the 1960s
-and 70s, as the laws of motion governing quantum mechanical systems can often
-be incredibly complex. \emph{Classical} mechanics, on the other hand, is
-governed simply by Newton's laws of motion,
-%
-\begin{align}
-\label{eq:intro-newton}
-- \frac{d E(\bm x)}{d \bm x} \equiv \bm F(\bm x) = m \ddot{\bm x}, 
-\end{align}
-%
-with $\bm x$ as a position vector, $m$ a mass, and $F$ the force acting on a
-particle. Thus for classical particles, we need only know the forces operating
-on each particle (which is a direct function of the system's energy) to solve for the
-time-dependent positions, momenta, and (ultimately) properties of a system.
-Critically, even though atomic behavior is strictly quantum mechanical, it was
-discovered that a classical mechanical description of the atomic motions could
-often yield satisfactory information, particularly for heavier atoms at higher
-temperatures.
-\cite{Karplus2014}
-As a result of this highly important insight (indeed, Karplus, Levitt, and
-Warshel won the Nobel prize for these ideas and related
-work),\cite{Karplus2014} it soon became possible to study both kinetic and
-thermodynamic properties of a wide range of molecular systems, historically beginning with monatomic
-liquids in 1964, and soon leading to the first polymer and protein simulations in 1975 and
-1977, respectively.\cite{VanGunsteren1990} Ever since these first studies, the field of \md has 
-increasingly become a preeminent tool in the investigation and prediction of chemical
-phenomena.
-
-Around the same time as \md was being developed and popularized as a `dynamics' solution to
-\cref{eq:intro-boltzmann}, a separate group of
-researchers\cite{Metropolis1953} found a way to
-formulate \cref{eq:intro-boltzmann} as a sampling problem based in probability
-theory: 
+In practice, most chemical systems contain large numbers of particles, and as the
+number of degress of freedom in the system increase, so does the
+dimensionality of the integral in \cref{eq:intro-boltzmann}. 
+In most practical scenarios, analytical integration is not possible, and for
+large systems it is
+computationally prohibitive to solve for $\braket{\obs}$ by standard numerical
+integration techniques.
+\cite{allen1989computer}
+In 1953, however a group of
+researchers\cite{Metropolis1953} showed how \cref{eq:intro-boltzmann} can be
+systematically estimated
+$\braket{\obs}$ via appropriate random sampling of the integrand of
+\cref{eq:intro-boltzmann} based on a probability distribution $\rho$:
 \cite{Harrison2010,allen1989computer}
 %
 \begin{align}
@@ -146,24 +102,70 @@ theory:
 \end{align}
 %
 In contrast to \cref{eq:intro-boltzmann}, \cref{eq:intro-mc} is the average
-over a total number of observations, ${\tau_{\text{obs}}}$, taken of the
-system and its properties randomly sampled, according to some probability
-distribution $\rho$, over all states of the system.  The key technique that
-defines MC is known as `importance sampling': provided we cleverly choose our
-probability distribution, $\rho$, to be identical to the Boltzmann
-distribution, $\rho \propto \exp (-E_n/k_BT)$, the right-hand side of
-\cref{eq:intro-mc} converges fairly rapidly as a function of
-${\tau_{\text{obs}}}$.  The interested reader is directed to
-\citet{allen1989computer} for detailed information
-on the exact techniques, algorithms, and practical concerns involved in
-importance sampling.  
+over a total number of sampled observations, ${\tau_{\text{obs}}}$, taken of the
+system and its properties, 
+and $\bm{\Gamma}(\tau)$ denotes the collective positions and
+momenta that define the state of the system at each sample point.
+The key technique that
+defines the resulting \mc algorithm is known as `importance sampling':
+provided we cleverly choose our probability distribution, $\rho$, to be
+identical to the Boltzmann distribution, $\rho \propto \exp (-H(\bm p, \bm x)/k_BT)$, the
+right-hand side of \cref{eq:intro-mc} converges fairly rapidly as a function
+of ${\tau_{\text{obs}}}$.  The interested reader is directed to
+\citet{allen1989computer} for detailed information on the exact techniques,
+algorithms, and practical concerns involved in importance sampling. In
+general, however, it is sufficient to know that \mc is one of the main
+algorithms used to evaluate average molecular properties,
+and that ultimately the \mc technique depends on the accuracy with which we can
+evaluate the potential and kinetic energies of a given system.
+
+As an alternative strategy to \mc,
+at the turn of the 20\super{th} century
+Ludwig Boltzmann proposed his now-famous `ergodic'
+hypothesis.\cite{boltzmann1898vorlesungen} This hypothesis states that, over sufficiently
+long time periods, the `ensemble average' defined in \cref{eq:intro-boltzmann} becomes
+identical to the `time-average' that results from studying the system's
+dynamical behavior,
 %
-Regardless of which specific technique is used, however, both
-\md and \mc methods
-enable us to calculate thermodynamic (and sometimes kinetic) properties of
-interest based solely on knowledge of the energy of a system as a function of
-the system state, enabling molecular simulation as we know it today.
-%}
+\newcommand{\tobs}{\ensuremath{t_{\text{obs}}}\xspace}
+\begin{align}
+\label{eq:intro-md}
+\braket{\obs} = \braket{\obs}_{\text{time}} 
+= \braket{\obs(\bm{\Gamma}(t)}_{\text{time}} 
+= \lim_{t_{\text{obs}} \to \infty} \frac{1}{t_{\text{obs}}}
+\int\limits_0^{t_{\text{obs}}}
+\obs(\bm{\Gamma}(t)) dt ,
+\end{align}
+%
+where \tobs indicates the length of time over which we average the system's
+properties.\cite{allen1989computer} The
+right-hand side of \cref{eq:intro-md} shows that, so long as we know and can
+solve for the equations of motion that govern a given system's behavior, we can
+simulate the time evolution of that system until the r.h.s. of
+\cref{eq:intro-md} converges, thereby obtaining a prediction for
+$\braket{\obs}$.
+Classical mechanics is
+governed simply by Newton's laws of motion,
+%
+\begin{align}
+\label{eq:intro-newton}
+- \frac{d E(\bm x)}{d \bm x} \equiv \bm F(\bm x) = m \ddot{\bm x}, 
+\end{align}
+%
+with $m$ a mass, and $\bm F$ the force acting on a
+particle. Thus as with \mc, we need only know the potential energy of
+the system (and by extension its constituent forces)
+in order to solve for the
+time-dependent positions, momenta, and (ultimately) properties of a system.
+The resulting integration of Newton's equations of motion, a process known
+as \md,
+has made it possible to study both the kinetic and
+thermodynamic properties of a wide range of molecular systems, historically beginning with monatomic
+liquids in 1964, and soon leading to the first polymer and protein simulations in 1975 and
+1977, respectively.\cite{VanGunsteren1990} Ever since these first studies, and
+as a complement to \mc, \md simulation has 
+increasingly become a preeminent tool in the investigation and prediction of chemical
+phenomena.
 
 
 
@@ -225,7 +227,7 @@ the system state, enabling molecular simulation as we know it today.
 \end{section}
 \begin{section}{Molecular Simulation: Challenges and Unanswered Questions}
 
-Recent successes in \md and \mc simulations
+Recent successes in both \mc and \md 
 have shown great promise for using molecular simulation in the understanding,
 interpretation, and even prediction of experimental
 results,\cite{VanGunsteren1990}
