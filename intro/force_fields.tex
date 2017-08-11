@@ -12,15 +12,17 @@ To understand why the development of accurate force fields remains so
 challenging, it's worthwhile to briefly discuss the development process
 itself, both in terms of the functional forms that get used in force fields as
 well as the manner in which these functional forms are parameterized.
-Traditionally, force fields have been created by an `empirical' development
+Traditionally, force fields have been crafted by an `empirical' development
 proccess,\cite{Stone2007}
 in which the force field functional form is parameterized so as to reproduce
 select experimental properties of interest. The obvious advantage of such a
-strategy is that, so long as the questions one is interested in are related to
-conditions (both chemical and physical) similar to the ones used in parameterization,
+strategy is that, so long as one parameterizes and investigates a limited
+scope of chemical, physical, and/or structural conditions, 
 there is a good chance that empirical force fields will be of good accuracy in
-answering those questions. Thus, for instance, empirical force fields have had
-remarkable success in simulating the behavior of folded proteins under biologically-relevant conditions.
+providing a microscopic picture of the macroscopic experimental properties.
+Thus, for instance, empirical force fields can have 
+remarkable success in simulating the behavior of folded proteins in
+biologically-relevant environments.
 \cite{Caleman2011,Piana2014,Lopes2015} 
 
 Despite these successes, empirical force field development also faces
@@ -41,16 +43,19 @@ Similarly, and despite much effort, it's still difficult to find an
 empirically-developed force field capable of correctly describing
 water across a wide range of physical and chemical environments.
 \cite{Cisneros2016a,Jorgensen2005}
-More distressingly, even within the limited range of experimental properties over which empirical
-force fields are intended to be used, force field accuracy can still be an
-issue, and time-consuming re-parameterization methods must often be employed
+More distressingly than the transferability problem, 
+force field accuracy can sometimes be an
+issue 
+even within the limited range of experimental conditions over which the force
+field was originally parameterized,
+and time-consuming re-parameterization methods must often be employed
 in order to correct for deficiencies in the original force field parameters.
 \cite{Hornak2006,Freddolino2010}
 
 Arguably, the underlying reason why empirical force field development is
 limited (both in terms of accuracy and transferability) is that the
-force fields themselves are typical based on rather limited, or `effective', physical
-models.
+force fields themselves are typical based on rather limited, or `effective',
+physics.
 %TODO: Check (and maybe find more) references here
 \cite{Parker2015,Sherrill2009,Zgarbova2010}
 Explicit many-body polarization, for instance, is not often accounted for in
@@ -62,7 +67,7 @@ reduced to more approximate point charge models,\cite{Cardamone2014}
 charge penetration effects are usually neglected,
 \cite{Parker2015,Sherrill2009}
 and exchange effects are described by an overly-repulsive (but computationally
-convenient) $1/r_{ij}$ functional form.
+convenient) $1/r_{ij}^{12}$ functional form.
 \cite{Abrahamson1963,Mackerell2004,Parker2015,Sherrill2009,Zgarbova2010}
 In some cases, these modeling choices are justified by increased gains in
 computational efficiency; indeed, it is only within the past decade or so that
@@ -71,11 +76,11 @@ treatments have become computationally-affordable.
 \cite{Albaugh2016,Cardamone2014,Cieplak2009,Simmonett2015,Simmonett2016,Demerdash2014}
 In other cases, however, empirical force field development is limited by the
 significant complications involved in parameterization.
-With empirical force field development, each additional parameter included in
-the model requires new (and expensive) molecular simulations to be run in
-order to optimally tune the parameter. Moreover, because experiment can
-only probe the total energies in a given system, parameters in empirical
-force fields must be fit simultaneously, and models with many parameters are
+With empirical force field development, each additional parameter must be
+optimized on the basis of costly molecular simulations.
+Moreover, and because experiment typically probes 
+only the average total energy of a given system, parameters in empirical
+force fields must be fit simultaneously. Models with many parameters are
 usually too time-consuming to optimize, and too prone to issues of
 overfitting,\cite{Hawkins2004} to warrant the effort. For these reasons, it is
 likely that empirically-fit force fields will remain restricted to
@@ -86,13 +91,16 @@ an alternate strategy is to fit force fields, not directly against
 experimental properties, but rather to benchmark calculations of the
 underlying \pes itself.\cite{Stone2007} 
 The drawback of such a first-principles, or 'ab initio', methodology, is
-obvious: by not fitting to experimental quantities, we lose room for error in
-ensuring the resulting force field closely match experimental reality,
-and introduce complicating factors (as discussed in \cref{ch:mastiff}) when
-comparing model and experiment such as the accuracy of the underlying
-benchmark \pes, the treatment of many-body and/or quantum effects, and
-possible errors in the experiments themselves.
+obvious: by not fitting to experimental quantities, 
+the resulting force fields will not closely match experiment unless we
+accurately and systematically account for all the relevant physics for a given
+system.
+For this reason, comparisons between an ab initio force fields and experiment (\cref{ch:mastiff})
+are often complicated by factors such as
+the accuracy of the underlying
+benchmark \pes or the treatment of many-body and/or quantum effects.
 \cite{Johnson2009,Taylor2016,Chalasinski2000}
+
 Nevertheless, ab initio force field development has several clear advantages
 over its empirical counterpart. 
 First, and especially for systems where experimental data is lacking, ab inito
@@ -100,8 +108,8 @@ force fields can be fit to calcuated data in order to make novel experimental
 predictions. Furthermore (and as discussed in \cref{sec:intro-sapt}), ab
 initio force fields can be fit, not merely to the total energy of a system,
 but also on a component-by-component basis to individually reproduce each
-physically-meaningful contribution to the \pes. This, along with the fact that
-directly parameterizing the \pes leads to far simpler optimization protocols,
+physically-meaningful contribution to the \pes. This, along with the
+simplicitly afforded by directly parameterizing the \pes,
 means that ab initio force fields can be fit to more complicated and more
 physically-motivated functional
 forms, thus enabling the possibility of increased accuracy in molecular
@@ -110,10 +118,10 @@ ab initio parameterization methods can lead to decreased reliance on error
 cancellation and minimize overfitting, thus augmenting both the accuracy and
 transferability of the resulting force fields. Finally, with ab initio force
 fields we can easily assess the fit quality compared to an underlying
-benchmark \pes, and
-(as will become apparent) such an ability to
-directly evaluate compare between putative model \glspl{pes} has enabled us to
-postulate, test, and evaluate new and improved functional forms and parameterization
+benchmark \pes; 
+as will be a theme of this dissertation, such an ability to
+directly compare between putative model \glspl{pes} enables us
+quickly evaluate new and improved functional forms and parameterization
 methods for ab initio force field development. 
 
 \end{section}

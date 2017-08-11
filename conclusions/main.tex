@@ -1,4 +1,53 @@
-\begin{chapter}{Conclusions}
+\begin{chapter}{Conclusions and Future Directions}
 \label{ch:conclusions}
+
+In this dissertation, we have presented a systematic methodology for improved
+ab initio force field development on the basis of \sapt and \isa calculations.
+Critically, the strategies developed herein allow for accurate and
+physically-based modeling of short-range effects in intermolecular force
+fields, and enable accurate, transferable, and cost-effective treatment of the
+important atomic-level anisotropies that are typical of many organic
+compounds. These improved methodologies for ab initio force field development
+have culminated in our \mastiff model for intermolecular interactions, and we
+are approaching the stage where \mastiff can be used in the generation of
+broadly-applicable force fields for large-scale molecular simulation. 
+
+Before such large-scale simulations can become a possibility, fundamental limitations in
+\mastiff  will be need to be
+adddressed, specifically with regards to the induction model.
+In particular, future work should focus on improved and more accurate treatment of the long-range polarization, 
+the development of new models to more physically treat the polarization
+damping, and the decomposition of the total induction energy into
+charge-transfer and polarization contributions.
+Though much work is needed to outline
+specific strategies to tackle each of these issues, it is hoped that
+regularized \sapt methods (\citen{Misquitta2013}), which can perform the
+charge-transfer/polarization decomposition, and the \isa-pol method
+(\cref{ch:workflow}), which can naturally partition the long-range polarization
+energies and quantify higher-order and/or anisotropic polarizabilities, might
+be of good service in this endeavor. 
+
+Assuming challenges in modeling the induction energy can be met, a second goal
+for future study should be the application of \mastiff to the wide range of
+chemical problems where atomic-level anisotropy is particularly important.
+These applications can initially consist of ab initio force field development
+for specific molecules, and we are already in the process of developing and
+testing models for industrially important compounds where
+isotropic force fields have known accuracy issues, such as with benzene and
+ethene.
+%TODO: citations here
+Later, emphasis should be placed on generating transferable anisotropic ab initio force
+fields for general \emph{classes} of molecules, such that the \mastiff model
+can be developed into a general, all-purpose model for accurate molecular
+simulation. The development of these general force fields will require us to address various
+challenges not yet considered with the \mastiff methodology, such as the
+treatment of flexible monomer geometries and the generalization of
+atom-specific anisotropic parameters into transferable and general atom type parameters.
+Nevertheless, and assuming these challenges can be overcome, it is hoped that
+\mastiff and related ab initio force fields will lead to increasingly accurate
+and robust models for molecular \glspl{pes},
+such that the complex, inherently anisotropic details of
+intermolecular interactions may be routinely studied in
+large-scale molecular simulation.
 
 \end{chapter}

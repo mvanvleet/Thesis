@@ -1,5 +1,29 @@
 \begin{section}{Outline}
 
-Define the contents of each chapter
+Having described the utility of
+molecular simulation and 
+the important goals of accuracy and transferabilty in force field development,
+the purpose of this dissertation is to describe new and better methods for
+obtaining functional forms and parameters that will lead to improved ab initio force
+field development. To this end,
+\cref{ch:isaff} describes an approach whereby the \isa partitioning scheme can
+be used to develop new models 
+for the \sapt exchange-repulsion energy and related
+short-range energy contributions. The methods in \cref{ch:isaff} neglect
+important effects due to the orientation dependence, or `atomic-level
+anisotropy', of the \isa charge densities, and \cref{ch:mastiff} extends the
+original \isa-based method to account for this atomic-level anisotropy in an
+accurate cost-efficient
+manner amenable to large-scale molecular simulation.
+As a third investigation of methods development for ab inito
+force fields, \cref{ch:lmoeda} explores the ways in which additional \eda
+methods (aside from \sapt) can be used to benchmark and parameterize ab initio
+force fields in cases where \sapt itself is in error. Finally, in the course
+of our research we have developed many automated tools and best practices for ab initio force 
+field development (\sapt-based or otherwise), and these practical
+considerations are the subject of \cref{ch:workflow,ch:pointer}. Overall
+conclusions and avenues for future research are the subject of
+\cref{ch:future,ch:conclusions}. 
+
 
 \end{section}

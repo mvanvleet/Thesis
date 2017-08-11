@@ -25,15 +25,15 @@ of interest,\footnotemark{} we first summarize several fundamental
 physical principles
 that help define the
 scope and importance of molecular simulation.
-Our first insight comes from the field of
-statistical mechanics, where by the mid-19\super{th} century it was discovered
+One insight comes from the field of
+statistical mechanics, where by the early 20\super{th} century it was discovered
 that experimental observables, which we denote \obs, depend entirely on
-a system's temperature, $T$, and the energy states (vida infra) available to that system:
+a system's temperature, $T$, and the energies available to that system,
 %
 \begin{align}
 \label{eq:intro-boltzmann}
 \braket{\obs} = \frac{\sum\limits_n \obs_n \exp (-E_n/k_BT)}
-                    {\sum\limits_n \exp (-E_n/k_BT)}
+                    {\sum\limits_n \exp (-E_n/k_BT)}.
 \end{align}
 %
 Here the angle brackets denote that we're interested in some \emph{average}
@@ -43,11 +43,11 @@ in the system) with energy $E_n$ and value of the observable
 $\obs_n$, 
 and $k_B$ is Boltzmann's constant.\cite{allen1989computer}
  Technically,
-this expression only holds for classical systems at constant temperature,
+this expression only holds for discrete systems at constant temperature,
 however conceptually-similar expressions can be derived outside of these
 assumptions. 
 %TODO: Cite useful things here
-Regadless of the exact expression, the essential point is as follow:
+Regadless, \cref{eq:intro-boltzmann} and related formulae show how, 
 given knowledge of all possible energy states of a system, we can
 have exact information for that system about any macroscropic properties of
 interest. 
@@ -109,38 +109,27 @@ governed simply by Newton's laws of motion,
 %
 \begin{align}
 \label{eq:intro-newton}
-\frac{d E(\bm x)}{d \bm x} \equiv \bm F(\bm x) = m \ddot{\bm x}, 
+- \frac{d E(\bm x)}{d \bm x} \equiv \bm F(\bm x) = m \ddot{\bm x}, 
 \end{align}
 %
 with $\bm x$ as a position vector, $m$ a mass, and $F$ the force acting on a
 particle. Thus for classical particles, we need only know the forces operating
 on each particle (which is a direct function of the system's energy) to solve for the
 time-dependent positions, momenta, and (ultimately) properties of a system.
-To quote Karplus, who along with Levitt and Warshel won the Nobel Prize in
-2013 for their work in molecular simulation, the important insight required to solve the dynamics
-problem for molecular systems was as follows:
-%
-\begin{quote}
-Although the laws governing the motions of atoms are quantum mechanical, the
-key realization that made possible the simulation of the dynamics of complex
-systems, including biomolecules, was that a classical mechanical description
-of the atomic motions is adequate in most cases.
-\\ \phantom{abc} \hfill
----\citet{Karplus2014}, Nobel Lecture 2013
-\end{quote}
-%
-As a result of this important insight, it soon became possible to study both kinetic and
-thermodynamic properties of a wide range of molecular systems (historically beginning with monatomic
-liquids in 1964, and leading to polymer and protein simulations by 1975 and
-1977, respectively),\cite{VanGunsteren1990} and the field of \md has since
-been established as a preeminent tool in the investigation and prediction of chemical
-phenomena.%\footnotemark{}
+Critically, even though atomic behavior is strictly quantum mechanical, it was
+discovered that a classical mechanical description of the atomic motions could
+often yield satisfactory information, particularly for heavier atoms at higher
+temperatures.
+\cite{Karplus2014}
+As a result of this highly important insight (indeed, Karplus, Levitt, and
+Warshel won the Nobel prize for these ideas and related
+work),\cite{Karplus2014} it soon became possible to study both kinetic and
+thermodynamic properties of a wide range of molecular systems, historically beginning with monatomic
+liquids in 1964, and soon leading to the first polymer and protein simulations in 1975 and
+1977, respectively.\cite{VanGunsteren1990} Ever since these first studies, the field of \md has 
+increasingly become a preeminent tool in the investigation and prediction of chemical
+phenomena.
 
-%\footnotetext{
-%% Though such methods will not feature in the present work, we would be remiss
-%% not to also mention the \mc technique, an equally important
-%% and commonly-used way of solving \cref{eq:intro-boltzmann} in cases where only
-%% thermodynamic properties are of concern.
 Around the same time as \md was being developed and popularized as a `dynamics' solution to
 \cref{eq:intro-boltzmann}, a separate group of
 researchers\cite{Metropolis1953} found a way to
@@ -173,7 +162,7 @@ Regardless of which specific technique is used, however, both
 \md and \mc methods
 enable us to calculate thermodynamic (and sometimes kinetic) properties of
 interest based solely on knowledge of the energy of a system as a function of
-the system state.
+the system state, enabling molecular simulation as we know it today.
 %}
 
 
@@ -263,10 +252,10 @@ This class of problems is often referred to simply as `sampling issues'.
 able to analyze the results of a simulation in such a way as to garner
 detailed, chemically-intuitive insight into the problem at hand.
 \cite{E2010,Pande2010,Rohrdanz2013}
-While this task is relatively straightforward in some cases, such as with
-studying the structural properties of homogeneous liquids,
+While this task is relatively straightforward for homogeneous liquids and
+other `simple' systems,
 it can become decidedly
-difficult for analyzing complex systems and properties, such as with using
+difficult for analyzing complex properties and mechanisms, such as with using
 simulation to investigate protein folding mechanisms.
 \end{enumerate}
 Though our focus in this dissertation will be on the first point (that of
@@ -278,7 +267,7 @@ Moreover, there is significant interplay between these areas in terms of
 research development.
 As an example, improvements in sampling methods often lead to increased computational
 efficiency, thereby enabling use of more accurate (but more costly)
-representations of the \pes. Conversely, the development of
+representations of the \pes. Conversely, the next section will discuss how the development of
 cost-effective potential energy functions is often necessary for
 running simulations over long enough time scales to ensure representative
 sampling and robust interpretation of the simulation results. Clearly, insofar
@@ -313,9 +302,9 @@ as to enable simulation that is chemically insightful (given the type of
 simulation analysis required for a particular problem or application) and
 computationally affordable (in accordance with the length of molecular simulation that will
 need to be run in order to appropriately deal with any sampling issues). 
-Bearing these stipulations in mind, we can now state the central
-question with which this dissertation is concerned: for the purposes of running
+Bearing these stipulations in mind, we can now broadly state the guiding
+question for this dissertation: in the pursuit of
 accurate and insightful molecular simulation, how can we optimally
-obtain a mathematical description of an arbitrary molecular \pes?
+obtain a mathematical description of the \pes?
 
 \end{section}

@@ -1,8 +1,8 @@
 \begin{section}{Ab initio force field development with \acrshort{sapt} and
 \acrshort{isa}}
 
-As implied throughout the preceding discussion, our overall goals for ab
-initio force field development can be summarized as follows:
+As implied throughout the preceding discussion, goals for ab
+initio force field development are as follows:
 \begin{enumerate}
 \item \textbf{Accuracy}: 
 Ab initio force fields should
@@ -28,8 +28,8 @@ as simple as possible, particularly so as to avoid overfitting
 
 A number of strategies for ab inito force field development are present in the
 literature,\cite{Stone2007,Ballone2014} however here we focus on the general
-approach used in our group\cite{Schmidt2015} to meet the above goals for
-developing optimal ab initio force fields. Additionally,
+approach used in our group\cite{Schmidt2015} to generate
+optimal ab initio force fields. Additionally,
 as the intramolecular portion of a force field is
 usually more straightforward to optimize,\cite{} we limit our discussion to
 the functional forms and parameters used in developing the intermolecular part
@@ -39,7 +39,7 @@ guide ab inito force field development: separation of the $N$-body
 potential into 2- and many-body contributions via the \mbe (\cref{sec:intro-mbe}), decomposition and
 subsequent component-by-component parameterization of the total two-body
 interaction energy using \sapt (\cref{sec:intro-sapt}), and characterization
-of the atomic contributions to each energy component via \isa
+of the atom-in-molecule contributions to each energy component via \isa
 (\cref{sec:intro-isa}).
 
 \begin{subsection}{The Many-Body Expansion}
@@ -60,14 +60,14 @@ V_N(\vec r_1 ,\vec r_2 ,\dots,\vec r_N ) =
 \end{align}
 %
 Here, and without loss of generality, we have expressed this roughly $3N$-dimensional
-surface as a `many-body' expansion in terms of $n$-body interacting clusters.
+surface as a `many-body' expansion of $n$-body cluster interactions.
 Thus $V_1$ describes one-body, or intramolecular, contributions to the overall
-\pes, and $\Delta V_2$ is referred to as the `pair potential', which represents the
-difference in interaction energies between a two-body cluster (i.e. dimer), and the
+\pes. $\Delta V_2$ is referred to as the `pair potential', and represents the
+difference in interaction energies between a two-body cluster, or `dimer', and the
 individual monomers themselves. In a similar fashion,
 $\Delta V_3$ corresponds to
-the non-additive contributions (that is, energy not accounted for
-in $V_2$) to the interaction energies of 3-body clusters, and $\Delta V_4$ and
+the non-additive contributions (energy not accounted for
+in $\Delta V_2$) to the interaction energies of trimers, and $\Delta V_4$ and
 higher-order terms are defined analagously. 
 
 The utility of the \mbe comes from the fact that, aside from 
@@ -103,44 +103,99 @@ direct effect on accuracy with respect to $V_N$ and/or experiment.
 Having limited our attention to modeling the pair potential,  $\Delta V_2$,
 a second technique we can employ in the development of ab initio force fields is
 to fit our force field parameters on a component-by-component basis to a
-physically-meaningful \eda. Force field fitting on a component-by-component
+physically-meaningful \eda of dimer interaction energies. Force field fitting on a component-by-component
 basis enables the following:
 \begin{enumerate}
 \item By increasing the amount of ab initio data used in the force field fits,
-we reduce the possibility of overfitting the potential, which in turn aids in
-generating transferable force field parameters\cite{Schmidt2015}
+we reduce the possibility of overfitting the potential, which in turn enables
+transferability\cite{Schmidt2015}
 \item By enforcing a one-to-one correspondence between force field functional
 forms and benchmark ab initio energies, we reduce reliance on error
 cancellation and ensure that all fitted parameters describe the intended physical
-feature, further increasing parameter transferability
+feature
 \item By evaluating the resulting fits on a component-by-component basis, we
 can directly relate errors in the potential to errors in the individual energy
-comopnents, thus systematically guiding further improvements to the ab initio
-force field
+comopnents, thus providing insight into how a current model might be improved
 \end{enumerate}
 
-In most cases (with the work described in \cref{ch:lmoeda} being an exception,
+In most cases (with the work described in \cref{ch:lmoeda} being an exception),
 we use \acrfull{sapt} as our \eda of choice. \sapt, and \dftsapt in particular
 (a variant of \sapt based on a \dft-based description of monomers, which
 scales reasonably as $N^5$ with respect to the number of electrons in the
 system), serves as an accurate yet affordable approximation to the
-gold-standard \ccsdt calculations discussed earlier, and ab inito force fields
-fit to \dftsapt energies have been shown to lead to good experimental property
-predictions.
+gold-standard \ccsdt calculations discussed earlier. Theories and formalisms
+for \sapt are reviewed in \citen{Szalewicz2012,Jeziorski1994,McDaniel2014a},
+and a variety of examples of \sapt-based ab initio force field development is given
+in \citen{McDaniel2016a,Schmidt2015}.
+Overall,
+ab inito force fields
+fit to \dftsapt energies have been shown to lead to good accuracy in experimental property
+predictions,
 \cite{McDaniel2016a,McDaniel2013}
+thus justifying our approach.
 Furthermore, and as is especially important in the development of
 \emph{transferable} ab initio force fields, \sapt provides a natural and
 physically-meaningful decomposition into energy components of electrostatics,
-exchange, polarization, and dispersion.
+exchange, induction, and dispersion. By fitting these energy terms on a
+component-by-component basis, the \sapt energy decomposition can be fully
+taken advantage of to yield (as in \citen{McDaniel2013}) a library of accurate
+and transferable force field parameters with broad applicability to a range of
+chemical and physical environments.
 
 \end{subsection}
 
-\begin{subsection}{\isa}
+\begin{subsection}{\isa-\dma}
 \label{sec:intro-isa}
 
-how is isa defined
-how do distribution schemes work
-what property calculations are possible using isa
+As a complement to \sapt-based fitting approaches, we and others have shown
+how distributed molecular property calculations can be used to obtain select force field
+parameters in a transferable manner without recourse to direct fitting.
+\cite{Stone2007,camcasp5.8,Metz2016} 
+By distributed, we mean here that the results of the molecular calculations, which
+yield properties for individaul monomers, can be decomposed into meaningful
+atom-in-molecule contributions for use in the pair potential, $\Delta V_2$. Historically,
+many of these distribution schemes have been based on a \acrfull{dma}, and methods for
+obtaining distributed multipolar electrostatic,\cite{Stone1981,Stone2005}
+polarization,\cite{Misquitta2006}
+and
+dispersion\cite{Williams2003,Misquitta2008,McDaniel2013}
+parameters
+from \dma are well-documented.\cite{McDaniel2014a,Stone2007}
+
+More recently, \citet{Misquitta2014} has, in conjunction with important
+contributions from
+\citeauthor{Lillestolen2008},\cite{Lillestolen2008,Lillestolen2009} 
+built upon the existing class of \citet{Hirshfeld1977} atom-in-molecule
+charge partitioning schemes to develop a new distribution scheme based on
+\acrfull{isa}, 
+termed \isa-\dma. In brief, \isa-\dma operates by partitioning a monomer
+electron density into atomic contributions,
+\begin{align}
+\rho_i(\mathbf{r}) = \rho_I(\mathbf{r})
+\frac{ w_i(\mathbf{r}) }{ \sum \limits_{a \in I} w_a(\mathbf{r}) }, 
+\end{align}
+where $\rho(\mathbf{r})$ is an electron density, $w_a(\mathbf{r})$ is a
+spherically-symmetric weight function which is iteratively determined in the
+course of the \isa analysis, and lower- and upper-case subscripts
+represent, respectively, atomic or molecular quantities.
+\cite{Misquitta2014}
+Using these atom-in-molecule charge densities, recent work has shown how
+new and/or improved parameters for multipolar electrostatics 
+(\cref{ch:workflow} and \citen{Misquitta2014}),
+exchange-repulsion (\cref{ch:isaff} and \citen{VanVleet2016}),
+and dispersion (\cref{ch:workflow})
+are now possible.
+Notably, ours is not the only group to take advantage of the \isa-\dma or related
+methods,
+\cite{Verstraelen2016}
+and a number of ab intio force fields have been developed with the aid of such
+distribution schemes.
+\cite{Vandenbrande2016,Verstraelen2014,Misquitta2016,Metz2016}
+% TODO: cite more force fields here?
+Regardless, the \isa-\dma parameters have shown good promise for the
+development of accurate and transferable force fields, and the manner in which
+we can include these parameters in force field development will be a main
+focus of this dissertation.
 
 \end{subsection}
 
