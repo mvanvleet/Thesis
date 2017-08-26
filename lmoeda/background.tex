@@ -6,8 +6,11 @@ accurate and transferable force fields can be generated for a wide variety of
 systems by fitting force field parameters on a component-by-component basis to
 reproduce an ab initio \sapt energy
 decomposition.\cite{McDaniel2012,McDaniel2012a} 
-While full details for this force field development methodology can be found
-in \citens{McDaniel2012a,McDaniel2015}, a short workflow is given here for
+\footnotemark{}
+%
+\footnotetext{
+While full details for this force field development workflow can be found
+in \citens{McDaniel2012a,McDaniel2015}, a short example is given here for
 \mgmof:
 %
 \begin{enumerate}
@@ -37,6 +40,7 @@ For each component of the \dftsapt interaction energy,
 parameterize the relevant functional forms (as detailed in \citen{McDaniel2012a} and
 \cref{sec:lmoeda-theory}) to reproduce the \dftsapt component energy.
 \end{enumerate}
+}
 %
 Once parameterized, these \sapt-based \mof force fields can be used
 for calculating individual adsorption isotherms or even for high-throughput
@@ -61,11 +65,12 @@ radius from the x-axis in the leftmost figure.
     \label{fig:lmoeda-sapt_breakdown}
     \end{figure}
     %%%%%%%%%%%% SAPT Breakdown %%%%%%%%%%%%%%%
-
-
+%
+%
 In the generation of force fields for \cus-\mofs, we expect that many of the
-advantages of the development methodology for coordinatively-saturated \mofs (such as the component-by-component based
-parameterization and protocol for partial charge determination) should also translate
+advantages of the development methodology for coordinatively-saturated \mofs
+(namely the component-by-component based
+parameterization) should also translate
 well to \cus-\mof materials. 
 Nevertheless, there are two reasons why a \sapt-based methodology
 is non-ideal for generating \cus-\mof force fields. First, and as shown in
@@ -88,9 +93,8 @@ methodology. For \cus-\mofs and other similar systems, a new strategy for force 
 
 As a second barrier to using a \sapt-based methodology, many of the compounds in the M-\mof-74 series are
 open-shell. Though this poses no fundamental issue, 
-in practice most implementations of \sapt (aside from the
-seldom-used \sapt2012 package developed in Krzysztof Szalewicz's group at
-Delaware) do not allow for computations of open-shell systems, and indeed
+in practice most implementations of \sapt 
+do not allow for computations of open-shell systems, and indeed
 \sapt-based studies of open-shell compounds are very
 rare.\cite{Zuchowski2008a} For these reasons, a new, open-shell-compatible electronic structure
 benchmark is highly preferable.

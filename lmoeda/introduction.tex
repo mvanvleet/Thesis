@@ -9,7 +9,6 @@ success, this high precision between the model
 and \sapt energies can only lead to experimentally-accurate molecular
 simulation in the event that the \sapt energies themselves are
 accurate with respect to the exact underlying \pes. 
-practice)
 Indeed, for systems where \sapt
 and \ccsdt (a gold-standard electronic structure theory that closely matches
 the exact \pes) disagree by several
@@ -20,16 +19,30 @@ First, for what types of systems might we expect \sapt to be inaccurate? Second,
 for the systems where \sapt and the exact \pes are in disagreement, how
 might we best modify our typical methodology for ab-initio force field development?
 
-The purpose of this chapter is to partially address these two questions, all
+The purpose of this Chapter is to partially address these two questions, all
 within the specific context of force field development for \cus \mofs.
-Importantly, the results presented here were gathered from 2012--2014, so some
-important advances (namely those presented in \cref{ch:isaff,ch:mastiff}) have
-yet to be incorporated into the force fields presented here, probably to the
-determinent of the accuracy and transferability that might be possible with
-the \lmoeda-based methodology.  Should this project be picked up in the
-future, it will likely prove advantageous to refit the \lmoeda-based force
-fields described herein to the functional forms and monomer-based parameters
+Vida infra, \sapt energy calculations have been shown to be in error for select \cus-\mofs,
+and we investigate how our \sapt-based force field development methodology
+can be extended to allow for force field development based on
+generic \edas,
+\cite{Pastorczak2017,Horn2016b,Su2014,Su2009,Fedorov2006,CruzHernandez2006,Jeziorski1994}
+with a particular emphasis on the Localized Molecular Orbital EDA (\lmoeda).
+\cite{Su2009,Chen2010}
+The work in this Chapter represents results gathered from 2012 -- 2014, after
+which the project was discontinued,  largely due to memory limitations in the
+\lmoeda implementation in GAMESS. 
+Additionally, some
+important advances (namely those presented in \cref{ch:isaff,ch:mastiff}) were
+unavailable during this project, leading to additional fundamental challenges
+in the accuracy and transferability of the resulting force fields.
+Should this project be continued in the
+future, it will likely prove necessary to refit \eda-based force
+fields to the functional forms and monomer-based parameters
 discussed in \cref{ch:mastiff}.
+In spite of these challenges and limitations, the results presented in this
+Chapter provide a valuable
+demonstration for the utility of using alternate \eda schemes as the basis
+of ab initio force field development.
 
 
 \end{section}
@@ -41,7 +54,7 @@ defined as porous
 materials containing inorganic nodes connected by organic linkers. Within
 this general motif, more than 20,000 compounds have been reported and
 studied,\cite{Furukawa2013} and this vast diversity of \mof materials shows great promise
-for chemical customization and optimization. Within the past two decades, a
+for chemical customization and optimization. Over the past two decades, a
 huge body of research has been devoted to the design and study of \mofs, and
 current applications range from gas separation and storage to catalysis and
 biomedical imaging.\cite{Furukawa2013}
@@ -78,18 +91,21 @@ force fields will be required to perform in-depth simulations and large-scale
 screenings of these materials, and such studies are already being
 undertaken.\cite{Lin2014,Haldoupis2015,Mercado2016,Becker2017}
 
-The goal of the present chapter is to present a general 
-methodology for developing accurate and transferable force fields for \cus-\mofs. 
+The goal of the present chapter is two-fold: first, to present a general 
+methodology for developing accurate and transferable force fields for
+\cus-\mofs, and second, to showcase how generic \edas can be used as the basis
+for force field development.
 The current study is limited to a discussion of the MOF-74 series (a
-prototypical and well-studied \cus-\mof), however it
+prototypical and well-studied \cus-\mof) and \lmoeda,\cite{Su2009,Chen2010} however it
 is expected that the methods presented herein might also be applicable to
-other systems. After outlining this methodology
+other systems and \edas. After outlining the methodologies used in this
+Chapter
 (\cref{sec:lmoeda-background,sec:lmoeda-theory}), we next show how our force
 fields can be applied to accurately predict \co adsorption isotherms in
 \mgmof. At the present time, we do not have results for other compounds in the
 M-MOF-74 series (M = Co, Cr, Cu, Fe, Mn, Ni, Ti, V, and Zn), largely as a
-result of techical challenges in the force field parameterization itself.
-We discuss these technical challenges in some detail, and conclude with our
+result of techical challenges in the force field parameterization process.
+We discuss these technical limitations in some detail, and conclude with our
 perspective on the challenges and opportunities associated with developing
 transferable force fields for the M-MOF-74 series and other similar \cus-\mof systems.
 
