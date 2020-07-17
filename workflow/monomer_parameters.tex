@@ -1,8 +1,10 @@
 \begin{section}{Monomer-Based Parameterization}
 \label{sec:workflow-monomer_parameters}
 
-While/after running the \dftsapt calculations, the next step in the Workflow
-is to compute various force field parameters which only depend on the
+The next step in the Workflow
+(which in practice can be accomplished as the \dftsapt calculations are
+running)
+is to compute the various force field parameters which only depend on the
 identities of the individual monomers themselves. The following subsections describe the
 calculations of multipole moments (\cref{sec:workflow-multipoles}),
 short-range exponents (\cref{sec:workflow-exponents}), dispersion coefficients
@@ -21,9 +23,9 @@ of interest should be mapped onto corresponding atom-in-molecule properties. Cur
 main distribution (or `charge partitioning') schemes are available in \camcasp:
 \dma\cite{Stone2005} and
 \isa.\cite{Misquitta2014} The theory behind the \isa procedure has already been detailed in
-\cref{ch:introduction}, and monomer property calculations using \dma are
+\cref{ch:intro}, and monomer property calculations using \dma are
 described in 
-\citen{Stone2005,Misquitta2006,McDaniel2014a}. In general, and where
+\citens{Stone2005,Misquitta2006,McDaniel2014a}. In general, and where
 available, \isa-based properties are to be preferred, and we recommend an
 \isa-based parameterization scheme for obtaining multipoles and
 atom-in-molecule exponents. A \dma-based method is currently required for
@@ -90,7 +92,7 @@ execute the command
 which creates the necessary \isa files for calculating both distributed
 multipoles and exponents (see \cref{sec:workflow-exponents}). After running
 these calculations (a process which may require several hours, depending on
-the molecule), the multipoles can be extracted simply by running
+the molecule), the multipole parameters can be extracted by running
 %
 \begin{lstlisting}
 ./scripts/workup_isa_charges.py
@@ -133,7 +135,7 @@ described in \citen{Kramer2014}, an atom-centered point charge model can be
 insufficiently accurate, making it 
 necessary to model the long-range electrostatics by including additional 
 `off-center/off-site' point charges. Given a well-chosen set of off-site charges, 
-an off-center point charge model usually can reasonably reproduce the effects of the
+an off-center point charge model can reasonably reproduce the effects of the
 neglected higher-order multipole moments.\cite{Dixon1997}
 %% (Using water as an example, off-site charges have been shown to substantially improve
 %% force field accuracy, and can either be placed in a
@@ -152,7 +154,7 @@ simple rank-truncation of the more complete \verb|<monomer>_ISA_L2.mom|
 multipoles, the $L0$ moments (that is, point charges) are identical between the two files.
 
 For developing rank-transformed point charge models, \citeauthor{Ferenczy1997} has
-programmed a method for calculating electrostatic potential-fitted charges,
+developed a method for calculating electrostatic potential-fitted charges,
 which can be thought of as a `rank transformation' procedure. The author's
 MULFIT program can be 
 downloaded online at
@@ -201,7 +203,7 @@ yield better force field fits.
 
 %\begin{subsubsection}{Overview}
 
-As described in \cref{ch:introduction,ch:isaff}, the \isa procedure
+As described in \cref{ch:intro,ch:isaff}, the \isa procedure
 produces a set of distributed \aim electron densities. The
 orientational average of each of these \aim densities, or
 `shape-functions', are spherically-symmetric quantities that describe the
@@ -210,13 +212,13 @@ radial decay of the \aim density.\cite{Misquitta2014} As described in
 \cref{sec:workflow-exponent_algorithm},
 the shape-functions can be fit to a Slater-type function in
 order to yield an isotropic, exponentially-decaying model for the \isa
-densities. Importantly, the Slater-exponents in this density model directly
+densities. Importantly, the Slater exponents in this density model directly
 yield the exponents necessary to describe short-range effects (such as
 exchange-repulsion and charge penetration) in the two-body force
-field (see \cref{ch:isaff} for details).
+field (see \cref{ch:isaff,ch:pointer} for details).
 
 Assuming the \isa calculations have already been run to obtain multipole
-moments (see previous section), the \isa exponents can be obtained very simply
+moments (see previous Section), the \isa exponents can be obtained very simply
 by running the command
 %
 \begin{lstlisting}

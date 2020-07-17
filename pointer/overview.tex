@@ -54,9 +54,10 @@ charge transfer,
 and anisotropic effects.
 \cite{VanVleet2017,Bartocci2015,Stone2013,Duke2014a,Cisneros2006,Elking2010,Chaudret2014a,Gavezzotti2003,Torheyden2006,Stone2007,Mitchell2001,Price2000,Stone1988,Day2003,Totton2010,Misquitta2016,Price2010a,Misquitta2008,Langhoff1971,Williams2003,Stone2007,Krishtal2011}
 
-Building on the topics discussed in \cref{ch:workflow}, our goal in 
-this Chapter, broadly speaking, is to discuss the current state of `consensus'
-regarding functional forms, parameterization methods, and best practices for
+Building on the concepts from \cref{ch:isaff,ch:mastiff}, our overarching goal in 
+the next two Chapters is to discuss the current state of `consensus'
+regarding functional forms, parameterization methods, and best practices
+within
 the limited scope of \sapt-based force field development.
 Here the focus will be on both the `scientific' and `artistic' elements
 of this force field development methodology, particularly as it pertains to 
@@ -66,34 +67,33 @@ development methodology there is good `consensus' as to the required
 functional forms and the manner in which these forms should be parameterized.
 In these cases of general consensus, a somewhat black-box
 workflow is possible for developing new \mastiff models, and our first goal in
-this Chapter is to detail 
-the ways in which a recently
-developed piece of software, the \pointer, can automate such tasks in the
+these Chapters is to detail 
+the ways in which
+recently
+developed software tools can automate such tasks in the
 course of
 routine force field development.
 
 For other aspects of force field development, such as with models for
-multipolar electrostatics, 
-%% despite theoretical consensus as to appropriate functional
-%% forms and parameters, 
+multipolar electrostatics
+(\cref{sec:workflow-multipoles,sec:pointer-electrostatics}), 
 there can remain pratical limitations 
 which,
-depending on the specific application and software package used,
+depending on the specific application and molecular simulation package used,
 may requite alternative, and potentially less accurate, strategies
 for force field development. For these areas, a second
-goal in this Chapter is to outline, both conceptually and using the \pointer
-software, current best practices for force field development in the event of
-limitations due to computational cost or software requirements.
-available functional forms.
+goal in these Chapters is to outline, both conceptually and in practice,
+guidelines for force field development 
+restricted by computational cost considerations and/or software limiations.
 
 Lastly, there remain select elements of force field development (namely the induction
-models discussed in \cref{sec:pointer-induction}) for which there has not yet
+models discussed in \cref{sec:workflow-polarizabilities,sec:pointer-induction}) for which there has not yet
 been established a `consensus' or set of best practices for force field
 development, either in a theoretical or practical sense. Such
 aspects of force field development will need to be the subject of future work (see
-\cref{ch:future}), both in our group and across the scientific community.
+\cref{ch:conclusions}), both in our group and across the scientific community.
 In the meantime, our third and
-final goal in this Chapter is to discuss the ambiguities involved in these
+final goal in the next Chapters is to discuss the ambiguities involved in these
 `non-consensus' aspects of force field development, and we offer some
 practical modeling recommendations and software tools to assist in both
 present and future `next-generation' force field development.

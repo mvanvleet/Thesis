@@ -35,7 +35,7 @@ a system's temperature, $T$, and the energies available to that system,
 %% \braket{\obs} = \frac{\sum\limits_n \obs_n \exp (-E_n/k_BT)}
 %%                     {\sum\limits_n \exp (-E_n/k_BT)}.
 \braket{\obs} = 
-\frac{\int d\bm p d\bm x \, \obs(\bm p, \bm x) \exp (-H(\bm p, \bm q)/k_BT)}
+\frac{\int d\bm p d\bm x \, \obs(\bm p, \bm x) \exp (-H(\bm p, \bm x)/k_BT)}
 {\int  d\bm p d\bm x \, \exp (-H(\bm p, \bm x)/k_BT) }
 \end{align}
 %
@@ -51,7 +51,7 @@ however conceptually-similar expressions can be derived outside of these
 assumptions. 
 %TODO: Cite useful things here
 Even though atomic behavior is, in principle, quantum mechanical,
-subsequent research over the years have shown that
+subsequent research over the years has shown that
 very satisfactory molecular properties, particularly for heavier atoms at higher
 temperatures,
 \cite{Karplus2014}
@@ -63,8 +63,8 @@ work),\cite{Karplus2014} it becomes possible to use
 \cref{eq:intro-boltzmann} to
 extract information regarding macroscropic properties of
 interest 
-given knowledge of the potential and kinetic energies available in a classical
-description of the molecular system. 
+given knowledge of the potential and kinetic energies
+available to a microscopic, classically-treated molecular system.
 
 \footnotetext{
 We've been intentionally vague about what these `experimental
@@ -86,9 +86,9 @@ large systems it is
 computationally prohibitive to solve for $\braket{\obs}$ by standard numerical
 integration techniques.
 \cite{allen1989computer}
-In 1953, however a group of
+In 1953, however, a group of
 researchers\cite{Metropolis1953} showed how \cref{eq:intro-boltzmann} can be
-systematically estimated
+used to systematically estimate
 $\braket{\obs}$ via appropriate random sampling of the integrand of
 \cref{eq:intro-boltzmann} based on a probability distribution $\rho$:
 \cite{Harrison2010,allen1989computer}
@@ -162,9 +162,8 @@ as \md,
 has made it possible to study both the kinetic and
 thermodynamic properties of a wide range of molecular systems, historically beginning with monatomic
 liquids in 1964, and soon leading to the first polymer and protein simulations in 1975 and
-1977, respectively.\cite{VanGunsteren1990} Ever since these first studies, and
-as a complement to \mc, \md simulation has 
-increasingly become a preeminent tool in the investigation and prediction of chemical
+1977, respectively.\cite{VanGunsteren1990} Ever since these initial studies, both \mc and \md simulations have
+become preeminent tools in the investigation and prediction of chemical
 phenomena.
 
 
@@ -243,8 +242,8 @@ energy, $E_n$, of any state $n$ of the system that might get sampled by the
 \md/\mc simulation. 
 \cite{Ballone2014,Lopes2015,Saunders2013,DeCarvalho2014}
 Henceforth we will collectively refer to these energies, given as a function
-of the system state $\bm \Gamma$, as the \pes of a system (Some visual
-examples of representative \glspl{pes} are shown in \cref{fig:intro-pes}).
+of the system's position $\bm x$, as the \pes of a system. For clarity, me visual
+examples of representative \glspl{pes} are shown in \cref{fig:intro-pes}.
 \item We must be able to obtain a representative sample of all states of the system over a sufficiently long timescale
 (commensurate with the timescale(s) of the chemical phenomena of interest) so as
 to obtain converged property predictions.
@@ -269,7 +268,7 @@ Moreover, there is significant interplay between these areas in terms of
 research development.
 As an example, improvements in sampling methods often lead to increased computational
 efficiency, thereby enabling use of more accurate (but more costly)
-representations of the \pes. Conversely, the next section will discuss how the development of
+representations of the \pes. Conversely, the next Section will discuss how the development of
 cost-effective potential energy functions is often necessary for
 running simulations over long enough time scales to ensure representative
 sampling and robust interpretation of the simulation results. Clearly, insofar

@@ -11,13 +11,13 @@ to those that require additional computations.
 Once the \pointer code has been successfully run, the resulting force fields
 should always be visualized, possibly with the aid of the included
 visualization scripts,
-
+%
 \begin{lstlisting}
 plot_compare_sapt_components.py -p <file_prefix> -s <file_suffix>'.dat' --display
 plot_sapt_component_errors.py <file_prefix> <file_suffix>'.dat' --display
 \end{lstlisting}
-
-where additional visualization options are available by inserting the \verb|-h|
+%
+where additional visualization options can be found by inserting the \verb|-h|
 flag into the function call for either script. Such visualizations are shown,
 using the pyridine dimer as an example, in
 \cref{fig:pointer-pyridine_fits,fig:pointer-pyridine_errors}, and additional
@@ -105,8 +105,8 @@ shows how errors in the exchange component dominate the overall
 error, and should be the first target for improvement. Since the exchange energy
 only depends on a short-range exponential decay, this error could possibly be
 mitigated by increasing the number of atomtypes (as shown, this force field
-only has three atomtypes) or by including anisotropy on additional atomtypes,
-as this potential only includes anisotropy on the nitrogen atom, and neglects
+only has three atomtypes). Alternately, anisotropy could be included for additional atomtypes,
+especially since the displayed potential only includes anisotropy on the nitrogen atom, and neglects
 possibly-important anisotropies in the carbon atoms.
 
 As for water, we see relatively little random error in the force field
@@ -123,7 +123,7 @@ this force field in general simulations involving water. Looking at the errors o
 component-by-component basis, we can see that systematic errors in the potential
 are heavily correlated with errors in the induction energy, making this
 induction energy the most important target for improved modeling. As will be
-discussed in \cref{ch:future}, improving our polarization model (both in terms
+discussed in \cref{ch:conclusions}, improving our polarization model (both in terms
 of the polarization damping and the long-range polarizabilities themselves)
 will hopefully serve to reduce these systematic errors and improve the overall
 quality of force fields for strongly polarizable molecules.
@@ -160,9 +160,9 @@ order to validate the many-body portion of the potential, trimer
 interaction energies should be computed for a subset of energetically-important configurations
 (preferably those taken from simulation) and compared to an accurate
 electronic structure benchmark. These validation studies are especially
-critical for highly-polar systems (such as water), as in these cases the
+critical for highly-polar systems such as water, as in these cases the
 many-body polarization energy can account for a non-negligable fraction of the
-total system energy. For such polar systems, it can also be important to study
+total system energy. For highly polar systems, it can also be important to study
 the interactions of larger clusters in order to probe four-body and higher
 interactions.\cite{Medders2015a,Cisneros2016,Medders2013}
 

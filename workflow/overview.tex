@@ -1,26 +1,27 @@
-Due in part to the improvements in \cref{ch:isaff,ch:mastiff}, the development
-protocol for \sapt-based, ab initio force fields is now fairly robust with
-respect to many parameterization details. Consequently, much of the workflow
-is now automated and requires little user input. The following sections are
-designed to give future users familiarity this workflow, not only as a
-``blackbox'' tool, but also as a starting point for more complex and/or
-system-specific force field development. To this end, we first provide an
-overview of the workflow itself, and then describe the theoretical and
-practical details of each step in subsequent sections.
+%% Due in part to the improvements in \cref{ch:isaff,ch:mastiff}, the development
+%% protocol for \sapt-based, ab initio force fields is now fairly robust with
+%% respect to many parameterization details. Consequently, much of our approach
+%% is now automated and requires little user input. The following two Chapters are
+%% designed to give future users familiarity with our strategy for force field
+%% development, not only as a
+%% ``blackbox'' tool, but also as a starting point for more complex and/or
+%% system-specific force field development. To this end, we begin with a
+%% broad overview of the approach itself, and in subsequent sections describe
+%% both the conceptual and practical details of our methodology. 
+%% 
+%% In order to gain expertise in practical force field development, new force
+%% field developers are encouraged to read through (in order)
+%% \cref{ch:intro,ch:workflow,ch:pointer} so as to obtain a theoretical understanding of
+%% the force field development process, after which they should work on
+%% developng their own force field using
+%% the semi-automated Workflow (described in this Chapter) and the \pointer software
+%% (\cref{ch:pointer}). Developing a force field for water
+%% makes for an excellent teaching example, however any interesting (and preferably
+%% small!) molecule will suffice.
 
-In order to gain expertise in practical force field development, new force field developers are encouraged to read through (in order)
-\cref{ch:introduction,ch:workflow,ch:pointer} to obtain a conceptual
-understanding of the force field development process, after which they should
-work on
-developng their own force field using
-the semi-automated workflow (\cref{ch:workflow}) and the \pointer software
-(\cref{ch:pointer}). Developing a force field for water
-makes for an excellent teaching example, however any interesting (and preferably
-small!) molecule will suffice.
+\begin{section}{Overview of \sapt-based Force Field Development}
 
-\begin{section}{Overview}
-
-As discussed in \cref{ch:introduction}, our \sapt-based force field 
+As discussed in \cref{ch:intro}, our \sapt-based force field 
 methodology principally relies on modeling two-body interactions
 for a given system of interest. These two-body (i.e. dimer)
 interactions are completely defined by the 
@@ -35,7 +36,7 @@ the energetics of gas-phase dimers. After all, aren't we interested in
 simulating a wider variety of chemically-relevant systems, including
 homogeneous and heterogeneous liquids, solids, and super-critical phases?
 This apparent discrepancy can be resolved by looking at the \mbe described in
-\cref{ch:introduction}. From this expansion, we see that \emph{any} system can
+\cref{ch:intro}. From this expansion, we see that \emph{any} system can
 be modeled as a sum of two- and many-body interactions, with the two-body
 interactions plus $N$-body polarization (an energy term which we obtain
 automatically in \cref{sec:workflow-polarizabilities}) accounting for upwards of
@@ -53,9 +54,10 @@ run simulations on any $N$-body system of interest.
 We are usually interested in obtaining
 transferable parameters for a new molecule or atomtype, in which case it is
 often easiest to model the interactions between two identical monomers (a
-so-called \homo dimer interaction).\footnotemark Still, there are reasons why it can
-be advantageous to instead study \hetero dimer interactions, and the workflow
-described herein applies equally to studying both \homo and \hetero
+so-called \homo dimer interaction).\footnotemark{} Still, there are reasons why it can
+be advantageous to instead study \hetero dimer interactions, and the
+development strategies
+described herein apply equally to studying both \homo and \hetero
 dimer interactions.
 
 \footnotetext{In general, force field development based on \homo
@@ -71,19 +73,19 @@ interactions are affordable.)}
 
 
 Regardless of the chosen dimer of study, modeling a 
-two-body \pes involves two major steps.  First, we must
+two-body \pes requires us to address two major challenges.  First, we must
 obtain benchmark two-body energies for a series of well-chosen dimer
 configurations. Second, we must
 calculate and/or fit all force field parameters so as to completely develop a
 force field for the two-body interaction energies. For the \sapt-based force fields described in
 \cref{ch:isaff,ch:mastiff}, 
-these two overarching steps lead to the following workflow:
+these challenges are treated according to the following Workflow:
 
 %
 \begin{minipage}{\linewidth}
 %\begin{enumerate}[I.]
 \begin{enumerate}[label=\Roman*)]
-\item Generate benchmark two-body energies
+\item Obtain benchmark two-body energies
 \label{workflow:step1}
     \begin{enumerate}[label=\arabic*)]
     \item Generate a series of well-chosen dimer configurations
@@ -113,7 +115,8 @@ order to correct the \dftsapt energies above
     \item Obtain all remaining force field parameters by fitting a chosen
     force field functional form to the two-body benchmark energies from Step \ref{workflow:step1}
         (see \cref{ch:pointer})
-        %\label{step:workflow-dimers}
+    \label{step:workflow-dimers}
+    \item Validate the final force field by comparison to both ab initio theory and experiment
     \end{enumerate}
 \end{enumerate}
 \phantom{abc}
@@ -131,8 +134,10 @@ at
 sufficient for most routine force field development. Installation and
 usage instructions are included on the website, and are also reprinted in
 \cref{fig:workflow-overview} for conveninece. 
-The remainder of this Chapter is designed to give new users a sense of the
-theory and practice involved in using the workflow, and we now turn to an
-in-depth discussion of each step.
+The remainder of this Chapter is designed to give new users a sense
+of the
+theory and practice involved in using Steps I and II.1 of the Workflow,
+whereas issues related to the final force field optimization and validation
+(Step II.2 -- II.3) will be subject of \cref{ch:pointer}.
 
 \end{section}

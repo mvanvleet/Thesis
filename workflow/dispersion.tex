@@ -92,7 +92,7 @@ related to \isa-pol are the subject of \cref{sec:workflow-alston}, and a
 comparison between the two methods for obtaining dispersion coefficients is
 given in \cref{sec:workflow-dispersion_comparison}. Finally, each method for
 obtaining dispersion coefficients requires a small amount of post-processing,
-and this is discussed in \cref{sec:workflow-cn_postprocess}.
+and this is also discussed in \cref{sec:workflow-cn_postprocess}.
 
 \end{subsubsection}
 
@@ -217,8 +217,7 @@ expectations, and that the number of fit atomtypes is kept relatively small
 unphysical disperion coefficients (see next point), you'll likely need to
 utilize the iterative fitting algorithm outlined in 
 \citen{McDaniel2013} or obtain dispersion coefficients from an \isa-based
-scheme (\cref{sec:workflow-alston}).\footnote{Scripts to perform the iterative
-\idma fitting algorithm can be made available upon request.}
+scheme (\cref{sec:workflow-alston}).
 %
 \item Dispersion coefficients should always be positive. Any negative
 dispersion coefficients are likely a sign of unphysical atomic
@@ -256,20 +255,20 @@ using the post-processing scripts described in
 Rather than iteratively fitting polarizabilities to reproduce the
 point-to-point response, with \isa it is possible to
 compute the atomic polarizabilities directly. First, note that the
-frequency-dependent, molecular polarizabilities are given by the following formula:
+frequency-dependent, molecular polarizabilities are given by 
 \begin{align}
 \label{eq:workflow-fdds}
 \alpha_{lm,l'm'}(\omega) = \int \int
 \hat{Q}_{lm}(\bm{r})
 \alpha(\bm{r},\bm{r'}|\omega)
-\hat{Q}_{l'm'}(\bm{r'})d\bm{r}d\bm{r'}
+\hat{Q}_{l'm'}(\bm{r'})d\bm{r}d\bm{r'},
 \end{align}
-Here $\hat{Q}$ are the regular spherical harmonic operators (defined in
+where $\hat{Q}$ are the regular spherical harmonic operators (defined in
 Appendix A of \citen{stone2013theory}) of rank $l$ and order $m$, and 
 $\alpha(\bm{r},\bm{r'}|\omega)$ is the \fdds, or charge density
 susceptibility, which measures the change in charge density at $\bm{r'}$ that
 results from a delta-function change in the electric potential at point
-$\bm{r}$. From \cref{eq:background-isa}, we have that
+$\bm{r}$. From \cref{eq:intro-isa}, we have that
 \begin{align}
 1 = \sum\limits_a \left ( 
 \frac{\bar{w}^a(\bm{r})}{\sum_m \bar{w}^m(\bm{r})}
@@ -317,7 +316,7 @@ all without recourse to the iterative fitting process required in
 The \isa-pol method has been completely implemented as of \camcasp-6.0, though
 the input scripts are (as of this writing) still in beta. Consult 
 \href{http://www-stone.ch.cam.ac.uk/programs/camcasp.html}{the \camcasp user
-manual} or contact Alston Misquitta for up-to-date details and required input files.
+manual} or contact Professor Alston Misquitta for up-to-date details and required input files.
 
 \end{paragraph}
 
@@ -434,7 +433,8 @@ coefficients calculated in \camcasp are intended to reproduce the \camcasp-calcu
 \dftsapt dispersion energies, but may only be approximately accurate for
 \molpro-calculated \dftsapt dispersion energies.\footnotemark{ } In practice, the
 \camcasp-calculated dispersion coefficients slightly underestimate the \molpro
-dispersion energies, and the coefficients need to be scaled (usually by a factor of 1.03-1.10,
+dispersion energies, and the coefficients need to be scaled (usually by a
+factor of 1.03 -- 1.10,
 depending on the atomtype) to reproduce the \molpro energies. This scaling can
 be carried out by executing the command
 %

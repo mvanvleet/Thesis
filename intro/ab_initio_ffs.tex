@@ -11,7 +11,7 @@ ideally be able to reproduce a benchamrk \pes (as calculated from high-quality
 compared to the \pes will be well-correlated with accuracy compared to
 experiment
 \item \textbf{Transferability}: The parameters and
-functional forms used ab inito force fields should be transferable between
+functional forms used in ab inito force fields should be transferable between
 chemical and physical environments without loss of accuracy
 \item \textbf{Cost-Efficiency}: 
 The computational cost of ab initio force fields should ideally be comparable to that
@@ -124,9 +124,9 @@ we use \acrfull{sapt} as our \eda of choice. \sapt, and \dftsapt in particular
 scales reasonably as $N^5$ with respect to the number of electrons in the
 system), serves as an accurate yet affordable approximation to the
 gold-standard \ccsdt calculations discussed earlier. Theories and formalisms
-for \sapt are reviewed in \citen{Szalewicz2012,Jeziorski1994,McDaniel2014a},
+for \sapt are reviewed in \citens{Szalewicz2012,Jeziorski1994,McDaniel2014a},
 and a variety of examples of \sapt-based ab initio force field development is given
-in \citen{McDaniel2016a,Schmidt2015}.
+in \citens{McDaniel2016a,Schmidt2015}.
 Overall,
 ab inito force fields
 fit to \dftsapt energies have been shown to lead to good accuracy in experimental property
@@ -144,17 +144,35 @@ chemical and physical environments.
 
 \end{subsection}
 
-\begin{subsection}{\isa-\dma}
+\begin{subsection}{\isa-\acrshort{dma}}
 \label{sec:intro-isa}
 
-As a complement to \sapt-based fitting approaches, we and others have shown
-how distributed molecular property calculations can be used to obtain select force field
-parameters in a transferable manner without recourse to direct fitting.
-\cite{Stone2007,camcasp5.8,Metz2016} 
-By distributed, we mean here that the results of the molecular calculations, which
-yield properties for individaul monomers, can be decomposed into meaningful
-atom-in-molecule contributions for use in the pair potential, $\Delta V_2$. Historically,
-many of these distribution schemes have been based on a \acrfull{dma}, and methods for
+Especially in the asymptotic regime (i.e. at large
+intermolecular separations), the pair potential can be described solely in
+terms of properties that depend only on the identities of the individual monomers.
+\cite{Stone2007,Metz2016}
+These `monomer' properties range in scope from the monomer electron density
+itself to the molecular polarizability, and these monomer properties define in
+turn the electrostatic,
+induction, and dispersion interactions at long-range. (Monomer properties can
+also define interactions at short-range, and we
+show in \cref{ch:isaff} how these quantities can help define parameters for exchange and
+charge penetration effects.) Because we can
+describe portions of the pair potential in terms of quantifiable ab initio monomer property
+calculations, we should be able to considerably reduce the number of 
+parameters required to fit a force field,
+and thus increase the accuracy and transferability of the resulting model. 
+
+Nevertheless, and although it is straightforward to calculate \emph{molecular} monomer
+properties, it is usually advantageous\cite{Stone2007} to describe the pair
+potential in terms of \emph{\aim} quantities, thus necessitating that we
+\emph{partition} the results of each monomer property calculation so as to describe the
+contribution of each atom in its molecular environment. \aim properties are
+not experimental observables, and so it can be quite complicated to find an
+ideal and physically-meaningful partitioning method for the purposes of force
+field development.\cite{camcasp5.8,Misquitta2014,Stone2007,Pastorczak2017} 
+Historically in our group, we have had reasonable success with using a 
+\acrfull{dma} partitioning scheme, and methods for
 obtaining distributed multipolar electrostatic,\cite{Stone1981,Stone2005}
 polarization,\cite{Misquitta2006}
 and
@@ -166,18 +184,20 @@ More recently, \citet{Misquitta2014} has, in conjunction with important
 contributions from
 \citeauthor{Lillestolen2008},\cite{Lillestolen2008,Lillestolen2009} 
 built upon the existing class of \citet{Hirshfeld1977} atom-in-molecule
-charge partitioning schemes to develop a new distribution scheme based on
+charge partitioning schemes to develop an improved distribution scheme based on
 \acrfull{isa}, 
-termed \isa-\dma. In brief, \isa-\dma operates by partitioning a monomer
+termed \isa-\dma. 
+In brief, \isa-\dma operates by partitioning a monomer
 electron density into atomic contributions,
 \begin{align}
+\label{eq:intro-isa}
 \rho_i(\mathbf{r}) = \rho_I(\mathbf{r})
 \frac{ w_i(\mathbf{r}) }{ \sum \limits_{a \in I} w_a(\mathbf{r}) }, 
 \end{align}
 where $\rho(\mathbf{r})$ is an electron density, $w_a(\mathbf{r})$ is a
 spherically-symmetric weight function which is iteratively determined in the
 course of the \isa analysis, and lower- and upper-case subscripts
-represent, respectively, atomic or molecular quantities.
+represent, respectively, \aim or molecular quantities.
 \cite{Misquitta2014}
 Using these atom-in-molecule charge densities, recent work has shown how
 new and/or improved parameters for multipolar electrostatics 

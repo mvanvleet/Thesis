@@ -63,7 +63,7 @@ following scheme:
 \begin{itemize}
 \item \textcolor{fit}{Unconstrained} parameters, which must be directly fit by \pointer
 %
-\item \textcolor{cfit}{Soft-constrained} parameters 
+\item \textcolor{cfit}{Optionally-constrained} parameters 
 which, depending on user-specified settings, are treated as either soft- or
 hard-constraints
 %
@@ -91,7 +91,7 @@ of in terms of one of the following three categories:
 been specified on the basis of any monomer properties calculation, and so must
 be directly fit to the two-body energy itself. 
 %
-\item \textcolor{cfit}{Soft-Constrained} parameters: These parameters
+\item \textcolor{cfit}{Optionally-Constrained} parameters: These parameters
 \emph{can} be fit entirely on the basis of monomer properties, however it is
 sometimes advantageous to further refine these parameters with respect to the
 benchmark two-body energies. In this case, soft
@@ -175,7 +175,7 @@ dispersion energy pre-factor:
 \sum\limits_{l>0,k} \textcolor{fit}{\adisp}  \mathcal{C}_{lk}(\theta_i,\phi_i)
 \right)
 \end{align}
-where the colors serve to indicate that both free and constrained
+where the colors serve to indicate that both free and optionally-constrained
 parameters are contained within the pre-factor.
 %
 \item \textcolor{mon}{$Q^i_t$}:

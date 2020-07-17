@@ -11,7 +11,7 @@ function,\cite{Tang1984,Tang1992}
 \textcolor{cfit}{\Adisp{i,\text{iso}}}
 \left(1 +
 \sum\limits_{l>0,k} \textcolor{fit}{\adisp}  \mathcal{C}_{lk}(\theta_i,\phi_i)
-\right)
+\right),
 \end{align}
 %
 where $f(x)$ is the Tang-Toennies damping function from
@@ -26,7 +26,7 @@ described in  \cref{sec:workflow-dispersion}.
 
 In obtaining a final model for dispersion, it is important to ensure that any
 model is quantitatively correct in the asymptotic regime, as the
-least-squares optimization procedure \pointer will not explicitly ensure this
+least-squares optimization algorithm used by \pointer will not explicitly ensure this
 physically-correct behavior. Unless directly fitting atomtype-specific scale
 factors to the dispersion energy (vida infra), a good strategy is to (using
 the methods in \cref{sec:workflow-dispersion}) manually fit a universal scale factor to
